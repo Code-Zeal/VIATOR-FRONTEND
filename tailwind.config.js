@@ -6,6 +6,7 @@ module.exports = {
     "./public/**/*.{js,jsx,ts,tsx,html}",
   ],
   theme: {
+    colors: { azulOscuro: "#02122C", blanco: "#ffffff", azulClaro: "#165BA6" },
     extend: {},
     screens: {
       sm: "450px",
