@@ -12,9 +12,9 @@ export default function NavBar() {
           </a>
         </li>
         <li className="flex justify-around items-center min-w-max  ">
-          <a href="/home">
+          <a href="/home" className="flex items-center justify-center px-2">
             <svg
-              className=" min-w-min w-6 h-6 m-4 sm:mx-10 sm:my-0 sm:w-auto sm:h-auto"
+              className=" min-w-min w-6 h-6 m-4 sm:mx-0 sm:my-0 sm:w-auto sm:h-auto"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -29,9 +29,9 @@ export default function NavBar() {
             <p className="mx-2 hidden sm:inline">Inicio</p>
           </a>
 
-          <a href="/profile">
+          <a href="/profile" className="flex items-center justify-center px-2">
             <svg
-              className=" min-w-min w-6 h-6 m-4 sm:mx-10 sm:my-0 sm:w-auto sm:h-auto"
+              className=" min-w-min w-6 h-6 m-4 sm:mx-0 sm:my-0 sm:w-auto sm:h-auto"
               xmlns="http://www.w3.org/2000/svg"
               width="14"
               height="15"
@@ -47,9 +47,9 @@ export default function NavBar() {
             </svg>
             <p className="mx-2 hidden sm:inline ">Perfil</p>
           </a>
-          <a href="/">
+          <a href="/" className="flex items-center justify-center px-2">
             <svg
-              className=" min-w-min w-6 h-6 m-4 sm:mx-10 sm:my-0 sm:w-auto sm:h-auto"
+              className=" min-w-min w-6 h-6 m-4 sm:mx-0 sm:my-0 sm:w-auto sm:h-auto"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="14"
