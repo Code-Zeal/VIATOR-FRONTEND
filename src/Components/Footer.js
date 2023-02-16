@@ -5,7 +5,7 @@ export default function Footer() {
       class="bg-gray-100 flex flex-row-reverse items-center"
     >
       <a
-        class=" rounded-full bg-blue-900 p-2 text-white shadow transition hover:bg-blue-500 sm:p-3 lg:p-4 transform -translate-x-20 hidden md:inline-block "
+        class=" rounded-full bg-azulOscuro p-2 text-white shadow transition hover:bg-azulClaro sm:p-3 lg:p-4 transform -translate-x-20 hidden md:inline-block "
         href="#up"
       >
         <span class="sr-only">Back to top</span>
@@ -14,7 +14,7 @@ export default function Footer() {
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5"
           viewBox="0 0 20 20"
-          fill="currentColor"
+          fill="white"
         >
           <path
             fill-rule="evenodd"
@@ -23,11 +23,11 @@ export default function Footer() {
           />
         </svg>
       </a>
-      <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-5xl p-4 sm:px-6 lg:px-8">
         <div class="flex justify-center text-teal-600">
           <img
             className="w-32 h-32"
-            src="https://i.imgur.com/nbeGDKG.png"
+            src="https://cdn.discordapp.com/attachments/1073592184344948758/1075861657273782332/Viator-logo-PNG.png"
             alt=""
           />
         </div>
