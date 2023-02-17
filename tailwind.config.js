@@ -6,12 +6,16 @@ module.exports = {
     "./public/**/*.{js,jsx,ts,tsx,html}",
   ],
   theme: {
-    colors: { azulOscuro: "#02122C", blanco: "#ffffff", azulClaro: "#165BA6" },
+    colors: {
+      azulOscuro: "#02122C",
+      blanco: "#ffffff",
+      azulClaro: "#165BA6",
+      amarillo: "	#FFFF00",
+    },
     extend: {},
     screens: {
       sm: "420px",
-      // => @media (min-width: 640px) { ... }
-
+      // => @media (min-width: 420px) { ... }
       md: "768px",
       // => @media (min-width: 768px) { ... }
 

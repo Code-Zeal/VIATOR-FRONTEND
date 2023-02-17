@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer
       aria-label="Site Footer"
-      class="bg-gray-100 flex flex-row-reverse items-center"
+      class="bg-blanco w-full flex flex-row-reverse items-center
     >
       <a
         class=" rounded-full bg-azulOscuro p-2 text-white shadow transition hover:bg-azulClaro sm:p-3 lg:p-4 transform -translate-x-20 hidden md:inline-block "
