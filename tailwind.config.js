@@ -9,7 +9,7 @@ module.exports = {
     colors: { azulOscuro: "#02122C", blanco: "#ffffff", azulClaro: "#165BA6" },
     extend: {},
     screens: {
-      sm: "450px",
+      sm: "420px",
       // => @media (min-width: 640px) { ... }
 
       md: "768px",
