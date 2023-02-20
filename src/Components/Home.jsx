@@ -1,11 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import NavBar from "./NavBar";
 import FlightSearch from "./FlightSearch";
 import Footer from "./Footer";
 import Recommendations from "./Recommendations.jsx";
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
+  let history = useHistory();
+
+  useEffect(() => {
+    history.push("/home");
+  }, []);
   return (
     <div className="h-screen w-screen bg-gray-200">
       <NavBar />

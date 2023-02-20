@@ -4,6 +4,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "./Components/Landing";
 import Home from "./Components/Home";
+import FormRegister from "./Components/FormRegister";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         <Route path="/" component={Landing} />
         <Route path="/home" component={Home} />
+        <Route exact path="/form" component={FormRegister} />
       </Switch>
     </Router>
   );

@@ -1,3 +1,4 @@
+import Logout from "./Logout";
 export default function NavBar() {
   return (
     <nav id="up" className="p-5 w-screen flex-nowrap flex bg-blanco z-10">
@@ -63,10 +64,10 @@ export default function NavBar() {
                 fill="#165BA6"
               />
             </svg>
-            <p className="mx-2 hidden sm:inline ">Cerrar Sesión</p>
           </a>
         </li>
       </ul>
+      <Logout></Logout>
     </nav>
   );
 }
