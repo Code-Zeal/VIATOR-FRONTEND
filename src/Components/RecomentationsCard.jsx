@@ -1,12 +1,12 @@
 export default function RecommendationsCard(props) {
   return (
-    <div className="w-1/3 h-80 p-6 my-4">
+    <div className="w-full h-64 md:w-1/2 md:h-80 lg:w-1/3 xl:w-1/4 p-6 my-4 ">
       <img
-        className=" w-full h-full relative block overflow-hidden rounded-xl bg-no-repeat"
+        className=" w-full h-full relative block overflow-hidden rounded-xl bg-no-repeat shadow-xl shadow-[black]"
         src={props.img}
-        alt={`${props.city} Popular place`}
+        alt={`${props.airline} Airplane or logo`}
       />
-      <span class="absolute z-10 transform -translate-y-64  inline-flex items-center rounded-full bg-black px-3 py-1 text-xs font-semibold text-blanco stroke-azulOscuro">
+      <span class="absolute z-10 transform -translate-y-48 md:-translate-y-64  inline-flex items-center rounded-lg bg-black mx-2 px-3 py-1 text-sm font-bold text-[white]  stroke-2 stroke-[yellow] bg-[#000000]  ">
         {props.value}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -19,9 +19,7 @@ export default function RecommendationsCard(props) {
       </span>
 
       <div class="relative bg-black bg-opacity-40  text-white">
-        <h3 class="text-2xl font-bold m-1 ">{props.city}</h3>
-
-        <p class="text-sm m-1 font-light">{props.country}</p>
+        <h3 class="text-2xl font-bold my-4 lg:text-3xl ">{props.airline}</h3>
       </div>
 
       <div></div>
