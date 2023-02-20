@@ -1,38 +1,57 @@
 import React from "react";
+import Select from "react-select";
 import { Link } from "react-router-dom";
 
 export default function FlightSearch() {
+  const options = [
+    {
+      value: "Ciudad de México, Aeropuerto Benito Juárez",
+      label: "Ciudad de México, Aeropuerto Benito Juárez",
+    },
+    {
+      value: "Santiago de Chile, Aeropuerto Arturo Merino Benitez",
+      label: "Santiago de Chile | Aeropuerto Arturo Merino Benitez",
+    },
+    { value: "Guadalajara", label: "Guadalajara" },
+    { value: "Monterrey", label: "Monterrey" },
+    { value: "Cancún", label: "Cancún" },
+    { value: "Los Ángeles", label: "Los Ángeles" },
+    { value: "Miami", label: "Miami" },
+    { value: "Buenos Aires", label: "Buenos Aires" },
+  ];
+
   return (
     <div class="bg-azulOscuro py-10">
       <h3 class="text-2xl font-bold mb-6 text-center text-blanco">
         Busca tu vuelo aquí
       </h3>
-      <form class="mx-auto lg:w-8/12 xl:w-6/12">
+      <form class="mx-auto lg:w-10/12 xl:w-8/12 px-4 py-2">
         <div class="flex flex-wrap mb-4 w-full justify-around">
-          <div class="w-full lg:w-auto">
+          <div class="w-full lg:w-1/6">
             <label for="origen" class="block font-medium mb-2 text-blanco">
               Origen
             </label>
-            <input
+            <Select
               id="origen"
-              type="text"
+              options={options}
               placeholder="Ciudad o aeropuerto"
-              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400 transition-colors duration-300"
+              className="w-full"
             />
           </div>
 
-          <div class="w-full lg:w-auto">
+          <div class="w-full lg:w-1/6">
             <label for="destino" class="block font-medium mb-2 text-blanco">
               Destino
             </label>
-            <input
+            <Select
               id="destino"
-              type="text"
+              options={options}
               placeholder="Ciudad o aeropuerto"
-              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400 transition-colors duration-300"
+              className="w-full"
             />
           </div>
-          <div class="w-full lg:w-auto">
+
+          <div class="w-full lg:w-1/6">
             <label for="fecha-ida" class="block font-medium mb-2 text-blanco">
               Fecha de ida
             </label>
@@ -43,7 +62,7 @@ export default function FlightSearch() {
             />
           </div>
 
-          <div class="w-full lg:w-auto">
+          <div class="w-full lg:w-1/6">
             <label
               for="fecha-vuelta"
               class="block font-medium mb-2 text-blanco"
