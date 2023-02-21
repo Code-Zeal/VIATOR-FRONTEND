@@ -374,7 +374,7 @@ const FormRegister = () => {
               <input
                 disabled={true}
                 type="text"
-                value="prueba@gmail.com"
+                value={user.email}
                 className="w-full h-1/2 border-2 rounded-md  text-[gray]"
               />
             </div>

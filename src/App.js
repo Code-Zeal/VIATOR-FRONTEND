@@ -10,8 +10,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Landing} />
-        <Route path="/home" component={Home} />
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/home" component={Home} />
         <Route exact path="/form" component={FormRegister} />
       </Switch>
     </Router>
