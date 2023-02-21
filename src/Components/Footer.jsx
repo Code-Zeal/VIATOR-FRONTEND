@@ -12,7 +12,7 @@ export default function Footer() {
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
+          class="h-5 w-5 animate-bounce"
           viewBox="0 0 20 20"
           fill="white"
         >
@@ -39,29 +39,14 @@ export default function Footer() {
 
         <nav aria-label="Footer Nav" class="mt-12">
           <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
-            <li>
-              <a
-                class="text-gray-700 transition hover:text-gray-700/75"
-                href="/about"
-              >
+            <li className=" animate-bounce">
+              <a className="text-[black]  hover:text-[gray]" href="/about">
                 Acerca de viator
               </a>
             </li>
 
-            <li>
-              <a
-                class="text-gray-700 transition hover:text-gray-700/75"
-                href="/creators"
-              >
-                Creadores
-              </a>
-            </li>
-
-            <li>
-              <a
-                class="text-gray-700 transition hover:text-gray-700/75"
-                href="/"
-              >
+            <li className="animate-bounce">
+              <a class="text-gray-700 transition hover:text-[gray]" href="/">
                 Los vuelos más baratos
               </a>
             </li>

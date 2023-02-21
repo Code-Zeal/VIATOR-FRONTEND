@@ -5,8 +5,12 @@ const Logout = () => {
   const { logout } = useAuth0();
   return (
     <div>
-      <button onClick={() => logout({ returnTo: window.location.origin })}>
-        Logout
+      <button
+        onClick={() =>
+          logout({ returnTo: window.location.origin, federated: false })
+        }
+      >
+        Cerrar Sesion
       </button>
     </div>
   );

@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { Provider } from "react-redux";
+import store from "./Redux/Store";
 
 import "./index.css";
 import App from "./App";
@@ -14,11 +16,13 @@ root.render(
       clientId="Op3PZMpZSk3hNvSTG9qRurhQip9WssPh"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: "this is a unique identifier viator final",
-        scope: "  openid profile email  ",
+        audience: "this is a unique identifier viator final 2",
+        scope: "openid profile email",
       }}
     >
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </Auth0Provider>
   </React.StrictMode>
 );
