@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer
       aria-label="Site Footer"
-      class="bg-blanco w-full flex flex-row-reverse items-center"
+      class="bg-blanco w-full flex flex-row-reverse items-center border-t-4 border-double"
     >
       <a
         class=" rounded-full bg-azulOscuro p-2 text-white shadow transition hover:bg-azulClaro sm:p-3 lg:p-4 transform -translate-x-20 hidden md:inline-block "
@@ -39,13 +39,13 @@ export default function Footer() {
 
         <nav aria-label="Footer Nav" class="mt-12">
           <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
-            <li className=" animate-bounce">
+            <li className="">
               <a className="text-[black]  hover:text-[gray]" href="/about">
                 Acerca de viator
               </a>
             </li>
 
-            <li className="animate-bounce">
+            <li className="">
               <a class="text-gray-700 transition hover:text-[gray]" href="/">
                 Los vuelos más baratos
               </a>
