@@ -6,6 +6,7 @@ import Landing from "./Components/Landing";
 import Home from "./Components/Home";
 import FormRegister from "./Components/FormRegister";
 import Shop from "./Components/Shop";
+import Profile from "./Components/Profile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/form" component={FormRegister} />
         <Route exact path="/shop" component={Shop} />
+        <Route exact path="/profile" component={Profile} />
       </Switch>
     </Router>
   );
