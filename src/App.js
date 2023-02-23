@@ -17,8 +17,25 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/form" component={FormRegister} />
         <Route exact path="/shop" component={Shop} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/profile/myTickets" component={MyTickets} />
+        {/* <Route path="/profile" component={Profile} /> */}
+        <Route
+          exact
+          path="/profile"
+          render={() => (
+            <div>
+              <Profile />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/myTickets"
+          render={() => (
+            <div>
+              <MyTickets />
+            </div>
+          )}
+        />
       </Switch>
     </Router>
   );
