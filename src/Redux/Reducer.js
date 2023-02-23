@@ -5,6 +5,8 @@ const initialState = {
   postRegisterData: [],
   dataAuth0: [],
   userExiste: "",
+  flights: [],
+  filteredFlights: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,7 +26,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userExiste: action.payload,
       };
-
+    case "GET_FLIGHTS":
+      return {
+        ...state,
+        flights: action.payload,
+      };
     // defecto
     default:
       return {

@@ -50,3 +50,20 @@ export const verificaccionUser = (subAuth0) => async (dispatch) => {
     payload: response.data,
   });
 };
+
+export function getFlights() {
+  return async function (dispatch) {
+    const res = await axios.get("http://localhost:4000/api/flights/");
+    return dispatch({
+      type: "GET_FLIGHTS",
+      payload: res.data,
+    });
+  };
+}
+
+export function filteredFlights(payload) {
+  return {
+    type: "FILTERED_FLIGHTS",
+    payload,
+  };
+}
