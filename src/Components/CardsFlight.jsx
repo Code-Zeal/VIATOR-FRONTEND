@@ -4,7 +4,7 @@ import CardFlight from "./CardFlight";
 import { useSelector } from "react-redux";
 
 const CardsFlight = () => {
-  const flights = useSelector((state) => state.getFlights);
+  const flights = useSelector((state) => state.getFlightsDataDePrueba);
 
   // const dispatch = useDispatch();
 

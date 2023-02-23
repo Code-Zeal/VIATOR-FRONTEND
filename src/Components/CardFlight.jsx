@@ -2,9 +2,9 @@ import React from "react";
 import moment from "moment";
 
 const CardFlight = (props) => {
-  const [hover, setHover] = React.useState(false);
-  const handleMouseEnter = () => setHover(true);
-  const handleMouseLeave = () => setHover(false);
+  // const [hover, setHover] = React.useState(false);
+  // const handleMouseEnter = () => setHover(true);
+  // const handleMouseLeave = () => setHover(false);
 
   return (
     <div className="m-2">
@@ -97,8 +97,7 @@ const CardFlight = (props) => {
   );
 };
 
-{
-  /* <div>
+/* <div>
             <div className="border mt-4 mb-1">
               <h4 className="mb-2">Vuelta</h4>
 
@@ -111,7 +110,7 @@ const CardFlight = (props) => {
               <p>Santiago</p>
             </div>
           </div> */
-}
+
 // sequelize.define('Flight',{
 //     id:{
 //         type:DataTypes.INTEGER,
@@ -152,6 +151,4 @@ const CardFlight = (props) => {
 
 export default CardFlight;
 
-{
-  /* <div class=" max-w-xl m-auto flex flex-wrap flex-col md:flex-row items-center justify-start"> */
-}
+/* <div class=" max-w-xl m-auto flex flex-wrap flex-col md:flex-row items-center justify-start"> */
