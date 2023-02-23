@@ -7,6 +7,7 @@ import Home from "./Components/Home";
 import FormRegister from "./Components/FormRegister";
 import Shop from "./Components/Shop";
 import Profile from "./Components/Profile";
+import MyTickets from "./Components/MyTickets";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/form" component={FormRegister} />
         <Route exact path="/shop" component={Shop} />
-        <Route exact path="/profile" component={Profile} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/profile/myTickets" component={MyTickets} />
       </Switch>
     </Router>
   );

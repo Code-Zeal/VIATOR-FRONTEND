@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import NavBar from "./NavBar";
 import Footer from "./Footer";
+import SideBarProfile from "./SideBarProfile";
 
 export default function Profile() {
   return (
-    <div className="h-screen w-screen bg-gray-200">
-      <Footer />
+    <div className="h-screen w-screen">
+      <SideBarProfile></SideBarProfile>
+      <Footer></Footer>
     </div>
   );
 }
