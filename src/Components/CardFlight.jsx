@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 
 const CardFlight = (props) => {
+  const [isFav, setIsFav] = useState(false);
+
   // const [hover, setHover] = React.useState(false);
   // const handleMouseEnter = () => setHover(true);
   // const handleMouseLeave = () => setHover(false);
@@ -17,9 +19,24 @@ const CardFlight = (props) => {
 
   return (
     <div className="m-auto my-6 flex flex-col  w-1/2  ">
-      <div className="flex justify-between">
+      <div className="flex  justify-between">
         <div className="border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90  flex justify-between w-1/3 items-center font-bold">
           <h4> Standar Ticket</h4>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#000000"
+            width="25px"
+            height="25px"
+            viewBox="0 0 24 24"
+            id="airplane"
+            data-name="Flat Color"
+            class="icon flat-color"
+          >
+            <path
+              id="primary"
+              d="M11.92,19.58,15.84,14H20a2,2,0,0,0,0-4H15.84L11.92,4.42A1,1,0,0,0,11.11,4h-.93a1,1,0,0,0-1,1.16L10,10H6.38L4.68,8.29A1.05,1.05,0,0,0,4,8H3a1,1,0,0,0-.89,1.45L3.38,12,2.11,14.55A1,1,0,0,0,3,16H4a1.05,1.05,0,0,0,.71-.29L6.38,14H10l-.81,4.84a1,1,0,0,0,1,1.16h.93A1,1,0,0,0,11.92,19.58Z"
+            />
+          </svg>
           <h4 className=" text-xl font-bold">Ida</h4>
         </div>
         <div className="py-2 w-1/3 border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90 flex justify-between items-center font-bold">
@@ -34,16 +51,112 @@ const CardFlight = (props) => {
         <div className="bg-[#E2D8FE] bg-opacity-80 border-2 flex w-full      h-full  ">
           <div className="w-4/5 text-[#00000] rounded-tl-xl rounded-bl-xl   py-4 flex   justify-between px-2">
             <div className="flex my-2  items-center ">
+              {isFav ? (
+                <>
+                  <svg
+                    className="cursor-pointer mx-4"
+                    onClick={() => setIsFav(false)}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50px"
+                    height="50px"
+                    viewBox="0 -1 20 20"
+                  >
+                    <g id="star" transform="translate(-2 -3)">
+                      <path
+                        id="secondary"
+                        fill="#2ca9bc"
+                        d="M12,4,9.22,9.27,3,10.11l4.5,4.1L6.44,20,12,17.27,17.56,20,16.5,14.21l4.5-4.1-6.22-.84Z"
+                      />
+                      <path
+                        id="primary"
+                        d="M12,4,9.22,9.27,3,10.11l4.5,4.1L6.44,20,12,17.27,17.56,20,16.5,14.21l4.5-4.1-6.22-.84Z"
+                        fill="none"
+                        stroke="#000000"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </g>
+                  </svg>
+                </>
+              ) : (
+                <>
+                  <svg
+                    className="cursor-pointer mx-4"
+                    onClick={() => setIsFav(true)}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50px"
+                    height="50px"
+                    viewBox="0 -1 20 20"
+                  >
+                    <g id="star" transform="translate(-2 -3)">
+                      <path
+                        id="secondary"
+                        fill="none"
+                        d="M12,4,9.22,9.27,3,10.11l4.5,4.1L6.44,20,12,17.27,17.56,20,16.5,14.21l4.5-4.1-6.22-.84Z"
+                      />
+                      <path
+                        id="primary"
+                        d="M12,4,9.22,9.27,3,10.11l4.5,4.1L6.44,20,12,17.27,17.56,20,16.5,14.21l4.5-4.1-6.22-.84Z"
+                        fill="none"
+                        stroke="#000000"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </g>
+                  </svg>
+                </>
+              )}
               <div className="flex-col items-center">
                 <p className="font-bold  px-2 text-xl">{`${props.origin}`}</p>
                 <p className=" font-medium text-[#151515] px-2">
                   {moment(props.dateTimeDeparture).format("HH:mm")}
                 </p>
               </div>
-              <div className="font-bold  bg-[#801072] bg-opacity-90  text-xs text-[white] px-4 py-2 rounded-xl flex items-center justify-center ">
+              <div className="font-bold    text-sm text-[black] px-4 py-2 rounded-xl flex flex-col items-center justify-center ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25px"
+                  height="25px"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                >
+                  <path
+                    d="M37 28.3923V35.4066C37 39.048 34.0885 42 30.497 42C26.9054 42 23.9939 39.048 23.9939 35.4066L24.0061 13.1429C24.0061 9.19797 21.0946 6 17.503 6C13.9115 6 11 9.19797 11 13.1429V28.3923"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M43 31L37 25L31 31"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M43 10.7273C43 15.1818 37 19 37 19C37 19 31 15.1818 31 10.7273C31 9.20831 31.6321 7.75155 32.7574 6.67748C33.8826 5.60341 35.4087 5 37 5C38.5913 5 40.1174 5.60341 41.2426 6.67748C42.3679 7.75155 43 9.20831 43 10.7273Z"
+                    fill="#2F88FF"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17 34.7273C17 39.1818 11 43 11 43C11 43 5 39.1818 5 34.7273C5 33.2083 5.63214 31.7516 6.75736 30.6775C7.88258 29.6034 9.4087 29 11 29C12.5913 29 14.1174 29.6034 15.2426 30.6775C16.3679 31.7516 17 33.2083 17 34.7273Z"
+                    fill="#2F88FF"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle cx="37" cy="11" r="2" fill="white" />
+                  <circle cx="11" cy="35" r="2" fill="white" />
+                </svg>
                 Escalas: {"2"}
               </div>
-
               <div className="flex-col">
                 <p className="font-bold text-xl px-2">{`${props.destiny}`}</p>
                 <p className=" font-medium px-2 text-[#151515]">
@@ -52,18 +165,18 @@ const CardFlight = (props) => {
               </div>
             </div>
             <div className="ml-5 flex flex-col  items-center justify-center">
-              <span className="font-extrabold text-xl">Precio por adulto</span>
+              <span className="font-bold text-xl">Precio final</span>
               {props.propiedadVueltaTrueOrFalse ? (
-                <p className="font-bold text-xl">
-                  $
+                <p className="font-bold text-md">
+                  USD $
                   {parseFloat(props.ticketPrice) +
                     parseFloat(props.vueltaData.ticketPrice)}
                   {"."}
                   00
                 </p>
               ) : (
-                <p className="font-bold text-xl">
-                  $
+                <p className="font-bold text-md">
+                  USD $
                   {props.ticketPrice.substring(0, props.ticketPrice.length - 1)}
                 </p>
               )}
@@ -80,7 +193,7 @@ const CardFlight = (props) => {
         <div>
           <div className="bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain">
             <div className="bg-[#E2D8FE] bg-opacity-80   border-2 flex w-full     rounded-br-xl  items-center justify-start">
-              <div className="flex flex-col p-6 items-center justify-center">
+              <div className="flex flex-col p-2 items-center justify-center">
                 <p className="font-bold  px-2 text-xl">
                   {props.vueltaData.origin}
                 </p>
@@ -88,7 +201,47 @@ const CardFlight = (props) => {
                   {moment(props.vueltaData.dateTimeDeparture).format("HH:mm")}
                 </p>
               </div>
-              <div className="font-bold  bg-[#801072] bg-opacity-90  text-xs text-[white] px-4 py-2  rounded-xl flex items-center justify-center">
+              <div className="font-bold    text-sm text-[black] px-4 py-2 rounded-xl flex flex-col items-center justify-center ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25px"
+                  height="25px"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                >
+                  <path
+                    d="M37 28.3923V35.4066C37 39.048 34.0885 42 30.497 42C26.9054 42 23.9939 39.048 23.9939 35.4066L24.0061 13.1429C24.0061 9.19797 21.0946 6 17.503 6C13.9115 6 11 9.19797 11 13.1429V28.3923"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M43 31L37 25L31 31"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M43 10.7273C43 15.1818 37 19 37 19C37 19 31 15.1818 31 10.7273C31 9.20831 31.6321 7.75155 32.7574 6.67748C33.8826 5.60341 35.4087 5 37 5C38.5913 5 40.1174 5.60341 41.2426 6.67748C42.3679 7.75155 43 9.20831 43 10.7273Z"
+                    fill="#2F88FF"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17 34.7273C17 39.1818 11 43 11 43C11 43 5 39.1818 5 34.7273C5 33.2083 5.63214 31.7516 6.75736 30.6775C7.88258 29.6034 9.4087 29 11 29C12.5913 29 14.1174 29.6034 15.2426 30.6775C16.3679 31.7516 17 33.2083 17 34.7273Z"
+                    fill="#2F88FF"
+                    stroke="#000000"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle cx="37" cy="11" r="2" fill="white" />
+                  <circle cx="11" cy="35" r="2" fill="white" />
+                </svg>
                 Escalas: {"1"}
               </div>
               <div className="flex flex-col p-6 items-center justify-center">
@@ -101,7 +254,23 @@ const CardFlight = (props) => {
               </div>
             </div>
           </div>
-          <h4 className="border-2 flex items-center justify-center w-1/5 rounded-bl-xl rounded-br-xl text-[black] border-[black] bg-[#E2D8FE] font-bold">
+
+          <h4 className="border-2 flex items-center justify-evenly w-1/5 rounded-bl-xl rounded-br-xl text-[black] border-[black] bg-[#E2D8FE] font-bold ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+              width="25px"
+              height="25px"
+              viewBox="0 0 24 24"
+              id="airplane"
+              data-name="Flat Color"
+              class="icon flat-color"
+            >
+              <path
+                id="primary"
+                d="M11.92,19.58,15.84,14H20a2,2,0,0,0,0-4H15.84L11.92,4.42A1,1,0,0,0,11.11,4h-.93a1,1,0,0,0-1,1.16L10,10H6.38L4.68,8.29A1.05,1.05,0,0,0,4,8H3a1,1,0,0,0-.89,1.45L3.38,12,2.11,14.55A1,1,0,0,0,3,16H4a1.05,1.05,0,0,0,.71-.29L6.38,14H10l-.81,4.84a1,1,0,0,0,1,1.16h.93A1,1,0,0,0,11.92,19.58Z"
+              />
+            </svg>
             Vuelta
           </h4>
         </div>
