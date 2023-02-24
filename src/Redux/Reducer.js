@@ -44,7 +44,7 @@ const initialState = {
     },
     {
       id: 5,
-      origin: "´puerto natales",
+      origin: "puerto natales",
       destiny: "puerto Montt",
       dateTimeDeparture: "2023-02-22T19:35:20.000Z",
       dateTimeArrival: "2023-02-22T19:35:20.000Z",

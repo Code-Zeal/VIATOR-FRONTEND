@@ -6,93 +6,108 @@ const CardFlight = (props) => {
   // const handleMouseEnter = () => setHover(true);
   // const handleMouseLeave = () => setHover(false);
 
+  /* //   getFlights
+//   id: 1,
+//   origin: "chiloe",
+//   destiny: "arica",
+//   dateTimeDeparture: "2023-02-22T19:35:20.000Z",
+//   dateTimeArrival: "2023-02-22T19:35:20.000Z",
+//   seatsAvailable: 20,
+//   ticketPrice: "400.000", */
+
   return (
-    <div className="m-2">
-      {/* //   getFlights
-  //   id: 1,
-  //   origin: "chiloe",
-  //   destiny: "arica",
-  //   dateTimeDeparture: "2023-02-22T19:35:20.000Z",
-  //   dateTimeArrival: "2023-02-22T19:35:20.000Z",
-  //   seatsAvailable: 20,
-  //   ticketPrice: "400.000", */}
-
-      <div className="border flex flex-col justify-center items-center">
-        <div>
-          <div className="border flex flex-row justify-around ">
-            <h3 className="text-sm">DEPARTURE </h3>
-
-            {console.log(props.dateTimeDeparture)}
-            <h4 className="text-sm">
-              {moment(props.dateTimeDeparture).format("DD, M ,YYYY")}
-            </h4>
-          </div>
-          {/* foto y nombre de la aerolinea */}
-          <div className="text-center w-60 mb-2 mt-4 flex flex-row">
-            <img src="" alt="logo" className="w-10  " />
-            <h4>Nombre Aerolinea</h4>
-          </div>
-          <div className=" border mt-2 mb-1">
-            <h4 className="mb-2">Ida</h4>
-
-            <p>{moment(props.dateTimeDeparture).format("HH:mm:ss")}</p>
-            {/* <p>PMC</p> */}
-            <p>{props.origin}</p>
-          </div>
-
-          <div className="border mt-1 ">
-            <p>{moment(props.dateTimeArrival).format("HH:mm:ss")}</p>
-            {/* <p>LUN</p> */}
-            <p>{props.destiny}</p>
-          </div>
-          {/* vuelta */}
-
-          {props.propiedadVueltaTrueOrFalse ? (
-            <div>
-              <div className="border mt-4 mb-1">
-                <h4 className="mb-2">Vuelta</h4>
-
-                <p>
-                  {moment(props.vueltaData.dateTimeDeparture).format(
-                    "HH:mm:ss"
-                  )}
-                </p>
-                <p>{props.vueltaData.origin}</p>
-              </div>
-
-              <div className=" border mb-4">
-                <p>
-                  {moment(props.vueltaData.dateTimeArrival).format("HH:mm:ss")}
-                </p>
-                <p>{props.vueltaData.destiny}</p>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
-
-          {/* /vueelta */}
+    <div className="m-auto my-6 flex flex-col  w-1/2  ">
+      <div className="flex justify-between">
+        <div className="border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90  flex justify-between w-1/3 items-center font-bold">
+          <h4> Standar Ticket</h4>
+          <h4 className=" text-xl font-bold">Ida</h4>
         </div>
+        <div className="py-2 w-1/3 border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90 flex justify-between items-center font-bold">
+          <h3 className="text-sm">DEPARTURE </h3>
 
-        <div className=" border flex flex-row">
-          <div className=" border-r pr-10">
-            <h4> Standar Ticket</h4>
-            {props.propiedadVueltaTrueOrFalse ? (
-              <p>
-                {parseFloat(props.ticketPrice) +
-                  parseFloat(props.vueltaData.ticketPrice)}
-                {"."}
-                000
-              </p>
-            ) : (
-              <p>{props.ticketPrice}</p>
-            )}
-            <span>Precio por adulto</span>
-          </div>
-
-          <button className="">Comprar</button>
+          <h4 className="text-sm">
+            {moment(props.dateTimeDeparture).format("DD, M ,YYYY")}
+          </h4>
         </div>
       </div>
+      <div className=" bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain  ">
+        <div className="bg-[#E2D8FE] bg-opacity-80 border-2 flex w-full      h-full  ">
+          <div className="w-4/5 text-[#00000] rounded-tl-xl rounded-bl-xl   py-4 flex   justify-between px-2">
+            <div className="flex my-2  items-center ">
+              <div className="flex-col items-center">
+                <p className="font-bold  px-2 text-xl">{`${props.origin}`}</p>
+                <p className=" font-medium text-[#151515] px-2">
+                  {moment(props.dateTimeDeparture).format("HH:mm")}
+                </p>
+              </div>
+              <div className="font-bold  bg-[#801072] bg-opacity-90  text-xs text-[white] px-4 py-2 rounded-xl flex items-center justify-center ">
+                Escalas: {"2"}
+              </div>
+
+              <div className="flex-col">
+                <p className="font-bold text-xl px-2">{`${props.destiny}`}</p>
+                <p className=" font-medium px-2 text-[#151515]">
+                  {moment(props.dateTimeArrival).format("HH:mm")}
+                </p>
+              </div>
+            </div>
+            <div className="ml-5 flex flex-col  items-center justify-center">
+              <span className="font-extrabold text-xl">Precio por adulto</span>
+              {props.propiedadVueltaTrueOrFalse ? (
+                <p className="font-bold text-xl">
+                  $
+                  {parseFloat(props.ticketPrice) +
+                    parseFloat(props.vueltaData.ticketPrice)}
+                  {"."}
+                  00
+                </p>
+              ) : (
+                <p className="font-bold text-xl">
+                  $
+                  {props.ticketPrice.substring(0, props.ticketPrice.length - 1)}
+                </p>
+              )}
+            </div>
+            {/* <p>LUN</p> */}
+          </div>
+
+          <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-1/5 cursor-pointer text-2xl font-bold">
+            Comprar
+          </div>
+        </div>
+      </div>
+      {props.propiedadVueltaTrueOrFalse ? (
+        <div>
+          <div className="bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain">
+            <div className="bg-[#E2D8FE] bg-opacity-80   border-2 flex w-full     rounded-br-xl  items-center justify-start">
+              <div className="flex flex-col p-6 items-center justify-center">
+                <p className="font-bold  px-2 text-xl">
+                  {props.vueltaData.origin}
+                </p>
+                <p className="font-medium px-2 text-[#151515]">
+                  {moment(props.vueltaData.dateTimeDeparture).format("HH:mm")}
+                </p>
+              </div>
+              <div className="font-bold  bg-[#801072] bg-opacity-90  text-xs text-[white] px-4 py-2  rounded-xl flex items-center justify-center">
+                Escalas: {"1"}
+              </div>
+              <div className="flex flex-col p-6 items-center justify-center">
+                <p className="font-bold  px-2 text-xl">
+                  {props.vueltaData.destiny}
+                </p>
+                <p className="font-medium px-2 text-[#151515]">
+                  {moment(props.vueltaData.dateTimeArrival).format("HH:mm")}
+                </p>
+              </div>
+            </div>
+          </div>
+          <h4 className="border-2 flex items-center justify-center w-1/5 rounded-bl-xl rounded-br-xl text-[black] border-[black] bg-[#E2D8FE] font-bold">
+            Vuelta
+          </h4>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
