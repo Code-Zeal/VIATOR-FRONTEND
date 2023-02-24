@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react"; //--
 import { useState, useEffect } from "react"; //--
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"; //--
 import Footer from "./Footer.jsx";
+import Welcom from "./Welcom.jsx";
 
 function Landing() {
   const { isAuthenticated } = useAuth0();
@@ -48,7 +49,8 @@ function Landing() {
     <>
       {isAuthenticated ? (
         <>
-          <FormRegister />
+          <Welcom></Welcom>
+          {/* <FormRegister /> */}
         </>
       ) : (
         <div className="  ">

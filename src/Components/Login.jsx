@@ -7,9 +7,11 @@ const Login = () => {
 
   return (
     <div className="mt-12 flex justify-center text-xl  bg-[white] w-48 h-12 rounded-2xl border-2 font-bold">
+      {/* <Link to="/welcom"> */}
       <button className="text-[black] " onClick={() => loginWithRedirect()}>
         INGRESAR
       </button>
+      {/* </Link> */}
     </div>
   );
 };

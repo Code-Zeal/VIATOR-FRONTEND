@@ -3,6 +3,7 @@ import axios from "axios";
 export const POST_AUTH0_DATA = "POST_AUTH0_DATA";
 export const PUT_USER = "PUT_USER";
 export const VERIFICACCION_USER = "VERIFICACCION_USER";
+export const VERIFICACCION_EMAIL = "VERIFICACCION_EMAIL";
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
   const response = await axios.put(
@@ -46,6 +47,18 @@ export const verificaccionUser = (subAuth0) => async (dispatch) => {
 
   dispatch({
     type: VERIFICACCION_USER,
+    // DATA SERIA POR EL EXIOS
+    payload: response.data,
+  });
+};
+
+export const verificaccionEmail = (subAuth0) => async (dispatch) => {
+  const response = await axios.get(
+    `http://localhost:4000/isRegistered?id=${subAuth0}`
+  );
+
+  dispatch({
+    type: VERIFICACCION_EMAIL,
     // DATA SERIA POR EL EXIOS
     payload: response.data,
   });
