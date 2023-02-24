@@ -6,6 +6,8 @@ import Landing from "./Components/Landing";
 import Home from "./Components/Home";
 import FormRegister from "./Components/FormRegister";
 import Shop from "./Components/Shop";
+import Profile from "./Components/Profile";
+import MyTickets from "./Components/MyTickets";
 
 function App() {
   return (
@@ -15,6 +17,25 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/form" component={FormRegister} />
         <Route exact path="/shop" component={Shop} />
+        {/* <Route path="/profile" component={Profile} /> */}
+        <Route
+          exact
+          path="/profile"
+          render={() => (
+            <div>
+              <Profile />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/myTickets"
+          render={() => (
+            <div>
+              <MyTickets />
+            </div>
+          )}
+        />
       </Switch>
     </Router>
   );
