@@ -6,7 +6,9 @@ const initialState = {
   dataAuth0: [],
   userExiste: "",
   flights: [],
+  flightDetails: [],
   filteredFlights: [],
+  filteredAirports: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -30,6 +32,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         flights: action.payload,
+      };
+    case "GET_FLIGHT_DETAILS":
+      return {
+        ...state,
+        flightDetails: action.payload,
+      };
+    case "GET_AIRPORTS_INPUT":
+      return {
+        ...state,
+        filteredAirports: action.payload,
       };
     // defecto
     default:

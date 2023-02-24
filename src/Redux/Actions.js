@@ -61,9 +61,35 @@ export function getFlights() {
   };
 }
 
+export function getFlightDetails(id) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get("http://localhost:4000/api/flights/" + id);
+      return dispatch({
+        type: "GET_FLIGHT_DETAILS",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function filteredFlights(payload) {
   return {
     type: "FILTERED_FLIGHTS",
     payload,
+  };
+}
+
+export function getAirportsByInput(payload) {
+  return async function (dispatch) {
+    const res = await axios.get(
+      `http://localhost:4000/getAirportsByInput/${payload}`
+    );
+    return dispatch({
+      type: "GET_AIRPORTS_INPUT",
+      payload: res.data,
+    });
   };
 }
