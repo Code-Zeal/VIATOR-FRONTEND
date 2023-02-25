@@ -8,6 +8,10 @@ import FormRegister from "./Components/FormRegister";
 import Shop from "./Components/Shop";
 import Profile from "./Components/Profile";
 import MyTickets from "./Components/MyTickets";
+import Favorites from "./Components/Favorites";
+import Data from "./Components/Data";
+import Admin from "./Components/Admin";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -33,6 +37,38 @@ function App() {
           render={() => (
             <div>
               <MyTickets />
+              <Profile></Profile>
+              <Footer></Footer>
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/favorites"
+          render={() => (
+            <div>
+              <Profile />
+              <Favorites />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/data"
+          render={() => (
+            <div>
+              <Profile />
+              <Data />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/admin"
+          render={() => (
+            <div>
+              <Profile />
+              <Admin />
             </div>
           )}
         />

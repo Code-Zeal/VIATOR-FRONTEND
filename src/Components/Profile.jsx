@@ -3,9 +3,8 @@ import SideBarProfile from "./SideBarProfile";
 
 export default function Profile() {
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen bg-[#F8FBFB]">
       <SideBarProfile></SideBarProfile>
-      <Footer></Footer>
     </div>
   );
 }
