@@ -9,6 +9,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import Home from "./Home";
+import Footer from "./Footer";
 
 const Welcom = () => {
   const dispatch = useDispatch();
@@ -68,22 +69,31 @@ const Welcom = () => {
     <>
       {dataID === "False" ? (
         <>
-          <div className="">
-            <h1>¿Deseas rellenar tus datos?</h1>
-            <p>
-              Es muy importate que ingrese tus datos para realizar compras y
-              recibir recomendacionesde los vuelos disponibles
+          <div className="w-11/12 bg-azulClaro text-[white] flex flex-col items-center justify-evenly h-96 mx-auto my-5 rounded-xl shadow-xl shadow-[#2c2c2c] sm:w-9/12 lg:w-7/12 ">
+            <img
+              className="animate-pulse"
+              src="https://i.imgur.com/clNpPpW.png"
+              alt=""
+            />
+            <h1 className="mx-auto font-bold text-xl sm:text-3xl text-center">
+              ¿Deseas rellenar tus datos?
+            </h1>
+            <p className="text-center px-2 md:text-2xl sm:px-8">
+              Es muy importate que ingreses tus datos para completar tu
+              registro, realizar compras y recibir recomendaciones de vuelos,
+              puedes hacerlo mas tarde
             </p>
 
-            <div className="">
-              <div>
-                <button onClick={completeToForm}>Completar ahora</button>
+            <div className="flex justify-evenly w-full ">
+              <div className="bg-[#4F46E5] px-3 py-1 md:px-8 md:py-3 rounded-md font-bold shadow-md shadow-[#0c0c0c] md:hover:bg-[#2f299d]">
+                <button onClick={completeToForm}>Ahora</button>
               </div>
-              <div>
-                <button onClick={goHome}>Completar mas tarde</button>
+              <div className="bg-[#4F46E5] px-3 py-1 md:px-8 md:py-3 md:hover:bg-[#2f299d] rounded-md font-bold shadow-md shadow-[#0c0c0c]">
+                <button onClick={goHome}>Más Tarde</button>
               </div>
             </div>
           </div>
+          <Footer></Footer>
         </>
       ) : (
         <Link to="/home">
