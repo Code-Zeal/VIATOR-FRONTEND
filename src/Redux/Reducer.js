@@ -6,6 +6,7 @@ import {
   PUT_DATA,
   VERIFICACCION_EMAIL,
   searchFlights,
+  SLIDER_RECOMENDADO
 } from "./Actions";
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   flightDetails: [],
   filteredFlights: [],
   filteredAirports: [],
+  recommended : []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -75,6 +77,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredAirports: action.payload,
       };
+    case SLIDER_RECOMENDADO: {
+      return {
+        ...state,
+        recommended : action.payload
+      }
+    }
     // defecto
     default:
       return {

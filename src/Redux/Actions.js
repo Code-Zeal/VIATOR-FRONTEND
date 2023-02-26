@@ -6,6 +6,7 @@ export const VERIFICACCION_USER = "VERIFICACCION_USER";
 export const GET_DATA = "GET_DATA";
 export const PUT_DATA = "PUT_DATA";
 export const VERIFICACCION_EMAIL = "VERIFICACCION_EMAIL";
+export const SLIDER_RECOMENDADO = "SLIDER_RECOMENDADO"
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
   const response = await axios.put(
@@ -149,4 +150,14 @@ export function getAirportsByInput(payload) {
       payload: res.data,
     });
   };
+}
+
+export const sliderRecomendado = () => {
+  return async (dispatch) => {
+    const info = await axios.get(`http://localhost:4000/api/flights`);
+    dispatch({
+      type : SLIDER_RECOMENDADO,
+      payload : info.data
+    })
+  }
 }
