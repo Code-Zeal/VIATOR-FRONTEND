@@ -19,9 +19,10 @@ export default function FlightSearch() {
     roundTrip: "",
     dateTimeDeparture: "",
     dateTimeReturn: "",
-    passengers: "",
+    passengers: 1,
     class: "",
   });
+  const [formValid, setFormValid] = useState(false);
 
   const handleCheck1Change = (event) => {
     if (event.target.checked) {
@@ -82,6 +83,7 @@ export default function FlightSearch() {
       ...formData,
       origin: selectedOption.value,
     });
+    validateForm();
     console.log(formData);
   }
 
@@ -90,6 +92,7 @@ export default function FlightSearch() {
       ...formData,
       destiny: selectedOption.value,
     });
+    validateForm();
     console.log(formData);
   }
 
@@ -98,6 +101,7 @@ export default function FlightSearch() {
       ...formData,
       dateTimeDeparture: event.target.value,
     });
+    validateForm();
     console.log(formData);
   }
 
@@ -106,6 +110,7 @@ export default function FlightSearch() {
       ...formData,
       dateTimeReturn: event.target.value,
     });
+    validateForm();
     console.log(formData);
   }
 
@@ -114,6 +119,7 @@ export default function FlightSearch() {
       ...formData,
       passengers: event.target.value,
     });
+    validateForm();
     console.log(formData);
   }
 
@@ -122,8 +128,23 @@ export default function FlightSearch() {
       ...formData,
       class: event.target.value,
     });
+    validateForm();
     console.log(formData);
   }
+
+  const validateForm = () => {
+    if (
+      formData.origin !== "" &&
+      formData.destiny !== "" &&
+      formData.dateTimeDeparture !== "" &&
+      formData.passengers !== "" &&
+      (checked2 ? formData.dateTimeReturn !== "" : true)
+    ) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -142,17 +163,6 @@ export default function FlightSearch() {
           <label>
             <input
               type="checkbox"
-              id="Check1"
-              name="ida_vuelta"
-              value="false"
-              checked={checked1}
-              onChange={handleCheck1Change}
-            />{" "}
-            Ida
-          </label>
-          <label>
-            <input
-              type="checkbox"
               id="Check2"
               name="ida_vuelta"
               checked={checked2}
@@ -160,6 +170,17 @@ export default function FlightSearch() {
               onChange={handleCheck2Change}
             />{" "}
             Ida y vuelta
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              id="Check1"
+              name="ida_vuelta"
+              value="false"
+              checked={checked1}
+              onChange={handleCheck1Change}
+            />{" "}
+            Ida
           </label>
 
           <div class="w-full lg:w-1/6">
@@ -242,6 +263,7 @@ export default function FlightSearch() {
               type="submit"
               class="w-4/12 bg-blue-500 hover:bg-blue-600 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition-colors duration-300 bg-azulClaro text-blanco"
               onClick={handleSubmit}
+              disabled={!formValid}
             >
               Buscar vuelos
             </button>

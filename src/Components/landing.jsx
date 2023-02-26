@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"; //--
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"; //--
 import Footer from "./Footer.jsx";
 import Welcome from "./Welcome.jsx";
-
+import { Redirect } from "react-router-dom";
 
 function Landing() {
   const { isAuthenticated } = useAuth0();
@@ -50,7 +50,9 @@ function Landing() {
     <>
       {isAuthenticated ? (
         <>
-          <Welcome></Welcome>
+          <Redirect to="/welcome" />
+          <Welcome />
+
           {/* <FormRegister /> */}
         </>
       ) : (

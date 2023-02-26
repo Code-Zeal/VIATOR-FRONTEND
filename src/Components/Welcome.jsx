@@ -43,6 +43,7 @@ const Welcome = () => {
     };
     dispatch(postDataAuth0Inicial(dataRegister, token));
   };
+  console.log(dataID);
 
   const completeToForm = () => {
     history.push("/form");
@@ -59,7 +60,7 @@ const Welcome = () => {
     // es la primera vez que se logea ? False si es su primera vez
     // DataID es un useSelector
     <>
-      {dataID === "False" ? (
+      {dataID === "False" || dataID === "" ? (
         <>
           <div className="w-11/12 bg-azulClaro text-[white] flex flex-col items-center justify-evenly h-96 mx-auto my-5 rounded-xl shadow-xl shadow-[#2c2c2c] sm:w-9/12 lg:w-7/12 ">
             <img
@@ -91,8 +92,7 @@ const Welcome = () => {
         </>
       ) : (
         // window.open("/home", "_self")
-
-        <Home />
+        <Redirect to="/home" />
       )}
     </>
   );
