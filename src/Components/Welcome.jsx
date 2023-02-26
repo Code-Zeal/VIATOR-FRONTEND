@@ -23,16 +23,8 @@ const Welcome = () => {
     id: user?.sub,
   };
 
-  useEffect(() => {
-    const redirectForm = async () => {
-      if (dataID === "False") {
-        history.push("/welcom");
-      } else {
-        history.push("/home");
-      }
-    };
-    redirectForm();
-  }, [dataID]);
+  // useEffect(() => {
+  // }, []);
 
   useEffect(() => {
     // reviso en mi base de datos si tengo el id de la persona que acaba de iniciar sesion
@@ -60,8 +52,8 @@ const Welcome = () => {
   const goHome = async () => {
     await registro();
 
-    history.push("/home");
-    window.location.reload();
+    // history.push("/home");
+    // window.location.reload();
   };
   return (
     // es la primera vez que se logea ? False si es su primera vez
@@ -89,16 +81,18 @@ const Welcome = () => {
                 <button onClick={completeToForm}>Ahora</button>
               </div>
               <div className="bg-[#4F46E5] px-3 py-1 md:px-8 md:py-3 md:hover:bg-[#2f299d] rounded-md font-bold shadow-md shadow-[#0c0c0c]">
-                <button onClick={goHome}>Más Tarde</button>
+                <Link to="/home">
+                  <button onClick={goHome}>Más Tarde</button>
+                </Link>
               </div>
             </div>
           </div>
           <Footer></Footer>
         </>
       ) : (
-        <Link to="/home">
-          <Home />
-        </Link>
+        // window.open("/home", "_self")
+
+        <Home />
       )}
     </>
   );
