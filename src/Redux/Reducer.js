@@ -3,6 +3,7 @@ import {
   PUT_USER,
   VERIFICACCION_USER,
   GET_DATA,
+  PUT_DATA,
 } from "./Actions";
 
 const initialState = {
@@ -34,6 +35,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: action.payload,
+      };
+
+    case PUT_DATA:
+      return {
+        ...state,
       };
 
     // defecto

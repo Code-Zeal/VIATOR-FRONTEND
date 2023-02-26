@@ -2,31 +2,69 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDataUser } from "../Redux/Actions";
+import { getDataUser, putDataUser } from "../Redux/Actions";
 
 export default function Data() {
   const { user, getAccessTokenSilently } = useAuth0();
   const data = useSelector((state) => state?.userData);
+  const [localData, setLocalData] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isEdit, setIsEdit] = useState(true);
-  const [editSave, setEditSave] = useState("Editar");
+  const [editSave, setEditSave] = useState(false);
   const dispatch = useDispatch();
-  useEffect(() => {
-    // reviso en mi base de datos si tengo el id de la persona que acaba de iniciar sesion
-    //  si tengo el id muetro el home em caso contrario muestro el formulario
-    dispatch(getDataUser(user?.sub));
-  }, [data]);
+  const valor = {
+    id: user?.sub,
+  };
+  const verificar = async () => {
+    // phoneNumber: Number,
+    // country: "",
+    // city: "",
+    if (editDispatch.nickname === "") {
+      setEditDispatch({ ...editDispatch, nickname: localData.nickName });
+    }
 
-  console.log(data);
+    if (editDispatch.phoneNumber.length === 0) {
+      setEditDispatch({ ...editDispatch, phoneNumber: localData.phone });
+    }
+    if (editDispatch.country === "") {
+      setEditDispatch({ ...editDispatch, country: localData.country });
+    }
+    if (editDispatch.city === "") {
+      setEditDispatch({ ...editDispatch, city: localData.city });
+    }
+  };
+  useEffect(() => {
+    setLocalData(data);
+    setIsLoaded(true);
+    // setEditDispatch({ ...editDispatch, idSubAuth0: valor.id });
+  }, [data, isLoaded]);
+  console.log(localData);
+
   const [editDispatch, setEditDispatch] = useState({
-    names: "",
-    lastNames: "",
     nickname: "",
-    DateOfBirth: "",
     phoneNumber: Number,
     country: "",
     city: "",
-    idSubAuth0: user?.sub,
   });
+
+  // "asfasgfasfasfas"
+  console.log(editDispatch);
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    // await verificar();
+
+    dispatch(putDataUser(valor.id, editDispatch));
+    alert("Complete data");
+    // await put();
+  };
+
+  useEffect(() => {
+    // reviso en mi base de datos si tengo el id de la persona que acaba de iniciar sesion
+    //  si tengo el id muetro el home em caso contrario muestro el formulario
+    dispatch(getDataUser(valor.id));
+  }, [user?.sub, editDispatch]);
+
+  console.log(valor.id);
   const handlerEdit = () => {
     if (isEdit) {
       setIsEdit(false);
@@ -37,6 +75,31 @@ export default function Data() {
       setEditSave("Editar");
     }
   };
+  const changeHanlderEdit = (event) => {
+    const propiedad = event.target.name;
+    let value;
+
+    if (event.target.name === "names") {
+      value = event.target.value;
+      setEditDispatch({
+        ...editDispatch,
+        [propiedad]: value,
+      });
+    } else if (propiedad === "phoneNumber") {
+      value = Number(event.target.value);
+      setEditDispatch({
+        ...editDispatch,
+        [propiedad]: value,
+      });
+    } else {
+      value = event.target.value;
+      setEditDispatch({
+        ...editDispatch,
+        [propiedad]: value,
+      });
+    }
+  };
+  console.log(editDispatch);
   return (
     <div className="absolute  w-full z-2  flex flex-col items-center">
       <div className="  w-3/4 ml-auto   flex flex-col items-center">
@@ -65,6 +128,10 @@ export default function Data() {
 
           <label htmlFor="">Username</label>
           <input
+            onChange={changeHanlderEdit}
+            placeholder={localData.nickName}
+            name="nickname"
+            // value={localData.nickName}
             className="bg-[#D9D9D9] rounded-lg "
             type="text"
             disabled={isEdit}
@@ -74,6 +141,9 @@ export default function Data() {
           <div className="flex flex-col items-start ">
             <label htmlFor="">Nombres</label>
             <input
+              value={localData.givenName}
+              // onChange={changeHanlderEdit}
+              name="names"
               disabled={true}
               className="bg-[#D9D9D9] rounded-lg w-96"
               type="text"
@@ -82,6 +152,8 @@ export default function Data() {
           <div className="flex flex-col items-start py-2">
             <label htmlFor="">Apellidos</label>
             <input
+              value={localData.familyName}
+              name="lastNames"
               disabled={true}
               className="bg-[#D9D9D9] rounded-lg w-96"
               type="text"
@@ -92,6 +164,9 @@ export default function Data() {
           <div className="flex flex-col items-start ">
             <label htmlFor="">Teléfono</label>
             <input
+              onChange={changeHanlderEdit}
+              placeholder={localData.phone}
+              name="phoneNumber"
               disabled={isEdit}
               className="bg-[#D9D9D9] rounded-lg w-96"
               type="text"
@@ -100,18 +175,22 @@ export default function Data() {
           <div className="flex flex-col items-start py-2">
             <label htmlFor="">Fecha de Nacimiento</label>
             <input
+              value={localData.birthdate}
+              name="DateOfBirth"
               disabled={true}
               className="bg-[#D9D9D9] rounded-lg w-96"
               type="text"
             />
           </div>
         </div>
+
         <div className="flex flex-col w-full  py-2">
           <label className="w-10/12 mx-auto" htmlFor="">
             Correo
           </label>
           <input
-            disabled={isEdit}
+            value={user?.email}
+            disabled={true}
             className="bg-[#D9D9D9] rounded-lg w-10/12 mx-auto  "
             type="text"
           />
@@ -120,6 +199,9 @@ export default function Data() {
           <div className="flex flex-col items-start ">
             <label htmlFor="">País</label>
             <input
+              onChange={changeHanlderEdit}
+              placeholder={localData.country}
+              name="country"
               disabled={isEdit}
               className="bg-[#D9D9D9] rounded-lg w-96"
               type="text"
@@ -128,6 +210,9 @@ export default function Data() {
           <div className="flex flex-col items-start  py-2">
             <label htmlFor="">Ciudad</label>
             <input
+              onChange={changeHanlderEdit}
+              placeholder={localData.city}
+              name="city"
               disabled={isEdit}
               className="bg-[#D9D9D9] rounded-lg w-96"
               type="text"
@@ -140,12 +225,21 @@ export default function Data() {
               Volver
             </button>
           </Link>
-          <button
-            onClick={handlerEdit}
-            className="bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg"
-          >
-            {editSave}
-          </button>
+          {isEdit ? (
+            <button
+              onClick={handlerEdit}
+              className="bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg"
+            >
+              Editar
+            </button>
+          ) : (
+            <button
+              onClick={submitHandler}
+              className="bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg"
+            >
+              Guardar
+            </button>
+          )}
         </div>
       </div>
     </div>
