@@ -6,10 +6,12 @@ const Login = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <div className="flex justify-center  bg-[blue] w-36 h-9 rounded-full border-2 font-bold">
-      <button className="text-blanco" onClick={() => loginWithRedirect()}>
-        Iniciar Sesion
+    <div className="mt-12 flex justify-center text-xl  bg-[white] w-48 h-12 rounded-2xl border-2 font-bold">
+      {/* <Link to="/welcom"> */}
+      <button className="text-[black] " onClick={() => loginWithRedirect()}>
+        INGRESAR
       </button>
+      {/* </Link> */}
     </div>
   );
 };

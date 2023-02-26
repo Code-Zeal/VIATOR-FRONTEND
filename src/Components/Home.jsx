@@ -1,23 +1,26 @@
-import { useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import NavBar from "./NavBar";
 import FlightSearch from "./FlightSearch";
 import Footer from "./Footer";
 import Recommendations from "./Recommendations.jsx";
-import { useHistory } from "react-router-dom";
 
-export default function Home() {
-  // let history = useHistory();
+export default function Home(props) {
+  const { user, isAuthenticated } = useAuth0();
 
-  // useEffect(() => {
-  //   history.push("/home");
-  //   window.location.reload();
-  // }, [history]);
   return (
-    <div className="h-screen w-screen bg-gray-200">
-      <NavBar />
-      <FlightSearch />
-      <Recommendations />
-      <Footer />
-    </div>
+    <>
+      {isAuthenticated ? (
+        <div className="h-screen w-screen bg-gray-200">
+          {/* <button onClick={valor}>holaaa</button> */}
+          <NavBar />
+          <FlightSearch />
+          <Recommendations />
+          <Footer />
+        </div>
+      ) : (
+        window.open("/", "_self")
+      )}
+    </>
   );
 }

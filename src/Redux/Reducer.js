@@ -1,8 +1,9 @@
 import {
   POST_AUTH0_DATA,
   PUT_USER,
-  searchFlights,
   VERIFICACCION_USER,
+  VERIFICACCION_EMAIL,
+  searchFlights, 
 } from "./Actions";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   postRegisterData: [],
   dataAuth0: [],
   userExiste: "",
+  userEmailExiste: "",
   flights: [],
   searchedFlights: [],
   flightDetails: [],
@@ -34,6 +36,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userExiste: action.payload,
       };
+    case VERIFICACCION_EMAIL:
+      return {
+        ...state,
+        userEmailExiste: action.payload,
+      };
+
     case "GET_FLIGHTS":
       return {
         ...state,
