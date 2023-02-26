@@ -61,6 +61,25 @@ export function getFlights() {
   };
 }
 
+export function searchFlights({
+  origin,
+  destiny,
+  roundTrip,
+  dateTimeDeparture,
+  dateTimeReturn,
+  passengers,
+}) {
+  return async function (dispatch) {
+    const res = await axios.get(
+      `http://localhost:4000/getFlightsByQuery?origin=${origin}&destiny=${destiny}&dateTimeDeparture=${dateTimeDeparture}&dateTimeReturn=${dateTimeReturn}&roundTrip=${roundTrip}&passengers=${passengers}`
+    );
+    return dispatch({
+      type: "SEARCH_FLIGHTS",
+      payload: res.data,
+    });
+  };
+}
+
 export function getFlightDetails(id) {
   return async function (dispatch) {
     try {

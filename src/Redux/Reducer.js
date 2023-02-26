@@ -1,4 +1,9 @@
-import { POST_AUTH0_DATA, PUT_USER, VERIFICACCION_USER } from "./Actions";
+import {
+  POST_AUTH0_DATA,
+  PUT_USER,
+  searchFlights,
+  VERIFICACCION_USER,
+} from "./Actions";
 
 const initialState = {
   // elprimer login que hace la persona lo llevara a un registro interno
@@ -6,6 +11,7 @@ const initialState = {
   dataAuth0: [],
   userExiste: "",
   flights: [],
+  searchedFlights: [],
   flightDetails: [],
   filteredFlights: [],
   filteredAirports: [],
@@ -32,6 +38,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         flights: action.payload,
+      };
+    case "SEARCH_FLIGHTS":
+      return {
+        ...state,
+        searchedFlights: action.payload,
       };
     case "GET_FLIGHT_DETAILS":
       return {

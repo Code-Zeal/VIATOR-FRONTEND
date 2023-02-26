@@ -1,21 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { searchFlights } from "../Redux/Actions";
 
 export default function FlightSearch() {
+  const flights = useSelector((state) => state.searchedFlights);
   const dispatch = useDispatch();
+  const history = useHistory();
   const [originOptions, setOriginOptions] = useState([]);
   const [destinyOptions, setDestinyOptions] = useState([]);
+  const [checked1, setChecked1] = useState(false);
+  const [checked2, setChecked2] = useState(true);
   const [formData, setFormData] = useState({
     origin: "",
     destiny: "",
+    roundTrip: "",
     dateTimeDeparture: "",
     dateTimeReturn: "",
     passengers: "",
     class: "",
   });
+
+  const handleCheck1Change = (event) => {
+    if (event.target.checked) {
+      setChecked1(event.target.checked);
+      setChecked2(!event.target.checked);
+      setFormData({
+        ...formData,
+        roundTrip: event.target.value,
+      });
+      console.log(formData);
+    }
+  };
+
+  const handleCheck2Change = (event) => {
+    if (event.target.checked) {
+      setChecked2(event.target.checked);
+      setChecked1(!event.target.checked);
+      setFormData({
+        ...formData,
+        roundTrip: event.target.value,
+      });
+      console.log(formData);
+    }
+  };
 
   const handleOriginInputChange = (inputValue) => {
     axios
@@ -95,6 +125,13 @@ export default function FlightSearch() {
     console.log(formData);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    dispatch(searchFlights(formData));
+    console.log(flights[0]);
+    history.push("/shop");
+  }
+
   return (
     <div class="bg-azulOscuro py-10">
       <h3 class="text-2xl font-bold mb-6 text-center text-blanco">
@@ -102,6 +139,29 @@ export default function FlightSearch() {
       </h3>
       <form class="mx-auto lg:w-10/12 xl:w-8/12 px-4 py-2">
         <div class="flex flex-wrap mb-4 w-full justify-around">
+          <label>
+            <input
+              type="checkbox"
+              id="Check1"
+              name="ida_vuelta"
+              value="false"
+              checked={checked1}
+              onChange={handleCheck1Change}
+            />{" "}
+            Ida
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              id="Check2"
+              name="ida_vuelta"
+              checked={checked2}
+              value="true"
+              onChange={handleCheck2Change}
+            />{" "}
+            Ida y vuelta
+          </label>
+
           <div class="w-full lg:w-1/6">
             <label class="block font-medium mb-2 text-blanco">Origen</label>
             <Select
@@ -181,6 +241,7 @@ export default function FlightSearch() {
             <button
               type="submit"
               class="w-4/12 bg-blue-500 hover:bg-blue-600 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition-colors duration-300 bg-azulClaro text-blanco"
+              onClick={handleSubmit}
             >
               Buscar vuelos
             </button>
