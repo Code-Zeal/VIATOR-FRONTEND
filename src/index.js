@@ -10,21 +10,19 @@ import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Auth0Provider
-      domain="dev-cz6i21an2opri7kv.us.auth0.com"
-      clientId="Op3PZMpZSk3hNvSTG9qRurhQip9WssPh"
-      authorizationParams={{
-        redirect_uri: window.location.origin,
-        audience: "this is a unique identifier viator final 2",
-        scope: "openid profile email",
-      }}
-    >
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </Auth0Provider>
-  </React.StrictMode>
+  <Auth0Provider
+    domain="dev-cz6i21an2opri7kv.us.auth0.com"
+    clientId="Op3PZMpZSk3hNvSTG9qRurhQip9WssPh"
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+      audience: "this is a unique identifier viator final 2",
+      scope: "openid profile email",
+    }}
+  >
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

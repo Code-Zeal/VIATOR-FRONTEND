@@ -12,11 +12,7 @@ module.exports = {
       azulClaro: "#165BA6",
       amarillo: "	#FFFF00",
     },
-    extend: {
-      animation: {
-        "spin-slow": "spin 5s ease-in-out infinite",
-      },
-    },
+    extend: {},
     screens: {
       sm: "420px",
       // => @media (min-width: 420px) { ... }
