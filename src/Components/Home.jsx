@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -6,6 +5,8 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import FlightSearch from "./FlightSearch";
 import Footer from "./Footer";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import Recommendations from "./Recommendations.jsx";
 
 export default function Home(props) {
