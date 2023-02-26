@@ -1,10 +1,16 @@
-import { POST_AUTH0_DATA, PUT_USER, VERIFICACCION_USER } from "./Actions";
+import {
+  POST_AUTH0_DATA,
+  PUT_USER,
+  VERIFICACCION_USER,
+  GET_DATA,
+} from "./Actions";
 
 const initialState = {
   // elprimer login que hace la persona lo llevara a un registro interno
   postRegisterData: [],
   dataAuth0: [],
   userExiste: "",
+  userData: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,6 +29,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userExiste: action.payload,
+      };
+    case GET_DATA:
+      return {
+        ...state,
+        userData: action.payload,
       };
 
     // defecto

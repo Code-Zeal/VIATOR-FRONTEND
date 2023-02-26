@@ -1,8 +1,46 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getDataUser } from "../Redux/Actions";
+
 export default function Data() {
+  const { user, getAccessTokenSilently } = useAuth0();
+  const data = useSelector((state) => state?.userData);
+  const [isEdit, setIsEdit] = useState(true);
+  const [editSave, setEditSave] = useState("Editar");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // reviso en mi base de datos si tengo el id de la persona que acaba de iniciar sesion
+    //  si tengo el id muetro el home em caso contrario muestro el formulario
+    dispatch(getDataUser(user?.sub));
+  }, [data]);
+
+  console.log(data);
+  const [editDispatch, setEditDispatch] = useState({
+    names: "",
+    lastNames: "",
+    nickname: "",
+    DateOfBirth: "",
+    phoneNumber: Number,
+    country: "",
+    city: "",
+    idSubAuth0: user?.sub,
+  });
+  const handlerEdit = () => {
+    if (isEdit) {
+      setIsEdit(false);
+      setEditSave("Guardar");
+    }
+    if (!isEdit) {
+      setIsEdit(true);
+      setEditSave("Editar");
+    }
+  };
   return (
-    <div className="absolute  w-full z-2   flex flex-col items-center">
+    <div className="absolute  w-full z-2  flex flex-col items-center">
       <div className="  w-3/4 ml-auto   flex flex-col items-center">
-        <div className=" flex flex-col ">
+        <div className=" flex flex-col py-2">
           <svg
             width="207"
             height="203"
@@ -26,45 +64,88 @@ export default function Data() {
           </svg>
 
           <label htmlFor="">Username</label>
-          <input className="bg-[#D9D9D9] rounded-lg" type="text" />
+          <input
+            className="bg-[#D9D9D9] rounded-lg "
+            type="text"
+            disabled={isEdit}
+          />
         </div>
-        <div className="flex justify-evenly w-full">
+        <div className="flex justify-evenly w-full py-2">
           <div className="flex flex-col items-start ">
             <label htmlFor="">Nombres</label>
-            <input className="bg-[#D9D9D9] rounded-lg w-96" type="text" />
+            <input
+              disabled={true}
+              className="bg-[#D9D9D9] rounded-lg w-96"
+              type="text"
+            />
           </div>
-          <div className="flex flex-col items-start ">
+          <div className="flex flex-col items-start py-2">
             <label htmlFor="">Apellidos</label>
-            <input className="bg-[#D9D9D9] rounded-lg w-96" type="text" />
+            <input
+              disabled={true}
+              className="bg-[#D9D9D9] rounded-lg w-96"
+              type="text"
+            />
           </div>
         </div>
-        <div className="flex justify-evenly w-full">
+        <div className="flex justify-evenly w-full py-2">
           <div className="flex flex-col items-start ">
             <label htmlFor="">Teléfono</label>
-            <input className="bg-[#D9D9D9] rounded-lg w-96" type="text" />
+            <input
+              disabled={isEdit}
+              className="bg-[#D9D9D9] rounded-lg w-96"
+              type="text"
+            />
           </div>
-          <div className="flex flex-col items-start ">
+          <div className="flex flex-col items-start py-2">
             <label htmlFor="">Fecha de Nacimiento</label>
-            <input className="bg-[#D9D9D9] rounded-lg w-96" type="text" />
+            <input
+              disabled={true}
+              className="bg-[#D9D9D9] rounded-lg w-96"
+              type="text"
+            />
           </div>
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="">Correo</label>
-          <input className="bg-[#D9D9D9] rounded-lg w-[85 0px]" type="text" />
+        <div className="flex flex-col w-full  py-2">
+          <label className="w-10/12 mx-auto" htmlFor="">
+            Correo
+          </label>
+          <input
+            disabled={isEdit}
+            className="bg-[#D9D9D9] rounded-lg w-10/12 mx-auto  "
+            type="text"
+          />
         </div>
-        <div className="flex justify-evenly w-full">
+        <div className="flex justify-evenly w-full py-2">
           <div className="flex flex-col items-start ">
-            <label htmlFor="">Teléfono</label>
-            <input className="bg-[#D9D9D9] rounded-lg w-96" type="text" />
+            <label htmlFor="">País</label>
+            <input
+              disabled={isEdit}
+              className="bg-[#D9D9D9] rounded-lg w-96"
+              type="text"
+            />
           </div>
-          <div className="flex flex-col items-start ">
-            <label htmlFor="">Fecha de Nacimiento</label>
-            <input className="bg-[#D9D9D9] rounded-lg w-96" type="text" />
+          <div className="flex flex-col items-start  py-2">
+            <label htmlFor="">Ciudad</label>
+            <input
+              disabled={isEdit}
+              className="bg-[#D9D9D9] rounded-lg w-96"
+              type="text"
+            />
           </div>
         </div>
-        <div className="">
-          <button>Volver</button>
-          <button>Editar</button>
+        <div className="flex justify-around w-11/12 py-4">
+          <Link to="/home">
+            <button className="bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg">
+              Volver
+            </button>
+          </Link>
+          <button
+            onClick={handlerEdit}
+            className="bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg"
+          >
+            {editSave}
+          </button>
         </div>
       </div>
     </div>
