@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Home from "./Home";
 import Footer from "./Footer";
 
-const Welcom = () => {
+const Welcome = () => {
   const dispatch = useDispatch();
   const { user, getAccessTokenSilently } = useAuth0();
   let history = useHistory();
@@ -104,4 +104,4 @@ const Welcom = () => {
   );
 };
 
-export default Welcom;
+export default Welcome;

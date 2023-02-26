@@ -11,7 +11,6 @@ import Landing from "./Components/Landing";
 import Home from "./Components/Home";
 import FormRegister from "./Components/FormRegister";
 import Shop from "./Components/Shop";
-import Welcom from "./Components/Welcom";
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
         <Route exact path="/" component={Landing} />
         <Route path="/home" component={Home} exact />
         <Route exact path="/form" component={FormRegister} />
-        {/* <Route exact path="/welcom" component={Welcom} /> */}
         <Redirect from="*" to="/" />
 
         <Route exact path="/shop" component={Shop} />
