@@ -47,8 +47,9 @@ function App() {
           path="/favorites"
           render={() => (
             <div>
-              <Profile />
               <Favorites />
+              <Profile />
+              <Footer></Footer>
             </div>
           )}
         />
@@ -57,8 +58,9 @@ function App() {
           path="/data"
           render={() => (
             <div>
-              <Profile />
               <Data />
+              <Profile />
+              <Footer></Footer>
             </div>
           )}
         />
@@ -67,8 +69,9 @@ function App() {
           path="/admin"
           render={() => (
             <div>
-              <Profile />
               <Admin />
+              <Profile />
+              <Footer></Footer>
             </div>
           )}
         />
