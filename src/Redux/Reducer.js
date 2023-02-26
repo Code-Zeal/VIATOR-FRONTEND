@@ -3,6 +3,7 @@ import {
   PUT_USER,
   VERIFICACCION_USER,
   VERIFICACCION_EMAIL,
+  searchFlights, 
 } from "./Actions";
 
 const initialState = {
@@ -11,6 +12,11 @@ const initialState = {
   dataAuth0: [],
   userExiste: "",
   userEmailExiste: "",
+  flights: [],
+  searchedFlights: [],
+  flightDetails: [],
+  filteredFlights: [],
+  filteredAirports: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -36,6 +42,26 @@ const rootReducer = (state = initialState, action) => {
         userEmailExiste: action.payload,
       };
 
+    case "GET_FLIGHTS":
+      return {
+        ...state,
+        flights: action.payload,
+      };
+    case "SEARCH_FLIGHTS":
+      return {
+        ...state,
+        searchedFlights: action.payload,
+      };
+    case "GET_FLIGHT_DETAILS":
+      return {
+        ...state,
+        flightDetails: action.payload,
+      };
+    case "GET_AIRPORTS_INPUT":
+      return {
+        ...state,
+        filteredAirports: action.payload,
+      };
     // defecto
     default:
       return {
