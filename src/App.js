@@ -12,6 +12,7 @@ import Home from "./Components/Home";
 import FormRegister from "./Components/FormRegister";
 import Shop from "./Components/Shop";
 import FlightDetails from "./Components/FlightDetails";
+import Welcome from "./Components/Welcome";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route exact path="/" component={Landing} />
         <Route path="/home" component={Home} exact />
         <Route exact path="/form" component={FormRegister} />
-        <Redirect from="*" to="/" />
+        <Route exact path="/welcome" component={Welcome} />
 
         <Route exact path="/shop" component={Shop} />
         <Route
