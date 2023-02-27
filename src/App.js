@@ -7,7 +7,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Landing from "./Components/Landing";
+import Landing from "./Components/landing";
 import Home from "./Components/Home";
 import FormRegister from "./Components/FormRegister";
 import CardsFlight from "./Components/CardsFlight";
