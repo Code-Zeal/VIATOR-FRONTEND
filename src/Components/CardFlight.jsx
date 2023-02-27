@@ -259,24 +259,33 @@ const CardFlight = (props) => {
             </div>
           </div>
 
-          <h4 className="border-2 flex items-center justify-evenly w-full lg:w-1/5 rounded-bl-xl rounded-br-xl text-[black] border-[black] bg-[#E2D8FE] font-bold ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-              width="25px"
-              height="25px"
-              viewBox="0 0 24 24"
-              id="airplane"
-              data-name="Flat Color"
-              class="icon flat-color"
-            >
-              <path
-                id="primary"
-                d="M11.92,19.58,15.84,14H20a2,2,0,0,0,0-4H15.84L11.92,4.42A1,1,0,0,0,11.11,4h-.93a1,1,0,0,0-1,1.16L10,10H6.38L4.68,8.29A1.05,1.05,0,0,0,4,8H3a1,1,0,0,0-.89,1.45L3.38,12,2.11,14.55A1,1,0,0,0,3,16H4a1.05,1.05,0,0,0,.71-.29L6.38,14H10l-.81,4.84a1,1,0,0,0,1,1.16h.93A1,1,0,0,0,11.92,19.58Z"
-              />
-            </svg>
-            Vuelta
-          </h4>
+          <div className="flex justify-between">
+            <h4 className="border-2 flex items-center justify-evenly w-full lg:w-1/5 rounded-bl-xl rounded-br-xl text-[black] border-[black] bg-[#E2D8FE] font-bold ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+                width="25px"
+                height="25px"
+                viewBox="0 0 24 24"
+                id="airplane"
+                data-name="Flat Color"
+                class="icon flat-color"
+              >
+                <path
+                  id="primary"
+                  d="M11.92,19.58,15.84,14H20a2,2,0,0,0,0-4H15.84L11.92,4.42A1,1,0,0,0,11.11,4h-.93a1,1,0,0,0-1,1.16L10,10H6.38L4.68,8.29A1.05,1.05,0,0,0,4,8H3a1,1,0,0,0-.89,1.45L3.38,12,2.11,14.55A1,1,0,0,0,3,16H4a1.05,1.05,0,0,0,.71-.29L6.38,14H10l-.81,4.84a1,1,0,0,0,1,1.16h.93A1,1,0,0,0,11.92,19.58Z"
+                />
+              </svg>
+              Vuelta
+            </h4>
+            <div className=" flex-col border-2 flex items-center justify-evenly w-full lg:w-1/5 rounded-bl-xl rounded-br-xl text-[black] border-[black] bg-[#E2D8FE] font-bold">
+              <h4 className=" ">DEPARTURE</h4>
+              {/* pendiente cambiar la fecha de departure */}
+              <h4 className=" ">
+                {moment(props.dateTimeReturn).format("DD - M - YYYY")}
+              </h4>
+            </div>
+          </div>
         </div>
       ) : (
         <></>
