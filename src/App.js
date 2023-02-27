@@ -14,6 +14,8 @@ import CardsFlight from "./Components/CardsFlight";
 import Shop from "./Components/Shop";
 import Profile from "./Components/Profile";
 import MyTickets from "./Components/MyTickets";
+
+import FilterShop from "./Components/FilterShop";
 import Favorites from "./Components/Favorites";
 import Data from "./Components/Data";
 import Admin from "./Components/Admin";
