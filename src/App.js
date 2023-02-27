@@ -8,6 +8,7 @@ import FormRegister from "./Components/FormRegister";
 import Shop from "./Components/Shop";
 import Profile from "./Components/Profile";
 import MyTickets from "./Components/MyTickets";
+import FilterShop from "./Components/FilterShop";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route exact path="/" component={Landing} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/form" component={FormRegister} />
+        <Route exact path="/filtro" component={FilterShop} />
+
         <Route exact path="/shop" component={Shop} />
         {/* <Route path="/profile" component={Profile} /> */}
         <Route
