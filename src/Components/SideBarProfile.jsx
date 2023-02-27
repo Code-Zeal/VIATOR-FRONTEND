@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function SideBarProfile() {
   return (
-    <div className="h-screen w-1/4 bg-[#F8FBFB]">
+    <div className="h-screen w-1/5 bg-[#F8FBFB]">
       <div class="flex h-screen flex-col justify-between border-r bg-white">
         <div class="px-4 ">
           <span class="grid h-10 w-32 my-12 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
@@ -14,8 +14,8 @@ export default function SideBarProfile() {
           </span>
 
           <nav aria-label="Main Nav" class="mt-24 flex flex-col space-y-1">
-            <a
-              href="/myTickets"
+            <Link
+              to="/myTickets"
               className="flex items-center gap-2 rounded-lg px-4 py-2 hover:bg-azulClaro"
             >
               <svg
@@ -48,9 +48,9 @@ export default function SideBarProfile() {
               </svg>
 
               <span class="text-sm font-medium"> Mis Boletos </span>
-            </a>
-            <a
-              href="/profile"
+            </Link>
+            <Link
+              to="/favorites"
               className="flex items-center gap-2 rounded-lg px-4 py-2 hover:bg-azulClaro"
             >
               <details class="group [&_summary::-webkit-details-marker]:hidden">
@@ -76,10 +76,10 @@ export default function SideBarProfile() {
                   </div>
                 </summary>
               </details>
-            </a>
+            </Link>
 
-            <a
-              href="/profile"
+            <Link
+              to="/data"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
               <svg
@@ -99,10 +99,10 @@ export default function SideBarProfile() {
               </svg>
 
               <span class="text-sm font-medium"> Mis Datos </span>
-            </a>
+            </Link>
 
-            <a
-              href="/profile"
+            <Link
+              to="/admin"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
               <svg
@@ -121,13 +121,13 @@ export default function SideBarProfile() {
               </svg>
 
               <span class="text-sm font-medium"> Admin </span>
-            </a>
+            </Link>
           </nav>
         </div>
 
         <div class="sticky inset-x-0 bottom-0 border-t border-gray-100">
-          <a
-            href="/profile"
+          <Link
+            to="/profile"
             className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
           >
             <img
@@ -143,7 +143,7 @@ export default function SideBarProfile() {
                 <span> eric@frusciante.com </span>
               </p>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

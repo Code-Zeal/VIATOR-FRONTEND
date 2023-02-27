@@ -5,6 +5,11 @@ import {
   FILTRO_SCALE,
   FILTRO_AIRPORT_BY_COUNTRY,
   GET_AIRPORTS,
+  GET_DATA,
+  PUT_DATA,
+  VERIFICACCION_EMAIL,
+  searchFlights,
+  SLIDER_RECOMENDADO
 } from "./Actions";
 
 const initialState = {
@@ -13,34 +18,22 @@ const initialState = {
   postRegisterData: [],
   dataAuth0: [],
   userExiste: "",
+
   ////////auth0------^^
+  userData: [],
+  userEmailExiste: "",
   flights: [],
+  searchedFlights: [],
+  flightDetails: [],
   filteredFlights: [],
 
   ///// AIRPORTS
-  getAirports: [
-    {
-      id: 1,
-      name: "aeropuerto Internacional",
-      country: "peruaa",
-      city: "lima",
-    },
-    {
-      id: 2,
-      name: "aeropuerto de",
-      country: "peru",
-      city: "tacna",
-    },
-    {
-      id: 3,
-      name: "aeropuerto ",
-      country: "chile",
-      city: "san",
-    },
-  ],
+  getAirports: [],
   getFiltroAirportByCountry: [],
   ///// FILTRO SCALE
   getFiltroFlightsScale: [],
+  filteredAirports: [],
+  recommended : []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -60,6 +53,22 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userExiste: action.payload,
       };
+    case GET_DATA:
+      return {
+        ...state,
+        userData: action.payload,
+      };
+
+    case PUT_DATA:
+      return {
+        ...state,
+      };
+    case VERIFICACCION_EMAIL:
+      return {
+        ...state,
+        userEmailExiste: action.payload,
+      };
+
     case "GET_FLIGHTS":
       return {
         ...state,
@@ -87,6 +96,27 @@ const rootReducer = (state = initialState, action) => {
         getFiltroAirportByCountry: action.payload,
         searchedFlights: action.payload,
       };
+    case "SEARCH_FLIGHTS":
+      return {
+        ...state,
+        searchedFlights: action.payload,
+      };
+    case "GET_FLIGHT_DETAILS":
+      return {
+        ...state,
+        flightDetails: action.payload,
+      };
+    case "GET_AIRPORTS_INPUT":
+      return {
+        ...state,
+        filteredAirports: action.payload,
+      };
+    case SLIDER_RECOMENDADO: {
+      return {
+        ...state,
+        recommended : action.payload
+      }
+    }
     // defecto
     default:
       return {

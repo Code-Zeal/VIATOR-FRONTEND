@@ -1,12 +1,9 @@
 export default function MyTickets() {
   return (
-    <div className=" w-full h-screen m-12 bg-[black] flex items-center">
-      <h1 className="text-[white]">HOLA</h1>
-      <h1 className="text-[white]">HOLA</h1>
-      <h1 className="text-[white]">HOLA</h1>
-      <h1 className="text-[white]">HOLA</h1>
-      <h1 className="text-[white]">HOLA</h1>
-      <h1 className="text-[white]">HOLA</h1>
+    <div className="absolute  w-full   flex items-center">
+      <div className="bg-[black] ml-auto w-3/4">
+        <h1 className="text-[white]">MyTickets</h1>
+      </div>
     </div>
   );
 }

@@ -5,6 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react"; //--
 import { useState, useEffect } from "react"; //--
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"; //--
 import Footer from "./Footer.jsx";
+import { Redirect } from "react-router";
+import Welcome from "./Welcome.jsx";
 
 function Landing() {
   const { isAuthenticated } = useAuth0();
@@ -48,7 +50,10 @@ function Landing() {
     <>
       {isAuthenticated ? (
         <>
-          <FormRegister />
+          <Redirect to="/welcome" />
+          <Welcome />
+
+          {/* <FormRegister /> */}
         </>
       ) : (
         <div className="  ">
@@ -84,11 +89,11 @@ function Landing() {
               </div>
             </div>
 
-            <div className=" hidden group-hover:block absolute top-[50%]  left-5 text-2xl rounded-full rounded-full ml-14 p-2  bg-[white] text-[black] cursor-pointer ">
+            <div className=" hidden group-hover:block absolute top-[50%]  left-5 text-2xl rounded-full ml-14 p-2  bg-[white] text-[black] cursor-pointer ">
               <BsChevronCompactLeft onClick={prevSlider} size={40} />
             </div>
 
-            <div className=" hidden group-hover:block absolute top-[50%]  right-5 text-2xl rounded-full  bg-black/20 text-[black] bg-[white] rounded-full cursor-pointer mr-14 p-2">
+            <div className=" hidden group-hover:block absolute top-[50%]  right-5 text-2xl bg-black/20 text-[black] bg-[white] rounded-full cursor-pointer mr-14 p-2">
               <BsChevronCompactRight onClick={nextSlider} size={40} />
             </div>
 
