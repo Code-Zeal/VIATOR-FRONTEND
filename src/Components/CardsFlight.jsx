@@ -25,7 +25,8 @@ const CardsFlight = () => {
     <div className="">
       {flights.map((f) => (
         <CardFlight
-          AirlineId={f.id}
+          flightId={f.id}
+          AirlineId={f.AirlineId}
           origin={f.origin}
           destiny={f.destiny}
           dateTimeDeparture={f.dateTimeDeparture}

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const CardFlight = (props) => {
+  console.log(props.ticketPrice);
   const [isFav, setIsFav] = useState(false);
 
   // const [hover, setHover] = React.useState(false);
@@ -43,7 +45,7 @@ const CardFlight = (props) => {
           <h3 className="text-sm">DEPARTURE </h3>
 
           <h4 className="text-sm">
-            {moment(props.dateTimeDeparture).format("DD, M ,YYYY")}
+            {moment(props.dateTimeDeparture).format("DD - M - YYYY")}
           </h4>
         </div>
       </div>
@@ -137,7 +139,7 @@ const CardFlight = (props) => {
                     <circle cx="37" cy="11" r="2" fill="white" />
                     <circle cx="11" cy="35" r="2" fill="white" />
                   </svg>
-                  Escalas: {<p className="inline-block">2</p>}
+                  Escalas: {<p className="">{props.scale}</p>}
                 </div>
                 <div className="flex-col">
                   <p className="font-bold text-xl lg:px-2">{`${props.destiny}`}</p>
@@ -150,17 +152,14 @@ const CardFlight = (props) => {
                 <span className="font-bold text-xl">Precio final</span>
                 {props.roundTrip ? (
                   <p className="font-bold text-md">
-                    USD ${parseFloat(props.ticketPrice)}
+                    USD {props.ticketPrice}
                     {"."}
                     00
                   </p>
                 ) : (
                   <p className="font-bold text-md">
-                    USD $
-                    {props.ticketPrice.substring(
-                      0,
-                      props.ticketPrice.length - 1
-                    )}
+                    USD
+                    {props.ticketPrice}
                   </p>
                 )}
               </div>
@@ -169,7 +168,7 @@ const CardFlight = (props) => {
           </div>
 
           <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-1/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
-            Detalles
+            <Link to={`/flight/${props.flightId}`}>Detalles</Link>
           </div>
         </div>
       </div>
@@ -249,7 +248,7 @@ const CardFlight = (props) => {
                   <circle cx="37" cy="11" r="2" fill="white" />
                   <circle cx="11" cy="35" r="2" fill="white" />
                 </svg>
-                Escalas: {<p className="">1</p>}
+                Escalas: {<p className="">{props.scale}</p>}
               </div>
               <div className="flex flex-col py-4 lg:p-6 items-center justify-center">
                 <p className="font-bold lg:px-2  text-xl">{props.origin}</p>

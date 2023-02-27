@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFlightDetails } from "../Redux/Actions";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import moment from "moment";
 
 export default function FlightDetails({ flightId, roundTrip }) {
   const dispatch = useDispatch();
   const detailedFlight = useSelector((state) => state.flightDetails);
 
+  console.log(detailedFlight);
+
   useEffect(() => {
     dispatch(getFlightDetails(flightId));
   }, [flightId]);
-  let idaVuelta = true;
+  let idaVuelta = detailedFlight.roundTrip;
   return (
     <div>
       <NavBar />
@@ -19,10 +22,12 @@ export default function FlightDetails({ flightId, roundTrip }) {
         <div className="rounded-tr-xl rounded-tl-xl w-full py-6 px-4 bg-azulClaro flex justify-between items-center text-[white] font-bold  ">
           <div className="flex flex-col items-center">
             <h3 className="py-2">
-              Origen <p> {detailedFlight.origin} </p>
+              <p> {detailedFlight.origin} </p>
             </h3>
             <p className="py-2">
-              Fecha y hora de ida {detailedFlight.dateTimeDeparture}
+              {moment(detailedFlight.dateTimeDeparture).format(
+                "DD-MM-YYYY HH:mm"
+              )}
             </p>
           </div>
           <svg
@@ -40,10 +45,12 @@ export default function FlightDetails({ flightId, roundTrip }) {
           <div>
             <div className="flex flex-col items-center">
               <h3 className="py-2">
-                Destino <p> {detailedFlight.destiny}</p>
+                <p> {detailedFlight.destiny}</p>
               </h3>
               <p className="py-2">
-                Fecha y hora de llegada {detailedFlight.dateTimeArrival}
+                {moment(detailedFlight.dateTimeArrival1).format(
+                  "DD-MM-YYYY HH:mm"
+                )}
               </p>
             </div>
           </div>
@@ -201,10 +208,12 @@ export default function FlightDetails({ flightId, roundTrip }) {
             <div className="rounded-tr-xl rounded-tl-xl w-full py-6 px-4 bg-azulClaro flex justify-between items-center text-[white] font-bold">
               <div className="flex flex-col items-center">
                 <h3 className="py-2">
-                  Destino <p> {detailedFlight.destiny}</p>
+                  <p> {detailedFlight.destiny}</p>
                 </h3>
                 <p className="py-2">
-                  Fecha y hora de llegada {detailedFlight.dateTimeArrival}
+                  {moment(detailedFlight.dateTimeReturn).format(
+                    "DD-MM-YYYY HH:mm"
+                  )}
                 </p>
               </div>
               <svg
@@ -222,10 +231,12 @@ export default function FlightDetails({ flightId, roundTrip }) {
               <div>
                 <div className="flex flex-col items-center">
                   <h3 className="py-2">
-                    Origen <p> {detailedFlight.origin} </p>
+                    <p> {detailedFlight.origin} </p>
                   </h3>
                   <p className="py-2">
-                    Fecha y hora de ida {detailedFlight.dateTimeDeparture}
+                    {moment(detailedFlight.dateTimeArrival2).format(
+                      "DD-MM-YYYY HH:mm"
+                    )}
                   </p>
                 </div>
               </div>

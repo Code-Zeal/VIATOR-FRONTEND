@@ -29,7 +29,6 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/cards" component={CardsFlight} />
 
-
         <Route exact path="/form" component={FormRegister} />
         <Route exact path="/welcome" component={Welcome} />
 
