@@ -160,7 +160,7 @@ const FormRegister = () => {
       alert("You Must Correct Errors");
     }
   };
-  // console.log(formRegister);
+  console.log(formRegister);
 
   return (
     <>
