@@ -310,12 +310,12 @@ export default function FlightDetails({ flightId, roundTrip }) {
                     </defs>
                   </svg>
                   <div className="bg-azulClaro text-[white] font-bold px-2 py-1 rounded-lg">
-                    <p>20</p>
+                    <p>{detailedFlight.seatsAvailable + 17} </p>
                   </div>
                 </div>
 
                 <p className="w-1/2 text-center font-bold">
-                  Asientos disponibles {detailedFlight.seatsAvailable}{" "}
+                  Asientos disponibles
                 </p>
               </div>
             </div>

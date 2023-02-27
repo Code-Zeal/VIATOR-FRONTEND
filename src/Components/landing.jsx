@@ -246,8 +246,8 @@ function Landing() {
                   </div>
                   <div class="flex-grow">
                     <p class="leading-relaxed text-base font-medium">
-                      Pero no te preocupes, tambien tenemos otros tipos de
-                      metodos de pagos, no es necesario
+                      Pero no te preocupes, ¡también tenemos otros medios de
+                      pagos!
                     </p>
                   </div>
                 </div>

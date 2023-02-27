@@ -160,7 +160,7 @@ export default function FlightSearch() {
       </h3>
       <form class="mx-auto lg:w-10/12 xl:w-8/12 px-4 py-2">
         <div class="flex flex-wrap mb-4 w-full justify-around">
-          <label>
+          <label class="text-blanco">
             <input
               type="checkbox"
               id="Check2"
@@ -171,7 +171,7 @@ export default function FlightSearch() {
             />{" "}
             Ida y vuelta
           </label>
-          <label>
+          <label class="text-blanco mr-6">
             <input
               type="checkbox"
               id="Check1"
