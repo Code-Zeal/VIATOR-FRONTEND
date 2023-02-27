@@ -4,38 +4,38 @@ import CardFlight from "./CardFlight";
 import { useSelector } from "react-redux";
 
 const CardsFlight = () => {
-  const flights = useSelector((state) => state.getFlightsDataDePrueba);
+  const flights = useSelector((state) => state.searchedFlights);
 
   // const dispatch = useDispatch();
 
-  //   getFlights
-  //   id: 1,
-  //   origin: "chiloe",
-  //   destiny: "arica",
-  //   dateTimeDeparture: "2023-02-22T19:35:20.000Z",
-  //   dateTimeArrival: "2023-02-22T19:35:20.000Z",
-  //   seatsAvailable: 20,
-  //   ticketPrice: "400.000",
+  // AirlineId: 1
+  // dateTimeArrival1: "2023-03-22T21:30:00.000Z"
+  // dateTimeArrival2: "2023-04-11T00:20:00.000Z"
+  // dateTimeDeparture: "2023-03-22T13:40:00.000Z"
+  // dateTimeReturn: "2023-04-10T16:00:00.000Z"
+  // destiny: "Aeropuerto Internacional Volkyr, Cali, Colombia"
+  // id: 1
+  // origin: "Aeropuerto Internacional Jorge Chávez, Callao, Peru"
+  // roundTrip: true
+  // scale: "1"
+  // seatsAvailable: 85
+  // ticketPrice: "$315"
 
-  // useEffect(() => {
-  // dispatch(putRegister())
-
-  //   }, [flights]);
   return (
     <div className="">
       {flights.map((f) => (
         <CardFlight
-          id={f.id}
+          AirlineId={f.id}
           origin={f.origin}
           destiny={f.destiny}
           dateTimeDeparture={f.dateTimeDeparture}
-          dateTimeArrival={f.dateTimeArrival}
+          dateTimeArrival1={f.dateTimeArrival1}
+          dateTimeArrival2={f.dateTimeArrival2}
+          dateTimeReturn={f.dateTimeReturn}
+          scale={f.scale}
+          roundTrip={f.roundTrip}
           seatsAvailable={f.seatsAvailable}
           ticketPrice={f.ticketPrice}
-          // le esyoy pasando la propiedad vuelta para obtener sus valores
-          vueltaData={f.vuelta}
-          // comprobando si tengo la propiedad vuelta me devuelve un true o false
-          propiedadVueltaTrueOrFalse={f.hasOwnProperty("vuelta")}
         />
       ))}
     </div>

@@ -142,17 +142,15 @@ const CardFlight = (props) => {
                 <div className="flex-col">
                   <p className="font-bold text-xl lg:px-2">{`${props.destiny}`}</p>
                   <p className=" font-medium lg:px-2  text-[#151515]">
-                    {moment(props.dateTimeArrival).format("HH:mm")}
+                    {moment(props.dateTimeArrival1).format("HH:mm")}
                   </p>
                 </div>
               </div>
               <div className="ml-5 flex flex-col  items-center justify-center">
                 <span className="font-bold text-xl">Precio final</span>
-                {props.propiedadVueltaTrueOrFalse ? (
+                {props.roundTrip ? (
                   <p className="font-bold text-md">
-                    USD $
-                    {parseFloat(props.ticketPrice) +
-                      parseFloat(props.vueltaData.ticketPrice)}
+                    USD ${parseFloat(props.ticketPrice)}
                     {"."}
                     00
                   </p>
@@ -175,7 +173,7 @@ const CardFlight = (props) => {
           </div>
         </div>
       </div>
-      {props.propiedadVueltaTrueOrFalse ? (
+      {props.roundTrip ? (
         <div>
           <div className="bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain">
             <div className="bg-[#E2D8FE] bg-opacity-80   border-2 flex w-full   items-center justify-start">
@@ -204,9 +202,9 @@ const CardFlight = (props) => {
                 </g>
               </svg>
               <div className="flex flex-col px-2 py-4 items-center justify-center">
-                <p className="font-bold  text-xl">{props.vueltaData.origin}</p>
+                <p className="font-bold  text-xl">{props.destiny}</p>
                 <p className="font-medium lg:px-2 text-[#151515]">
-                  {moment(props.vueltaData.dateTimeDeparture).format("HH:mm")}
+                  {moment(props.dateTimeReturn).format("HH:mm")}
                 </p>
               </div>
               <div className="font-bold    text-sm text-[black] px-4 py-2 rounded-xl flex  items-center justify-center ">
@@ -254,11 +252,9 @@ const CardFlight = (props) => {
                 Escalas: {<p className="">1</p>}
               </div>
               <div className="flex flex-col py-4 lg:p-6 items-center justify-center">
-                <p className="font-bold lg:px-2  text-xl">
-                  {props.vueltaData.destiny}
-                </p>
+                <p className="font-bold lg:px-2  text-xl">{props.origin}</p>
                 <p className="font-medium lg:px-2  text-[#151515]">
-                  {moment(props.vueltaData.dateTimeArrival).format("HH:mm")}
+                  {moment(props.dateTimeArrival2).format("HH:mm")}
                 </p>
               </div>
             </div>
