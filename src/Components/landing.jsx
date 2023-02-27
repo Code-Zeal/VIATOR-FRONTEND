@@ -7,7 +7,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"; //
 import Footer from "./Footer.jsx";
 import { Redirect } from "react-router";
 import Welcome from "./Welcome.jsx";
-
+//prueba
 function Landing() {
   const { isAuthenticated } = useAuth0();
 
