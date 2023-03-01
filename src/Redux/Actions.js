@@ -178,6 +178,10 @@ export function getFlightsScale(scale) {
     return dispatch({
       type: FILTRO_SCALE,
       payload: response.data,
+    })
+  }
+}
+
 export function getAirportsByInput(payload) {
   return async function (dispatch) {
     const res = await axios.get(
@@ -192,7 +196,7 @@ export function getAirportsByInput(payload) {
 
 export const sliderRecomendado = () => {
   return async (dispatch) => {
-    const info = await axios.get(`http://localhost:4000/api/flights`);
+    const info = await axios.get(`http://localhost:4000/api/recommended`);
     dispatch({
       type : SLIDER_RECOMENDADO,
       payload : info.data
