@@ -1,3 +1,6 @@
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import {
   POST_AUTH0_DATA,
   PUT_USER,
@@ -14,6 +17,11 @@ import {
   FILTRO_AIRLINE_NAME,
   FILTRO_RESET_SHOP,
 } from "./Actions";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
 const initialState = {
   ////////auth0
@@ -42,7 +50,7 @@ const initialState = {
   getAirline: [],
 };
 
-const rootReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case PUT_USER:
       return {
@@ -157,4 +165,7 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+const rootReducer = combineReducers({
+  user: userReducer,
+});
+export default persistReducer(persistConfig, rootReducer);
