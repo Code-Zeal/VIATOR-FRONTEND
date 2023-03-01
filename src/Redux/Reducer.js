@@ -16,6 +16,7 @@ import {
   GET_AIRLINE,
   FILTRO_AIRLINE_NAME,
   FILTRO_RESET_SHOP,
+  CLEAR_DATA,
 } from "./Actions";
 
 const persistConfig = {
