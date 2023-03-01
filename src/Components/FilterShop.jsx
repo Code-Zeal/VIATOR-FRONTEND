@@ -1,43 +1,36 @@
 import { useState, useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAirports,
-  getAirportByCountry2,
   getFlightsScale,
+  get_airline,
+  filtroAirlineName,
+  resetFiltrosShop,
 } from "../Redux/Actions";
 
 const FilterShop = () => {
   const dispatch = useDispatch();
-  const { user, getAccessTokenSilently } = useAuth0();
-  const getAirports = useSelector((state) => state?.getAirports);
+  const getAirlineName = useSelector((state) => state?.getAirline);
 
-  const filtrosAirportFn = (event) => {
+  const filtrosAirlineFn = (event) => {
     const valor = event.target.value;
-
-    const result = getAirports.find((f) => {
-      if (f.name === valor) {
-        const country = f.country;
-        const name = f.name;
-        // dispatch(getAirportByCountry2(name, country))
-      }
-    });
+    console.log(valor);
+    dispatch(filtroAirlineName(valor));
   };
 
+  const defaultFiltros = () => {
+    dispatch(resetFiltrosShop());
+  };
   const handleChangeScale = (event) => {
     const valor = event.target.value;
 
-    console.log(valor);
-
-    // dispatch(getFlightsScale(valor));
+    dispatch(getFlightsScale(valor));
   };
+  console.log(getAirlineName);
 
   useEffect(() => {
-    // dispatch(getAirports());
+    dispatch(get_airline());
   }, []);
-
-  console.log(getAirports);
 
   return (
     <div className=" flex items-center bg-azulOscuro text-[white] py-2 w-screen px-4 ">
@@ -52,11 +45,17 @@ const FilterShop = () => {
         </h1>
         <h2 className="font-bold lg:text-xl py-2">Aeropuertos</h2>
         <div className="flex">
-          {getAirports.map((air) => (
+          <button
+            onClick={defaultFiltros}
+            className="px-2 py-1 bg-blanco text-[black]  rounded-lg hover:bg-[#6644c1] hover:text-[white] hover:shadow-lg hover:shadow-[white] md:m-2 m-1"
+          >
+            Resetear Filtros
+          </button>
+          {getAirlineName.map((air) => (
             <button
               className="px-2 py-1 bg-blanco text-[black]  rounded-lg hover:bg-[#6644c1] hover:text-[white] hover:shadow-lg hover:shadow-[white] md:m-2 m-1"
-              onClick={filtrosAirportFn}
-              value={air.name}
+              onClick={filtrosAirlineFn}
+              value={air.id}
             >
               {air.name}
             </button>
