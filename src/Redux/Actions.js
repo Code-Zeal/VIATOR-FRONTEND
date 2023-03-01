@@ -9,8 +9,11 @@ export const FILTRO_SCALE = "FILTRO_SCALE";
 export const GET_DATA = "GET_DATA";
 export const PUT_DATA = "PUT_DATA";
 export const VERIFICACCION_EMAIL = "VERIFICACCION_EMAIL";
-export const SLIDER_RECOMENDADO = "SLIDER_RECOMENDADO"
+export const SLIDER_RECOMENDADO = "SLIDER_RECOMENDADO";
 
+export const GET_AIRLINE = "GET_AIRLINE";
+export const FILTRO_AIRLINE_NAME = "FILTRO_AIRLINE_NAME";
+export const FILTRO_RESET_SHOP = "FILTRO_RESET_SHOP";
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
   const response = await axios.put(
@@ -144,7 +147,6 @@ export function filteredFlights(payload) {
   };
 }
 
-
 // Airports
 export function getAirports() {
   return async function (dispatch) {
@@ -172,14 +174,11 @@ export function getAirportByCountry2(airlineName, country) {
 
 export function getFlightsScale(scale) {
   return async function (dispatch) {
-    const response = await axios.get(
-      `http://localhost:4000/api/scaleFlight?scale=${scale}`
-    );
     return dispatch({
       type: FILTRO_SCALE,
-      payload: response.data,
-    })
-  }
+      payload: scale,
+    });
+  };
 }
 
 export function getAirportsByInput(payload) {
@@ -198,8 +197,36 @@ export const sliderRecomendado = () => {
   return async (dispatch) => {
     const info = await axios.get(`http://localhost:4000/api/recommended`);
     dispatch({
-      type : SLIDER_RECOMENDADO,
-      payload : info.data
-    })
-  }
+      type: SLIDER_RECOMENDADO,
+      payload: info.data,
+    });
+  };
+};
+
+export function get_airline() {
+  return async function (dispatch) {
+    const response = await axios.get(`http://localhost:4000/api/airlines`);
+    console.log(response);
+    return dispatch({
+      type: GET_AIRLINE,
+      payload: response.data,
+    });
+  };
+}
+export function filtroAirlineName(airlineID) {
+  console.log(airlineID);
+  return async function (dispatch) {
+    return dispatch({
+      type: FILTRO_AIRLINE_NAME,
+      payload: airlineID,
+    });
+  };
+}
+export function resetFiltrosShop() {
+  return async function (dispatch) {
+    return dispatch({
+      type: FILTRO_RESET_SHOP,
+      payload: "RESET_FILTROS_SHOP",
+    });
+  };
 }

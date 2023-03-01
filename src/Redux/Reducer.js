@@ -9,7 +9,10 @@ import {
   PUT_DATA,
   VERIFICACCION_EMAIL,
   searchFlights,
-  SLIDER_RECOMENDADO
+  SLIDER_RECOMENDADO,
+  GET_AIRLINE,
+  FILTRO_AIRLINE_NAME,
+  FILTRO_RESET_SHOP,
 } from "./Actions";
 
 const initialState = {
@@ -24,6 +27,8 @@ const initialState = {
   userEmailExiste: "",
   flights: [],
   searchedFlights: [],
+  searchedFlightsAUX: [],
+
   flightDetails: [],
   filteredFlights: [],
 
@@ -33,7 +38,8 @@ const initialState = {
   ///// FILTRO SCALE
   getFiltroFlightsScale: [],
   filteredAirports: [],
-  recommended : []
+  recommended: [],
+  getAirline: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -86,8 +92,11 @@ const rootReducer = (state = initialState, action) => {
     case FILTRO_SCALE:
       return {
         ...state,
-        getFiltroFlightsScale: action.payload,
-        searchedFlights: action.payload,
+        searchedFlights: [
+          ...state.searchedFlightsAUX.filter(
+            (scal) => scal.scale === action.payload
+          ),
+        ],
       };
 
     case FILTRO_AIRPORT_BY_COUNTRY:
@@ -100,6 +109,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: action.payload,
+        searchedFlightsAUX: action.payload,
       };
     case "GET_FLIGHT_DETAILS":
       return {
@@ -114,9 +124,31 @@ const rootReducer = (state = initialState, action) => {
     case SLIDER_RECOMENDADO: {
       return {
         ...state,
-        recommended : action.payload
-      }
+        recommended: action.payload,
+      };
     }
+
+    case GET_AIRLINE:
+      return {
+        ...state,
+        getAirline: action.payload,
+      };
+    case FILTRO_AIRLINE_NAME:
+      return {
+        ...state,
+        searchedFlights: [
+          ...state.searchedFlightsAUX.filter(
+            (air) => air.AirlineId == action.payload
+          ),
+        ],
+      };
+
+    case FILTRO_RESET_SHOP:
+      return {
+        ...state,
+        searchedFlights: [...state.searchedFlightsAUX],
+      };
+
     // defecto
     default:
       return {

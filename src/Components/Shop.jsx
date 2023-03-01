@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import { useSelector } from "react-redux";
 import CardsFlight from "./CardsFlight";
 import FlightSearch from "./FlightSearch";
+import FilterShop from "./FilterShop";
 
 export default function Shop() {
   const flights = useSelector((state) => state.searchedFlights);
@@ -11,6 +12,7 @@ export default function Shop() {
   return (
     <div className="h-screen w-screen bg-gray-200">
       <NavBar />
+      <FilterShop />
       <FlightSearch />
       <CardsFlight />
       <Footer />
