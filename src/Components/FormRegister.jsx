@@ -13,17 +13,37 @@ const validate = (formRegister) => {
   if (formRegister.names === "") {
     errors.names = "Se requiere nombre";
   }
+  if (formRegister.names.length < 2) {
+    errors.names = "El nombre debe contener como mínimo 2 caracteres";
+  }
+  if (formRegister.names.length === 50) {
+    errors.names = "El nombre no puede contener más de 50 caracteres";
+  }
   if (formRegister.lastNames === "") {
     errors.lastNames = "Se requiere que ingrese informacion";
+  }
+  if (formRegister.lastNames.length < 2) {
+    errors.lastNames = "El apellido debe contener como mínimo 2 caracteres";
+  }
+  if (formRegister.lastNames.length === 50) {
+    errors.lastNames = "El apellido no puede contener más de 50 caracteres";
   }
   if (formRegister.nickname === "") {
     errors.nickname = "Se requiere que ingrese informacion";
   }
+  if (formRegister.nickname.length < 2) {
+    errors.nickname =
+      "El nombre usuario debe contener como mínimo 2 caracteres";
+  }
+  if (formRegister.nickname.length === 20) {
+    errors.nickname =
+      "El nombre de usuario no pude contener más de 20 caracteres";
+  }
   if (formRegister.DateOfBirth === "") {
-    errors.DateOfBirth = "Ingresa una Fecha correcta";
+    errors.DateOfBirth = "Debes ingresar una fecha válida";
   }
   if (formRegister.phoneNumber === 0) {
-    errors.phoneNumber = "Ingresa Numero de telefono Valido";
+    errors.phoneNumber = "Ingresa un número de telefono válido";
   }
   if (formRegister.country === "") {
     errors.country = "Se requiere que ingrese informacion";
@@ -36,6 +56,25 @@ const validate = (formRegister) => {
 };
 
 const FormRegister = () => {
+  const handleKeyPress = (event) => {
+    const charCode = event.which || event.keyCode;
+    // Códigos de teclas permitidas: letras mayúsculas y minúsculas, números y algunos caracteres de puntuación
+    const allowedKeys = [
+      8,
+      32,
+      44,
+      45,
+      46,
+      95,
+      ...Array.from({ length: 26 }, (_, i) => i + 65),
+      ...Array.from({ length: 26 }, (_, i) => i + 97),
+      ...Array.from({ length: 10 }, (_, i) => i + 48),
+    ];
+    if (!allowedKeys.includes(charCode)) {
+      event.preventDefault();
+    }
+  };
+
   // const data = useSelector((state) => state?.userExiste);
 
   const { user, getAccessTokenSilently } = useAuth0();
@@ -222,7 +261,11 @@ const FormRegister = () => {
               name="names"
               value={formRegister.names}
               onChange={changeHanlderForm}
+              onKeyPress={handleKeyPress}
               className="w-full h-1/2  border-2 rounded-md mr-1 "
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}"
+              minLength={2}
+              maxLength={50}
             />
             <input
               placeholder="Apellidos"
@@ -230,7 +273,11 @@ const FormRegister = () => {
               name="lastNames"
               value={formRegister.lastNames}
               onChange={changeHanlderForm}
+              onKeyPress={handleKeyPress}
               className="w-full h-1/2  ml-1 border-2 rounded-md"
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}"
+              minLength={2}
+              maxLength={50}
             />
           </div>
           <div className="flex justify-evenly w-full px-6 mb-10">
@@ -262,7 +309,11 @@ const FormRegister = () => {
               name="nickname"
               value={formRegister.nickname}
               onChange={changeHanlderForm}
-              className="w-full h-1/2 border-2 rounded-md"
+              onKeyPress={handleKeyPress}
+              className="w-full h-1/2  ml-1 border-2 rounded-md"
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}"
+              minLength={2}
+              maxLength={20}
             />
           </div>
           <span className=" text-[#ff0000] mb-10"> {errors.nickname}</span>
