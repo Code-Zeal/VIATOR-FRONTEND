@@ -14,6 +14,7 @@ export const SLIDER_RECOMENDADO = "SLIDER_RECOMENDADO";
 export const GET_AIRLINE = "GET_AIRLINE";
 export const FILTRO_AIRLINE_NAME = "FILTRO_AIRLINE_NAME";
 export const FILTRO_RESET_SHOP = "FILTRO_RESET_SHOP";
+export const CLEAR_DATA = "CLEAR_DATA";
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
   const response = await axios.put(
@@ -230,3 +231,92 @@ export function resetFiltrosShop() {
     });
   };
 }
+
+export const limpiarReduxData = () => {
+  return (dispatch) => {
+    dispatch({
+      type: POST_AUTH0_DATA,
+      payload: [],
+    });
+    dispatch({
+      type: PUT_USER,
+      payload: [],
+    });
+    dispatch({
+      type: VERIFICACCION_USER,
+      payload: "",
+    });
+    dispatch({
+      type: FILTRO_SCALE,
+      payload: [],
+    });
+    dispatch({
+      type: FILTRO_AIRPORT_BY_COUNTRY,
+      payload: "",
+    });
+    dispatch({
+      type: GET_AIRPORTS,
+      payload: [],
+    });
+    dispatch({
+      type: GET_DATA,
+      payload: [],
+    });
+    dispatch({
+      type: PUT_DATA,
+      payload: [],
+    });
+    dispatch({
+      type: VERIFICACCION_EMAIL,
+      payload: [],
+    });
+    dispatch({
+      type: searchFlights,
+      payload: [],
+    });
+    dispatch({
+      type: SLIDER_RECOMENDADO,
+      payload: [],
+    });
+    dispatch({
+      type: GET_AIRLINE,
+      payload: [],
+    });
+    dispatch({
+      type: FILTRO_AIRLINE_NAME,
+      payload: [],
+    });
+    dispatch({
+      type: FILTRO_RESET_SHOP,
+      payload: [],
+    });
+    dispatch({
+      type: "RECOMMENDED",
+      payload: [],
+    });
+    dispatch({
+      type: "GET_AIRLINE",
+      payload: [],
+    });
+
+    dispatch({
+      type: "GET_FLIGHTS",
+      payload: [],
+    });
+
+    dispatch({
+      type: "SEARCH_FLIGHTS",
+      payload: [],
+    });
+
+    dispatch({
+      type: "GET_FLIGHT_DETAILS",
+      payload: [],
+    });
+
+    dispatch({
+      type: "GET_AIRPORTS_INPUT",
+      payload: [],
+    });
+  };
+};
