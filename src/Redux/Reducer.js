@@ -1,3 +1,6 @@
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import {
   POST_AUTH0_DATA,
   PUT_USER,
@@ -17,7 +20,16 @@ import {
   CREATE_AIRLINE,
   ADD_AIRPORT_TO_AIRLINE,
   DELETE_AIRPORT_TO_AIRLINE,
+  GET_AIRLINE,
+  FILTRO_AIRLINE_NAME,
+  FILTRO_RESET_SHOP,
+  CLEAR_DATA,
 } from "./Actions";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
 const initialState = {
   ////////auth0
@@ -31,6 +43,8 @@ const initialState = {
   userEmailExiste: "",
   flights: [],
   searchedFlights: [],
+  searchedFlightsAUX: [],
+
   flightDetails: [],
   filteredFlights: [],
 
@@ -44,9 +58,10 @@ const initialState = {
   getAirliness: [],
   //
   getCountries: [],
+  getAirline: [],
 };
 
-const rootReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case PUT_USER:
       return {
@@ -96,8 +111,11 @@ const rootReducer = (state = initialState, action) => {
     case FILTRO_SCALE:
       return {
         ...state,
-        getFiltroFlightsScale: action.payload,
-        searchedFlights: action.payload,
+        searchedFlights: [
+          ...state.searchedFlightsAUX.filter(
+            (scal) => scal.scale === action.payload
+          ),
+        ],
       };
 
     case FILTRO_AIRPORT_BY_COUNTRY:
@@ -110,6 +128,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: action.payload,
+        searchedFlightsAUX: action.payload,
       };
     case "GET_FLIGHT_DETAILS":
       return {
@@ -164,6 +183,28 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     }
+    
+
+    case GET_AIRLINE:
+      return {
+        ...state,
+        getAirline: action.payload,
+      };
+    case FILTRO_AIRLINE_NAME:
+      return {
+        ...state,
+        searchedFlights: [
+          ...state.searchedFlightsAUX.filter(
+            (air) => air.AirlineId == action.payload
+          ),
+        ],
+      };
+
+    case FILTRO_RESET_SHOP:
+      return {
+        ...state,
+        searchedFlights: [...state.searchedFlightsAUX],
+      };
 
     // defecto
     default:
@@ -173,4 +214,7 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+const rootReducer = combineReducers({
+  user: userReducer,
+});
+export default persistReducer(persistConfig, rootReducer);
