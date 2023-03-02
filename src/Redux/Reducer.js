@@ -13,6 +13,13 @@ import {
   VERIFICACCION_EMAIL,
   searchFlights,
   SLIDER_RECOMENDADO,
+  CREATE_AIRPORT,
+  GET_AIRLINES,
+  ADD_AIRLINE_TO_AIRPORT,
+  GET_COUNTRIES,
+  CREATE_AIRLINE,
+  ADD_AIRPORT_TO_AIRLINE,
+  DELETE_AIRPORT_TO_AIRLINE,
   GET_AIRLINE,
   FILTRO_AIRLINE_NAME,
   FILTRO_RESET_SHOP,
@@ -48,6 +55,9 @@ const initialState = {
   getFiltroFlightsScale: [],
   filteredAirports: [],
   recommended: [],
+  getAirliness: [],
+  //
+  getCountries: [],
   getAirline: [],
 };
 
@@ -136,6 +146,44 @@ export const userReducer = (state = initialState, action) => {
         recommended: action.payload,
       };
     }
+    case CREATE_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case GET_AIRLINES: {
+      return {
+        ...state,
+        getAirliness: action.payload,
+      };
+    }
+    case ADD_AIRLINE_TO_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case ADD_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case GET_COUNTRIES: {
+      return {
+        ...state,
+        getCountries: action.payload,
+      };
+    }
+    case CREATE_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    
 
     case GET_AIRLINE:
       return {
