@@ -9,7 +9,14 @@ import {
   PUT_DATA,
   VERIFICACCION_EMAIL,
   searchFlights,
-  SLIDER_RECOMENDADO
+  SLIDER_RECOMENDADO,
+  CREATE_AIRPORT,
+  GET_AIRLINES,
+  ADD_AIRLINE_TO_AIRPORT,
+  GET_COUNTRIES,
+  CREATE_AIRLINE,
+  ADD_AIRPORT_TO_AIRLINE,
+  DELETE_AIRPORT_TO_AIRLINE,
 } from "./Actions";
 
 const initialState = {
@@ -33,7 +40,10 @@ const initialState = {
   ///// FILTRO SCALE
   getFiltroFlightsScale: [],
   filteredAirports: [],
-  recommended : []
+  recommended: [],
+  getAirliness: [],
+  //
+  getCountries: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -114,9 +124,47 @@ const rootReducer = (state = initialState, action) => {
     case SLIDER_RECOMENDADO: {
       return {
         ...state,
-        recommended : action.payload
-      }
+        recommended: action.payload,
+      };
     }
+    case CREATE_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case GET_AIRLINES: {
+      return {
+        ...state,
+        getAirliness: action.payload,
+      };
+    }
+    case ADD_AIRLINE_TO_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case ADD_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case GET_COUNTRIES: {
+      return {
+        ...state,
+        getCountries: action.payload,
+      };
+    }
+    case CREATE_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+
     // defecto
     default:
       return {
