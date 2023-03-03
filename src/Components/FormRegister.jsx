@@ -468,7 +468,7 @@ const FormRegister = () => {
             >
               <option value="">Select a country</option>
               {countries.map((country) => (
-                <option key={country.country} value={country.country}>
+                <option key={country.country} value={`${country.country}`}>
                   {country.country}
                 </option>
               ))}
@@ -507,7 +507,7 @@ const FormRegister = () => {
             >
               <option value="">Select a city</option>
               {cities.map((city) => (
-                <option key={city} value={city}>
+                <option key={city} value={`${city}`}>
                   {city}
                 </option>
               ))}
