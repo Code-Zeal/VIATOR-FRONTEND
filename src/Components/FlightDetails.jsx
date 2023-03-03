@@ -1,15 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlightDetails } from "../Redux/Actions";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import moment from "moment";
+import Paypal from "./Paypal";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function FlightDetails({ flightId, roundTrip }) {
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+
+  const [quantity, setQuantity] = useState({
+    quantity: Number,
+  });
+  console.log(quantity);
+  const handlerQantity = (event) => {
+    let value = Number(event.target.value);
+    setQuantity({
+      quantity: value,
+    });
+  };
   const dispatch = useDispatch();
   const detailedFlight = useSelector((state) => state.flightDetails);
-
-  console.log(detailedFlight);
 
   useEffect(() => {
     dispatch(getFlightDetails(flightId));
@@ -200,6 +212,19 @@ export default function FlightDetails({ flightId, roundTrip }) {
                   {detailedFlight.ticketPrice} USDT
                 </p>
               </div>
+              <select onChange={handlerQantity} name="quantity" id="">
+                <option selected disabled="true">
+                  Cantidad de boletos
+                </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
             </div>
           </>
         )}
@@ -354,6 +379,19 @@ export default function FlightDetails({ flightId, roundTrip }) {
                       }
                       USD{" "}
                     </p>
+                    <select onChange={handlerQantity} name="quantity" id="">
+                      <option selected disabled="true">
+                        Cantidad de boletos
+                      </option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                    </select>
                   </div>
                   <div className="flex">
                     <svg
@@ -393,8 +431,15 @@ export default function FlightDetails({ flightId, roundTrip }) {
         ) : (
           <></>
         )}
+
         <button className="w-full mt-4 bg-[#080808] text-[white] py-4 rounded-tl-xl rounded-tr-xl text-4xl tracking-wide font-bold lg:mt-20">
-          COMPRAR
+          {console.log(quantity)}
+          <Paypal
+            valuePerTicket={detailedFlight.ticketPrice}
+            quantity={quantity.quantity}
+            name={`Compra de Bolet desde Viator `}
+            description={`Compra de Bolet desde Viator `}
+          ></Paypal>
         </button>
       </div>
       <Footer></Footer>

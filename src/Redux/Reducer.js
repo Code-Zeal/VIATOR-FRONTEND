@@ -9,7 +9,7 @@ import {
   PUT_DATA,
   VERIFICACCION_EMAIL,
   searchFlights,
-  SLIDER_RECOMENDADO
+  SLIDER_RECOMENDADO,
 } from "./Actions";
 
 const initialState = {
@@ -33,7 +33,8 @@ const initialState = {
   ///// FILTRO SCALE
   getFiltroFlightsScale: [],
   filteredAirports: [],
-  recommended : []
+  recommended: [],
+  onApproveRes: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -114,9 +115,21 @@ const rootReducer = (state = initialState, action) => {
     case SLIDER_RECOMENDADO: {
       return {
         ...state,
-        recommended : action.payload
-      }
+        recommended: action.payload,
+      };
     }
+    case "CREATE_ORDER": {
+      window.location.href = action.payload.href;
+      return {
+        ...state,
+      };
+    }
+    case "ON_APPROVE": {
+      return {
+        ...state,
+      };
+    }
+
     // defecto
     default:
       return {

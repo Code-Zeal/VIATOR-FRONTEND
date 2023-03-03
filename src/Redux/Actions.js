@@ -9,8 +9,7 @@ export const FILTRO_SCALE = "FILTRO_SCALE";
 export const GET_DATA = "GET_DATA";
 export const PUT_DATA = "PUT_DATA";
 export const VERIFICACCION_EMAIL = "VERIFICACCION_EMAIL";
-export const SLIDER_RECOMENDADO = "SLIDER_RECOMENDADO"
-
+export const SLIDER_RECOMENDADO = "SLIDER_RECOMENDADO";
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
   const response = await axios.put(
@@ -144,7 +143,6 @@ export function filteredFlights(payload) {
   };
 }
 
-
 // Airports
 export function getAirports() {
   return async function (dispatch) {
@@ -178,8 +176,8 @@ export function getFlightsScale(scale) {
     return dispatch({
       type: FILTRO_SCALE,
       payload: response.data,
-    })
-  }
+    });
+  };
 }
 
 export function getAirportsByInput(payload) {
@@ -193,13 +191,32 @@ export function getAirportsByInput(payload) {
     });
   };
 }
+export function createOrder(oder) {
+  console.log(oder);
+  return async function (dispatch) {
+    const res = await axios.post(`http://localhost:4000/createOrder`, oder);
+    return dispatch({
+      type: "CREATE_ORDER",
+      payload: res.data,
+    });
+  };
+}
+export function onApprove(body) {
+  return async function (dispatch) {
+    const res = await axios.get(`http://localhost:4000/capture-order`, body);
+    return dispatch({
+      type: "ON_APPROVE",
+      payload: res,
+    });
+  };
+}
 
 export const sliderRecomendado = () => {
   return async (dispatch) => {
     const info = await axios.get(`http://localhost:4000/api/recommended`);
     dispatch({
-      type : SLIDER_RECOMENDADO,
-      payload : info.data
-    })
-  }
-}
+      type: SLIDER_RECOMENDADO,
+      payload: info.data,
+    });
+  };
+};
