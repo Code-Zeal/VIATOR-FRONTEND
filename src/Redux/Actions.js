@@ -285,7 +285,10 @@ export const deleteAirportToAirline = (data) => {
     );
     dispatch({
       type: DELETE_AIRPORT_TO_AIRLINE,
-      payload: response.data,})}}
+      payload: response.data,
+    });
+  };
+};
 
 export function get_airline() {
   return async function (dispatch) {
@@ -401,5 +404,29 @@ export const limpiarReduxData = () => {
       type: "GET_AIRPORTS_INPUT",
       payload: [],
     });
+  };
+};
+export const CreateFlights = (formFlight) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/flights",
+      formFlight
+    );
+    dispatch({
+      type: "CREATE_FLIGHT",
+      payload: response.data,
+    });
+  };
+};
+export const getAirportsAirline = (id) => {
+  return async (dispatch) => {
+    const response = await axios.get(
+      `http://localhost:4000/api/airlines/${id}`
+    );
+    dispatch({
+      type: "GET_AIRPORTS_AIRLINE",
+      payload: response.data,
+    });
+    console.log(response.data);
   };
 };

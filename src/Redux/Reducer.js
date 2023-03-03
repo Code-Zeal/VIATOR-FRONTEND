@@ -59,6 +59,7 @@ const initialState = {
   //
   getCountries: [],
   getAirline: [],
+  getAirlinesAirports: [],
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -183,7 +184,6 @@ export const userReducer = (state = initialState, action) => {
         ...state,
       };
     }
-    
 
     case GET_AIRLINE:
       return {
@@ -204,6 +204,15 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: [...state.searchedFlightsAUX],
+      };
+    case "CREATE_FLIGHT":
+      return {
+        ...state,
+      };
+    case "GET_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+        getAirlinesAirports: action.payload,
       };
 
     // defecto
