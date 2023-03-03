@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { putRegister, postDataAuth0Inicial } from "../Redux/Actions";
+import {
+  putRegister,
+  postDataAuth0Inicial,
+  getCountries,
+} from "../Redux/Actions";
 import Footer from "./Footer";
 import Logout from "./Logout";
 import Home from "./Home";
@@ -13,17 +17,37 @@ const validate = (formRegister) => {
   if (formRegister.names === "") {
     errors.names = "Se requiere nombre";
   }
+  if (formRegister.names.length < 2) {
+    errors.names = "El nombre debe contener como mínimo 2 caracteres";
+  }
+  if (formRegister.names.length === 50) {
+    errors.names = "El nombre no puede contener más de 50 caracteres";
+  }
   if (formRegister.lastNames === "") {
     errors.lastNames = "Se requiere que ingrese informacion";
+  }
+  if (formRegister.lastNames.length < 2) {
+    errors.lastNames = "El apellido debe contener como mínimo 2 caracteres";
+  }
+  if (formRegister.lastNames.length === 50) {
+    errors.lastNames = "El apellido no puede contener más de 50 caracteres";
   }
   if (formRegister.nickname === "") {
     errors.nickname = "Se requiere que ingrese informacion";
   }
+  if (formRegister.nickname.length < 2) {
+    errors.nickname =
+      "El nombre usuario debe contener como mínimo 2 caracteres";
+  }
+  if (formRegister.nickname.length === 20) {
+    errors.nickname =
+      "El nombre de usuario no pude contener más de 20 caracteres";
+  }
   if (formRegister.DateOfBirth === "") {
-    errors.DateOfBirth = "Ingresa una Fecha correcta";
+    errors.DateOfBirth = "Debes ingresar una fecha válida";
   }
   if (formRegister.phoneNumber === 0) {
-    errors.phoneNumber = "Ingresa Numero de telefono Valido";
+    errors.phoneNumber = "Ingresa un número de telefono válido";
   }
   if (formRegister.country === "") {
     errors.country = "Se requiere que ingrese informacion";
@@ -36,6 +60,46 @@ const validate = (formRegister) => {
 };
 
 const FormRegister = () => {
+  const countries = useSelector((state) => state.getCountries);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+
+  const handleCountryChange = (event) => {
+    setSelectedCountry(event.target.value);
+    setSelectedCity("");
+  };
+
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
+
+  const cities = selectedCountry
+    ? countries.find((country) => country.country === selectedCountry).cities
+    : [];
+
+  useEffect(() => {
+    dispatch(getCountries());
+  }, [getCountries]);
+
+  const handleKeyPress = (event) => {
+    const charCode = event.which || event.keyCode;
+    // Códigos de teclas permitidas: letras mayúsculas y minúsculas, números y algunos caracteres de puntuación
+    const allowedKeys = [
+      8,
+      32,
+      44,
+      45,
+      46,
+      95,
+      ...Array.from({ length: 26 }, (_, i) => i + 65),
+      ...Array.from({ length: 26 }, (_, i) => i + 97),
+      ...Array.from({ length: 10 }, (_, i) => i + 48),
+    ];
+    if (!allowedKeys.includes(charCode)) {
+      event.preventDefault();
+    }
+  };
+
   // const data = useSelector((state) => state?.userExiste);
 
   const { user, getAccessTokenSilently } = useAuth0();
@@ -222,7 +286,11 @@ const FormRegister = () => {
               name="names"
               value={formRegister.names}
               onChange={changeHanlderForm}
+              onKeyPress={handleKeyPress}
               className="w-full h-1/2  border-2 rounded-md mr-1 "
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}"
+              minLength={2}
+              maxLength={50}
             />
             <input
               placeholder="Apellidos"
@@ -230,7 +298,11 @@ const FormRegister = () => {
               name="lastNames"
               value={formRegister.lastNames}
               onChange={changeHanlderForm}
+              onKeyPress={handleKeyPress}
               className="w-full h-1/2  ml-1 border-2 rounded-md"
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}"
+              minLength={2}
+              maxLength={50}
             />
           </div>
           <div className="flex justify-evenly w-full px-6 mb-10">
@@ -262,7 +334,11 @@ const FormRegister = () => {
               name="nickname"
               value={formRegister.nickname}
               onChange={changeHanlderForm}
-              className="w-full h-1/2 border-2 rounded-md"
+              onKeyPress={handleKeyPress}
+              className="w-full h-1/2  ml-1 border-2 rounded-md"
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}"
+              minLength={2}
+              maxLength={20}
             />
           </div>
           <span className=" text-[#ff0000] mb-10"> {errors.nickname}</span>
@@ -383,109 +459,19 @@ const FormRegister = () => {
               </svg>
             </label>
             <select
-              onChange={changeHanlderForm}
               name="country"
               className="w-full   border-2 rounded-md h-1/2"
+              onChange={(event) => {
+                handleCountryChange(event);
+                changeHanlderForm(event);
+              }}
             >
-              <option value="AF">Afganistán</option>
-              <option value="AL">Albania</option>
-              <option value="DE">Alemania</option>
-              <option value="AD">Andorra</option>
-              <option value="AO">Angola</option>
-              <option value="AI">Anguilla</option>
-              <option value="AQ">Antártida</option>
-              <option value="AG">Antigua y Barbuda</option>
-              <option value="AN">Antillas Holandesas</option>
-              <option value="SA">Arabia Saudí</option>
-              <option value="DZ">Argelia</option>
-              <option value="AR">Argentina</option>
-              <option value="AM">Armenia</option>
-              <option value="AW">Aruba</option>
-              <option value="AU">Australia</option>
-              <option value="AT">Austria</option>
-              <option value="AZ">Azerbaiyán</option>
-              <option value="BS">Bahamas</option>
-              <option value="BH">Bahrein</option>
-              <option value="BD">Bangladesh</option>
-              <option value="BB">Barbados</option>
-              <option value="BE">Bélgica</option>
-              <option value="BZ">Belice</option>
-              <option value="BJ">Benin</option>
-              <option value="BM">Bermudas</option>
-              <option value="BY">Bielorrusia</option>
-              <option value="MM">Birmania</option>
-              <option value="BO">Bolivia</option>
-              <option value="BA">Bosnia y Herzegovina</option>
-              <option value="BW">Botswana</option>
-              <option value="BR">Brasil</option>
-              <option value="BN">Brunei</option>
-              <option value="BG">Bulgaria</option>
-              <option value="BF">Burkina Faso</option>
-              <option value="BI">Burundi</option>
-              <option value="BT">Bután</option>
-              <option value="CV">Cabo Verde</option>
-              <option value="KH">Camboya</option>
-              <option value="CM">Camerún</option>
-              <option value="CA">Canadá</option>
-              <option value="TD">Chad</option>
-              <option value="CL">Chile</option>
-              <option value="CN">China</option>
-              <option value="CY">Chipre</option>
-              <option value="VA">Ciudad del Vaticano (Santa Sede)</option>
-              <option value="CO">Colombia</option>
-              <option value="KM">Comores</option>
-              <option value="CG">Congo</option>
-              <option value="CD">Congo, República Democrática del</option>
-              <option value="KR">Corea</option>
-              <option value="KP">Corea del Norte</option>
-              <option value="CI">Costa de Marfíl</option>
-              <option value="CR">Costa Rica</option>
-              <option value="HR">Croacia (Hrvatska)</option>
-              <option value="CU">Cuba</option>
-              <option value="DK">Dinamarca</option>
-              <option value="DJ">Djibouti</option>
-              <option value="DM">Dominica</option>
-              <option value="EC">Ecuador</option>
-              <option value="EG">Egipto</option>
-              <option value="SV">El Salvador</option>
-              <option value="AE">Emiratos Árabes Unidos</option>
-              <option value="ER">Eritrea</option>
-              <option value="SI">Eslovenia</option>
-              <option value="ES">España</option>
-              <option value="US">Estados Unidos</option>
-              <option value="EE">Estonia</option>
-              <option value="ET">Etiopía</option>
-              <option value="FJ">Fiji</option>
-              <option value="PH">Filipinas</option>
-              <option value="FI">Finlandia</option>
-              <option value="FR">Francia</option>
-              <option value="GA">Gabón</option>
-              <option value="GM">Gambia</option>
-              <option value="GE">Georgia</option>
-              <option value="GH">Ghana</option>
-              <option value="GI">Gibraltar</option>
-              <option value="GD">Granada</option>
-              <option value="GR">Grecia</option>
-              <option value="GL">Groenlandia</option>
-              <option value="GP">Guadalupe</option>
-              <option value="GU">Guam</option>
-              <option value="GT">Guatemala</option>
-              <option value="GY">Guayana</option>
-              <option value="GF">Guayana Francesa</option>
-              <option value="GN">Guinea</option>
-              <option value="GQ">Guinea Ecuatorial</option>
-              <option value="GW">Guinea-Bissau</option>
-              <option value="HT">Haití</option>
-              <option value="HN">Honduras</option>
-              <option value="HU">Hungría</option>
-              <option value="IN">India</option>
-              <option value="ID">Indonesia</option>
-              <option value="IQ">Irak</option>
-              <option value="IR">Irán</option>
-              <option value="IE">Irlanda</option>
-              <option value="BV">Isla Bouvet</option>
-              <option value="CX">Isla de Christmas</option>
-              <option value="IS">Islandia</option>
+              <option value="">Select a country</option>
+              {countries.map((country) => (
+                <option key={country.country} value={country.country}>
+                  {country.country}
+                </option>
+              ))}
             </select>
           </div>
           <span className="mb-10 text-[#ff0000]">{errors.country}</span>
@@ -508,18 +494,23 @@ const FormRegister = () => {
                 />
               </svg>
             </label>
+
             <select
-              onChange={changeHanlderForm}
               name="city"
               className="w-full   border-2 rounded-md h-1/2"
+              value={selectedCity}
+              onChange={(event) => {
+                handleCityChange(event);
+                changeHanlderForm(event);
+              }}
+              disabled={!selectedCountry}
             >
-              <option value="AF">Puerto Montt</option>
-              <option value="AL">Santiago</option>
-              <option value="DE">Viña del Mar</option>
-              <option value="AD">Puerto Natales</option>
-              <option value="AO">Punta Arenas</option>
-              <option value="AI">Chillan</option>
-              <option value="AQ">Castro</option>
+              <option value="">Select a city</option>
+              {cities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
             </select>
           </div>
           <span className="mb-10 text-[#ff0000]"> {errors.city}</span>
