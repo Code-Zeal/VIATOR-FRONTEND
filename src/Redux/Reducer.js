@@ -17,6 +17,7 @@ import {
   FILTRO_AIRLINE_NAME,
   FILTRO_RESET_SHOP,
   CLEAR_DATA,
+  GET_TICKET_USER,
 } from "./Actions";
 
 const persistConfig = {
@@ -49,6 +50,33 @@ const initialState = {
   filteredAirports: [],
   recommended: [],
   getAirline: [],
+
+  // Ticket
+
+  getTicketUserData: [
+    {
+      id: 1,
+      namePassanger: "Carlitos Hernandez",
+      seat: 12,
+      UserId: "auth0id131",
+      FlightId: 1,
+      Flight: {
+        id: 1,
+        origin: "Aereopuerto Internacional el Dorado, Bogota D.C, Colombia",
+        destiny: "Aeropuerto Internacional Jorge Chávez, Callao, Peru",
+        dateTimeDeparture: "2023-03-22T13:40:00.000Z",
+        dateTimeArrival1: "2023-03-22T21:30:00.000Z",
+        dateTimeReturn: null,
+        dateTimeArrival2: null,
+        roundTrip: false,
+        seatsAvailable: 134,
+        ticketPrice: 288,
+        scale: "1",
+        state: true,
+        AirlineId: 1,
+      },
+    },
+  ],
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -156,6 +184,12 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: [...state.searchedFlightsAUX],
+      };
+
+    case GET_TICKET_USER:
+      return {
+        ...state,
+        getTicketUserData: action.payload,
       };
 
     // defecto

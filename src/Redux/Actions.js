@@ -15,6 +15,7 @@ export const GET_AIRLINE = "GET_AIRLINE";
 export const FILTRO_AIRLINE_NAME = "FILTRO_AIRLINE_NAME";
 export const FILTRO_RESET_SHOP = "FILTRO_RESET_SHOP";
 export const CLEAR_DATA = "CLEAR_DATA";
+export const GET_TICKET_USER = "GET_TICKET_USER";
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
   const response = await axios.put(
@@ -320,3 +321,16 @@ export const limpiarReduxData = () => {
     });
   };
 };
+
+// export function getTicketUser(id) {
+//   return async function (dispatch) {
+//     const response = await axios.get(
+//       `http://localhost:4000/User/getUserTickets?id=${id}`
+//     );
+//     console.log(response);
+//     return dispatch({
+//       type: GET_TICKET_USER,
+//       payload: response.data,
+//     });
+//   };
+// }
