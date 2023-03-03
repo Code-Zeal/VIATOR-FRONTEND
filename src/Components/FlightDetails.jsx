@@ -13,7 +13,6 @@ export default function FlightDetails({ flightId, roundTrip }) {
   const [quantity, setQuantity] = useState({
     quantity: Number,
   });
-  console.log(quantity);
   const handlerQantity = (event) => {
     let value = Number(event.target.value);
     setQuantity({
@@ -433,8 +432,8 @@ export default function FlightDetails({ flightId, roundTrip }) {
         )}
 
         <button className="w-full mt-4 bg-[#080808] text-[white] py-4 rounded-tl-xl rounded-tr-xl text-4xl tracking-wide font-bold lg:mt-20">
-          {console.log(quantity)}
           <Paypal
+            myQuery={detailedFlight.id}
             valuePerTicket={detailedFlight.ticketPrice}
             quantity={quantity.quantity}
             name={`Compra de Bolet desde Viator `}

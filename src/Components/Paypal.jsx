@@ -13,8 +13,7 @@ const product = {
   quantity: 1,
   valuePerTicket: "1200",
 };
-function Paypal({ name, description, quantity, valuePerTicket }) {
-  console.log(valuePerTicket);
+function Paypal({ name, description, quantity, valuePerTicket, myQuery }) {
   const onApproveRes = useSelector((state) => state.onApproveRes);
   const dispatch = useDispatch();
   const [oder, setOder] = useState({
@@ -22,20 +21,23 @@ function Paypal({ name, description, quantity, valuePerTicket }) {
     description: description,
     quantity: quantity,
     valuePerTicket: valuePerTicket,
+    myRoute: "flight",
+    myQuery: myQuery,
   });
+  console.log(oder);
   useEffect(() => {
     setOder({
       name: name,
       description: description,
       quantity: quantity,
       valuePerTicket: valuePerTicket,
+      myQuery: myQuery,
+      myRoute: "flight",
     });
-  }, [name, description, valuePerTicket, quantity]);
+  }, [name, description, valuePerTicket, quantity, myQuery]);
   const createOrders = async () => {
     await dispatch(createOrder(oder));
   };
-
-  console.log(oder);
 
   const onApprove = (data) => {
     let body = {
