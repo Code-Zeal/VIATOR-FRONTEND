@@ -9,6 +9,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function FlightDetails({ flightId, roundTrip }) {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user } = useAuth0();
+  const sub = user?.sub;
 
   const [quantity, setQuantity] = useState({
     quantity: Number,
@@ -24,7 +26,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
 
   useEffect(() => {
     dispatch(getFlightDetails(flightId));
-  }, [flightId]);
+  }, [flightId, dispatch]);
   let idaVuelta = detailedFlight.roundTrip;
   return (
     <div>
@@ -176,7 +178,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                   {" "}
                   {
                     <p className="lg:text-md mr-1">
-                      {detailedFlight.ticketPrice}.00{" "}
+                      {detailedFlight?.ticketPrice}.00{" "}
                     </p>
                   }
                   USD{" "}
@@ -208,7 +210,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                 </svg>
 
                 <p className="font-bold lg:text-lg">
-                  {detailedFlight.ticketPrice} USDT
+                  {detailedFlight?.ticketPrice} USDT
                 </p>
               </div>
               <select onChange={handlerQantity} name="quantity" id="">
@@ -373,7 +375,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                       {" "}
                       {
                         <p className="lg:text-md mr-1">
-                          {detailedFlight.ticketPrice}.00{" "}
+                          {detailedFlight?.ticketPrice}.00{" "}
                         </p>
                       }
                       USD{" "}
@@ -418,7 +420,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                     </svg>
 
                     <p className="font-bold lg:text-lg">
-                      {detailedFlight.ticketPrice} USDT
+                      {detailedFlight?.ticketPrice} USDT
                     </p>
                   </div>
                 </>
@@ -432,12 +434,14 @@ export default function FlightDetails({ flightId, roundTrip }) {
         )}
 
         <button className="w-full mt-4 bg-[#080808] text-[white] py-4 rounded-tl-xl rounded-tr-xl text-4xl tracking-wide font-bold lg:mt-20">
+          {console.log(detailedFlight.ticketPrice)}
           <Paypal
-            myQuery={detailedFlight.id}
+            userId={sub}
+            flightId={detailedFlight.id}
             valuePerTicket={detailedFlight.ticketPrice}
             quantity={quantity.quantity}
-            name={`Compra de Bolet desde Viator `}
-            description={`Compra de Bolet desde Viator `}
+            name={`Compra de Boleto de Viator `}
+            description={`Compra de Boleto de Viator `}
           ></Paypal>
         </button>
       </div>
