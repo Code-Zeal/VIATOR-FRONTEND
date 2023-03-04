@@ -20,13 +20,12 @@ export default function CreateFlight() {
   const airlines = useSelector((state) => state.getAirliness);
   const getAirlinesAirports = useSelector((state) => state.getAirlinesAirports);
   const dispatch = useDispatch();
-  console.log(getAirlinesAirports);
 
   // const [countrie, setCountrie] = useState(false);
   const [hasRoundTrip, setHasRoundTrip] = useState(true);
   const [hasAirline, setHasAirline] = useState(true);
   const [currentAirline, setCurrentAirline] = useState({
-    airline: "",
+    airline: Number,
   });
   const [time1, setTime1] = useState(true);
   const [time2, setTime2] = useState(true);
@@ -119,28 +118,20 @@ export default function CreateFlight() {
     }
   };
 
-  const handlerRelation = (event) => {
-    const propiedad = event.target.name;
-    let value;
-    value = Number(event.target.value);
-
-    setRelation({
-      ...relation,
-      [propiedad]: value,
-    });
-  };
   useEffect(() => {
     dispatch(getAirlines());
-    dispatch(getAirportsAirline(1));
+    dispatch(getAirportsAirline(currentAirline.airline));
     dispatch(getCountries());
-  }, [dispatch]);
+  }, [dispatch, currentAirline]);
 
   const redirectHome = async () => {
-    history.push("/createAirline");
+    history.push("/createFlight");
     window.location.reload();
   };
   const submitCreate = async () => {
     await dispatch(CreateFlights(formFlight));
+    alert("Conexión creada correctamente");
+    await redirectHome();
   };
   const handleFormFlight = (event) => {
     //DATES
@@ -202,6 +193,15 @@ export default function CreateFlight() {
       event.target.className.includes("date")
     ) {
       return;
+    } else if (event.target.className.includes("airline")) {
+      setHasAirline(false);
+      setCurrentAirline({
+        airline: event.target.value,
+      });
+      setFormFlight({
+        ...formFlight,
+        [event.target.name]: event.target.value,
+      });
     } else {
       setFormFlight({
         ...formFlight,
@@ -390,7 +390,7 @@ export default function CreateFlight() {
             onChange={handleFormFlight}
             name="AirlineId"
             id=""
-            className=""
+            className="airline"
           >
             <option value="default" disabled="true" selected>
               Aerolinea
@@ -402,22 +402,45 @@ export default function CreateFlight() {
         </div>
         <div className="flex flex-col py-6">
           <label htmlFor="airlines">Aeropuerto Origen</label>
-          <select name="airportOriginId" onChange={handleFormFlight} id="">
+          <select
+            disabled={hasAirline}
+            name="airportOriginId"
+            onChange={handleFormFlight}
+            id=""
+            className=""
+          >
             <option value="default" disabled="true" selected>
               Aeropuerto
             </option>
-            {airlines.map((el) => {
-              return <option value={el.id}>{el.name}</option>;
-            })}
+            {hasAirline === false ? (
+              getAirlinesAirports.Airports.map((el) => {
+                return (
+                  <option value={el.AirlineAirport.AirportId}>{el.name}</option>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </select>
           <label htmlFor="airlines">Aeropuerto Destino</label>
-          <select onChange={handleFormFlight} name="airportDestinyId" id="">
+          <select
+            disabled={hasAirline}
+            onChange={handleFormFlight}
+            name="airportDestinyId"
+            id=""
+          >
             <option value="default" disabled="true" selected>
               Aeropuerto
             </option>
-            {airlines.map((el) => {
-              return <option value={el.id}>{el.name}</option>;
-            })}
+            {hasAirline === false ? (
+              getAirlinesAirports.Airports.map((el) => {
+                return (
+                  <option value={el.AirlineAirport.AirportId}>{el.name}</option>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </select>
         </div>
       </div>
