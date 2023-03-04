@@ -18,10 +18,14 @@ import MyTickets from "./Components/MyTickets";
 import FilterShop from "./Components/FilterShop";
 import Favorites from "./Components/Favorites";
 import Data from "./Components/Data";
-import Admin from "./Components/Admin";
+import CreateAirport from "./Components/CreateAirport";
 import Footer from "./Components/Footer";
 import FlightDetails from "./Components/FlightDetails";
 import Welcome from "./Components/Welcome";
+import CreateAirline from "./Components/CreateAirline";
+import CreateFlight from "./Components/CreateFlight";
+import FlightsAdmin from "./Components/FlightsAdmin";
+import ConectAir from "./Components/ConectAir";
 
 function App() {
   return (
@@ -85,10 +89,54 @@ function App() {
         />
         <Route
           exact
-          path="/admin"
+          path="/createAirport"
           render={() => (
             <div>
-              <Admin />
+              <CreateAirport />
+              <Profile />
+              <Footer></Footer>
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/createAirline"
+          render={() => (
+            <div>
+              <CreateAirline></CreateAirline>
+              <Profile />
+              <Footer></Footer>
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/createFlight"
+          render={() => (
+            <div>
+              <CreateFlight></CreateFlight>
+              <Profile />
+              <Footer></Footer>
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/flights"
+          render={() => (
+            <div>
+              <FlightsAdmin></FlightsAdmin>
+              <Profile />
+              <Footer></Footer>
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/conectAir"
+          render={() => (
+            <div>
+              <ConectAir></ConectAir>
               <Profile />
               <Footer></Footer>
             </div>
