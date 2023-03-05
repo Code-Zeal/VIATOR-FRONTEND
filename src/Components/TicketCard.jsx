@@ -1,22 +1,68 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Popup from "./Popup";
+import { putTicketTransfer, putTicketCompleteForm } from "../Redux/Actions";
+
 import moment from "moment";
-import { Link } from "react-router-dom";
+import PopupFormPasajero from "./PopupFormPasajero";
 
 const TicketCard = (props) => {
-  const [isFav, setIsFav] = useState(false);
+  const dispatch = useDispatch();
 
-  // const [hover, setHover] = React.useState(false);
-  // const handleMouseEnter = () => setHover(true);
-  // const handleMouseLeave = () => setHover(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupForm, setShowPopupForm] = useState(false);
 
-  /* //   getFlights
-//   id: 1,
-//   origin: "chiloe",
-//   destiny: "arica",
-//   dateTimeDeparture: "2023-02-22T19:35:20.000Z",
-//   dateTimeArrival: "2023-02-22T19:35:20.000Z",
-//   seatsAvailable: 20,
-//   ticketPrice: "400.000", */
+  //////////////////////tranferir
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
+  const handleOpenPopupForm = () => {
+    setShowPopupForm(true);
+  };
+
+  const handleClosePopupForm = () => {
+    setShowPopupForm(false);
+  };
+
+  const handleTransfer = (email) => {
+    const dataTransfer = {
+      email: email,
+      idTicket: props.idTicket,
+    };
+    dispatch(putTicketTransfer(dataTransfer));
+
+    // Aquí puedes agregar la lógica para transferir el ticket
+    console.log("Ticket transferido a: " + email);
+    // Cerrar el popup después de transferir el ticket
+    setShowPopup(false);
+  };
+
+  const handleFormPassanger = ({ email, namePassanger }) => {
+    const dataPassanger = {
+      email: email,
+      namePassanger: namePassanger,
+    };
+    dispatch(putTicketCompleteForm(dataPassanger));
+
+    // Aquí puedes agregar la lógica para transferir el ticket
+    console.log("Ticket transferido a: " + email);
+    // Cerrar el popup después de transferir el ticket
+    setShowPopup(false);
+  };
+  ////////////////////////////////////////Transferir
+
+  const venderTicket = () => {
+    // dispatch(funcion())
+  };
+
+  const rellenarPasajeTicket = () => {
+    // dispatch(funcion())
+  };
 
   return (
     <div className="m-auto my-6 flex flex-col lg:w-1/2  w-11/12 mx-auto  ">
@@ -111,27 +157,33 @@ const TicketCard = (props) => {
                 </div>
               </div>
               <div className="ml-5 flex flex-col  items-center justify-center">
-                <span className="font-bold text-xl">Precio final</span>
-                {props.roundTrip ? (
-                  <p className="font-bold text-md">
-                    USD {props.ticketPrice}
-                    {"."}
-                    00
-                  </p>
-                ) : (
-                  <p className="font-bold text-md">
-                    USD
-                    {props.ticketPrice}
-                  </p>
-                )}
+                <span className="font-bold text-xl">Asientos</span>
+                <p>{props.seatUser}</p>
               </div>
             </div>
           </div>
 
           <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
-            <button className="text-sm px-2">Vender</button>
-            <button className="text-sm px-2">Tranferir</button>
-            <button className="text-sm px-2">Rellenar pasaje</button>
+            <button onClick={venderTicket} className="text-sm px-2">
+              Vender
+            </button>
+            <button onClick={handleOpenPopup} className="text-sm px-2">
+              Transferir
+            </button>
+            <Popup
+              isOpen={showPopup}
+              onClose={handleClosePopup}
+              onSubmit={handleTransfer}
+            />
+
+            <button onClick={handleOpenPopupForm} className="text-sm px-2">
+              Rellenar pasaje
+            </button>
+            <PopupFormPasajero
+              isOpen={showPopupForm}
+              onClose={handleClosePopupForm}
+              onSubmit={handleFormPassanger}
+            />
           </div>
         </div>
       </div>
@@ -218,6 +270,11 @@ const TicketCard = (props) => {
                 <p className="font-medium lg:px-2  text-[#151515]">
                   {moment(props.dateTimeArrival2).format("HH:mm")}
                 </p>
+              </div>
+
+              <div className="ml-5 flex flex-col  items-center justify-center">
+                <span className="font-bold text-xl">Asientos</span>
+                <p>{props.seatUser + 7}</p>
               </div>
             </div>
           </div>

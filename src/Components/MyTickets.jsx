@@ -9,21 +9,16 @@ export default function MyTickets() {
   const { user, isAuthenticated } = useAuth0();
   const id = user?.sub;
   const dispatch = useDispatch();
-  const ticketsUser = useSelector((state) => state.getTicketUserData);
-  useEffect(() => {}, [ticketsUser]);
-  // const valor = useSelector((state) => state.getAirports);
 
-  console.log(ticketsUser);
-
-  // getAirports;
-
-  // useEffect(() => {
-  //   dispatch(getTicketUser(id));
-  // }, []);
+  useEffect(() => {
+    dispatch(getTicketUser(id));
+  }, []);
 
   return (
-    <div className="absolute ml-[21%] w-[75%] z-20 bg-[pink]  flex flex-col items-center">
-      {/* <TicketsCards /> */}
+    <div className="absolute ml-[21%] w-[100%] z-20 bg-[pink]  flex flex-col items-center">
+      <h1>Tickets Del usuario</h1>
+
+      <TicketsCards />
       {/* <h1 className="text-[white] my-2">MyTickets</h1>
       <h1 className="text-[white] my-2">MyTickets</h1>
       <h1 className="text-[white] my-2">MyTickets</h1>

@@ -18,6 +18,8 @@ import {
   FILTRO_RESET_SHOP,
   CLEAR_DATA,
   GET_TICKET_USER,
+  PUT_TICKET_TRANSFER,
+  PUT_TICKET_FORM,
 } from "./Actions";
 
 const persistConfig = {
@@ -51,8 +53,6 @@ const initialState = {
   recommended: [],
   getAirline: [],
 
-  // Ticket
-
   getTicketUserData: [
     {
       id: 1,
@@ -66,9 +66,9 @@ const initialState = {
         destiny: "Aeropuerto Internacional Jorge Chávez, Callao, Peru",
         dateTimeDeparture: "2023-03-22T13:40:00.000Z",
         dateTimeArrival1: "2023-03-22T21:30:00.000Z",
-        dateTimeReturn: null,
-        dateTimeArrival2: null,
-        roundTrip: false,
+        dateTimeReturn: "2023-03-22T13:40:00.000Z",
+        dateTimeArrival2: "2023-03-22T21:30:00.000Z",
+        roundTrip: true,
         seatsAvailable: 134,
         ticketPrice: 288,
         scale: "1",
@@ -77,6 +77,7 @@ const initialState = {
       },
     },
   ],
+  // Ticket
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -190,6 +191,15 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         getTicketUserData: action.payload,
+      };
+
+    case PUT_TICKET_TRANSFER:
+      return {
+        ...state,
+      };
+    case PUT_TICKET_FORM:
+      return {
+        ...state,
       };
 
     // defecto
