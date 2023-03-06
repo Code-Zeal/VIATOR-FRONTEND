@@ -199,6 +199,25 @@ export function getAirportsByInput(payload) {
     });
   };
 }
+export function createOrder(oder) {
+  console.log(oder);
+  return async function (dispatch) {
+    const res = await axios.post(`http://localhost:4000/createOrder`, oder);
+    return dispatch({
+      type: "CREATE_ORDER",
+      payload: res.data,
+    });
+  };
+}
+export function onApprove(body) {
+  return async function (dispatch) {
+    const res = await axios.get(`http://localhost:4000/capture-order`, body);
+    return dispatch({
+      type: "ON_APPROVE",
+      payload: res,
+    });
+  };
+}
 
 export const sliderRecomendado = () => {
   return async (dispatch) => {

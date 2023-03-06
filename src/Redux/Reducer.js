@@ -55,8 +55,8 @@ const initialState = {
   getFiltroFlightsScale: [],
   filteredAirports: [],
   recommended: [],
+  onApproveRes: "",
   getAirliness: [],
-  //
   getCountries: [],
   getAirline: [],
 };
@@ -146,7 +146,14 @@ export const userReducer = (state = initialState, action) => {
         recommended: action.payload,
       };
     }
+    case "CREATE_ORDER": {
+      window.location.href = action.payload.href}
     case CREATE_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case "ON_APPROVE": {
       return {
         ...state,
       };
