@@ -1,13 +1,28 @@
+import { useDispatch } from "react-redux";
+import { getFlightsByAirline } from "../Redux/Actions";
+import { useHistory } from "react-router-dom";
+
 export default function RecommendationsCard(props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  function handleOnClick() {
+    dispatch(getFlightsByAirline(props.name));
+    history.push("/shop");
+  }
+
   return (
-    <div className="w-full h-64 md:w-1/2 md:h-80 lg:w-1/3 xl:w-1/4 p-6 my-4 ">
+    <div
+      className="w-full h-64 md:w-1/2 md:h-80 lg:w-1/3 xl:w-1/4 p-6 my-4 cursor-pointer"
+      onClick={handleOnClick}
+    >
       <img
         className=" w-full h-full relative block overflow-hidden rounded-xl bg-no-repeat shadow-xl shadow-[black]"
         src={props.img}
-        alt={`${props.airline} Airplane or logo`}
+        alt={`${props.name} logo`}
       />
       <span class="absolute z-10 transform -translate-y-48 md:-translate-y-64  inline-flex items-center rounded-lg bg-black mx-2 px-3 py-1 text-sm font-bold text-[white]  stroke-2 stroke-[yellow] bg-[#000000]  ">
-        {props.value}
+        {props.rating}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="ml-1.5 h-4 w-4 text-amarillo"
@@ -19,7 +34,7 @@ export default function RecommendationsCard(props) {
       </span>
 
       <div class="relative bg-black bg-opacity-40  text-white">
-        <h3 class="text-2xl font-bold my-4 lg:text-3xl ">{props.airline}</h3>
+        <h3 class="text-2xl font-bold my-4 lg:text-3xl ">{props.name}</h3>
       </div>
 
       <div></div>

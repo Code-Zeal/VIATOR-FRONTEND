@@ -304,7 +304,10 @@ export const deleteAirportToAirline = (data) => {
     );
     dispatch({
       type: DELETE_AIRPORT_TO_AIRLINE,
-      payload: response.data,})}}
+      payload: response.data,
+    });
+  };
+};
 
 export function get_airline() {
   return async function (dispatch) {
@@ -422,3 +425,24 @@ export const limpiarReduxData = () => {
     });
   };
 };
+
+export function getFlightsByAirline(airline) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(
+        "http://localhost:4000/api/getFlightByAirline?airlineName=" + airline
+      );
+      return dispatch({
+        type: "GET_AIRLINE_FLIGHTS",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export const clearState = () => ({
+  type: "CLEAR_STATE",
+  payload: [],
+});
