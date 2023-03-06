@@ -42,6 +42,7 @@ const initialState = {
   userData: [],
   userEmailExiste: "",
   flights: [],
+  airlineFlights: [],
   searchedFlights: [],
   searchedFlightsAUX: [],
 
@@ -183,7 +184,6 @@ export const userReducer = (state = initialState, action) => {
         ...state,
       };
     }
-    
 
     case GET_AIRLINE:
       return {
@@ -204,6 +204,18 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: [...state.searchedFlightsAUX],
+      };
+
+    case "GET_AIRLINE_FLIGHTS":
+      return {
+        ...state,
+        airlineFlights: action.payload,
+      };
+
+    case "CLEAR_STATE":
+      return {
+        ...state,
+        airlineFlights: [],
       };
 
     // defecto
