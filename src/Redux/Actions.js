@@ -113,6 +113,15 @@ export function getFlights() {
     });
   };
 }
+export function getFlightsAdm() {
+  return async function (dispatch) {
+    const res = await axios.get("http://localhost:4000/api/flightsAdmin");
+    return dispatch({
+      type: "GET_FLIGHTS_ADM",
+      payload: res.data,
+    });
+  };
+}
 
 export function searchFlights({
   origin,
@@ -425,6 +434,41 @@ export const limpiarReduxData = () => {
     });
   };
 };
+export const CreateFlights = (formFlight) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/flights",
+      formFlight
+    );
+    dispatch({
+      type: "CREATE_FLIGHT",
+      payload: response.data,
+    });
+  };
+};
+export const getAirportsAirline = (id) => {
+  return async (dispatch) => {
+    const response = await axios.get(
+      `http://localhost:4000/api/airlines/${id}`
+    );
+    dispatch({
+      type: "GET_AIRPORTS_AIRLINE",
+      payload: response.data,
+    });
+    console.log(response.data);
+  };
+};
+export function putFlightDetails(idState) {
+  return async function (dispatch) {
+    
+      const res = await axios.put(
+        "http://localhost:4000/api/setStateFlights",
+        idState
+      );
+      return dispatch({
+        type: "PUT_FLIGHT_DETAILS",
+      })
+    }}
 
 export function getFlightsByAirline(airline) {
   return async function (dispatch) {
@@ -439,6 +483,18 @@ export function getFlightsByAirline(airline) {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+export function cloudinaryFlights(payload) {
+  return {
+    type: "CLOUDINARY_FLIGHTS",
+    payload,
+  };
+}
+export function cloudinaryUsers(payload) {
+  return {
+    type: "CLOUDINARY_USERS",
+    payload,
   };
 }
 

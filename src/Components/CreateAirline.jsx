@@ -10,20 +10,43 @@ import {
   getCountries,
 } from "../Redux/Actions";
 import { useHistory } from "react-router-dom";
+import { useRef } from "react";
+import { cloudinaryFlights } from "../Redux/Actions";
 
 export default function CreateAirline() {
+  const [formAiline, setFormAirline] = useState({
+    name: "",
+    infoContact: "",
+    picture: "",
+  });
+  const dispatch = useDispatch();
+
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dx2me9gqm",
+        uploadPreset: "hauiebsf",
+      },
+      function (error, result) {
+        console.log(result.event === "success");
+        if (result.event === "success") {
+          setFormAirline({
+            ...formAiline,
+            picture: result.info.secure_url,
+          });
+        }
+      }
+    );
+  }, []);
   let history = useHistory();
 
   const airlines = useSelector((state) => state.getAirliness);
   const Airport = useSelector((state) => state.getAirports);
   const CountrieCities = useSelector((state) => state.getCountries);
-  const dispatch = useDispatch();
 
-  const [formAiline, setFormAirline] = useState({
-    name: "",
-    infoContact: "",
-    rating: "0",
-  });
   console.log(formAiline);
 
   const [city, setCity] = useState(true);
@@ -58,16 +81,12 @@ export default function CreateAirline() {
     dispatch(getAirports());
     dispatch(getCountries());
   }, [dispatch]);
+
   const handlerChangeAirport = (event) => {
     if (city) {
       setCity(false);
     }
-    if (formAiline.rating === "") {
-      setFormAirline({
-        ...formAiline,
-        rating: "0",
-      });
-    }
+
     if (event.target.className.includes("countries")) {
       // console.log(event.target.value);
       // setCountrie(event.target.value);
@@ -98,55 +117,77 @@ export default function CreateAirline() {
       {/* <button className="mx-6" onClick={countries}>
         countries
       </button> */}
-      <form action="">
+      <div className="bg-azulClaro w-1/2 px-8 mt-8 rounded-xl">
+        <div className="flex flex-col items-center  my-3 h-[200px] ">
+          <img
+            className="rounded-full w-[150px] h-[150px] border-2 bg-[white]"
+            src={formAiline.picture}
+            alt=""
+          />
+
+          <button
+            className="border-2 border-[black] mt-2 hover:bg-[#961d1d] bg-[#e54848] text-[white] py-1 px-3 text-lg rounded-lg font-bold"
+            onClick={() => widgetRef.current.open()}
+          >
+            Subir Imagen
+          </button>
+        </div>
         <div className="flex flex-col py-2">
-          <label htmlFor="">Nombre de la aerolinea</label>
+          <label className="text-[white] font-bold" htmlFor="">
+            Nombre de la aerolinea
+          </label>
           <input
             name="name"
             onChange={handlerChangeAirport}
             type="text"
-            className="bg-[gray]  rounded-lg"
+            className="bg-azulOscuro border-2  rounded-lg text-[white]"
           />
         </div>
         <div className=" flex flex-col py-2">
-          <label htmlFor="Pais">Correo</label>
+          <label className="text-[white] font-bold" htmlFor="Pais">
+            Correo
+          </label>
           <input
             name="infoContact"
             onChange={handlerChangeAirport}
             type="text"
-            className="bg-[gray]  rounded-lg"
-          />
-        </div>
-        <div className="flex flex-col py-2">
-          <label htmlFor="Ciudad">Rating</label>
-
-          <input
-            name="rating"
-            type="text"
-            placeholder="0"
-            onChange={handlerChangeAirport}
+            className="bg-azulOscuro border-2  rounded-lg text-[white]"
           />
         </div>
 
-        <label htmlFor="airlines">Aeropuertos</label>
+        <label className="font-bold text-[white] " htmlFor="airlines">
+          Aeropuertos
+        </label>
         <div>
-          {/* <input onChange={handlerChangeAirport} type="checkbox" />
-          <label htmlFor="">Nombre de la aerolinea</label> */}
-          {Airport.map((el) => {
-            return (
-              <div>
-                <input
-                  onChange={handlerRelation}
-                  name={el.id}
-                  type="checkbox"
-                />
-                <label htmlFor="">{el.name}</label>
-              </div>
-            );
-          })}
+          <div className="bg-azulOscuro w-full rounded-lg p-4 my-2 ">
+            <div className="flex flex-col overflow-y-scroll h-52">
+              {Airport.map((el) => {
+                return (
+                  <div className="flex items-center ">
+                    <input
+                      className="border-2 w-4 h-4 appearance-none bg-[white] m-0 checked:bg-[#ef1bef]  checked:border-[white] checked:border-2 rounded-full "
+                      onChange={handlerRelation}
+                      name={el.id}
+                      type="checkbox"
+                    />
+                    <label className="text-[white] text-md" htmlFor="">
+                      {el.name}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <button onClick={submitHandler}>Crear</button>
-      </form>
+        <div className="w-full flex items-center justify-center py-4">
+          <button
+            className="border-2 border-[black] hover:bg-[#191483] bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg font-bold"
+            onClick={submitHandler}
+          >
+            Crear
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

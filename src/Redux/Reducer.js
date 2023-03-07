@@ -60,6 +60,10 @@ const initialState = {
   getAirliness: [],
   getCountries: [],
   getAirline: [],
+  getAirlinesAirports: [],
+  cloudinaryAirline: "",
+  cloudinaryUsers: "",
+  flightsAdm: "",
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -148,7 +152,12 @@ export const userReducer = (state = initialState, action) => {
       };
     }
     case "CREATE_ORDER": {
-      window.location.href = action.payload.href}
+      window.location.href = action.payload.href;
+      return {
+        ...state,
+      };
+    }
+
     case CREATE_AIRPORT: {
       return {
         ...state,
@@ -202,7 +211,7 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         searchedFlights: [
           ...state.searchedFlightsAUX.filter(
-            (air) => air.AirlineId == action.payload
+            (air) => air.AirlineId === action.payload
           ),
         ],
       };
@@ -211,6 +220,34 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: [...state.searchedFlightsAUX],
+      };
+    case "CREATE_FLIGHT":
+      return {
+        ...state,
+      };
+    case "GET_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+        getAirlinesAirports: action.payload,
+      };
+    case "PUT_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+      };
+    case "CLOUDINARY_FLIGHTS":
+      return {
+        ...state,
+        cloudinaryAirline: action.payload,
+      };
+    case "CLOUDINARY_USERS":
+      return {
+        ...state,
+        cloudinaryUsers: action.payload,
+      };
+    case "GET_FLIGHTS_ADM":
+      return {
+        ...state,
+        flightsAdm: action.payload,
       };
 
     case "GET_AIRLINE_FLIGHTS":

@@ -26,6 +26,7 @@ import CreateAirline from "./Components/CreateAirline";
 import CreateFlight from "./Components/CreateFlight";
 import FlightsAdmin from "./Components/FlightsAdmin";
 import ConectAir from "./Components/ConectAir";
+import FlightAdminDetails from "./Components/FlightsAdminDetails";
 
 function App() {
   return (
@@ -140,6 +141,13 @@ function App() {
               <Profile />
               <Footer></Footer>
             </div>
+          )}
+        />
+        <Route
+          exact
+          path="/flightAdm/:id"
+          render={({ match }) => (
+            <FlightAdminDetails flightId={match.params.id} />
           )}
         />
       </Switch>
