@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Popup from "./Popup";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import { putTicketTransfer, putTicketCompleteForm } from "../Redux/Actions";
 
 import moment from "moment";
 import PopupFormPasajero from "./PopupFormPasajero";
 
 const TicketCard = (props) => {
+  const { user } = useAuth0();
+  const sub = user?.sub;
   const dispatch = useDispatch();
 
   const [showPopup, setShowPopup] = useState(false);
@@ -32,6 +36,7 @@ const TicketCard = (props) => {
   const handleTransfer = (email) => {
     const dataTransfer = {
       email: email,
+      idUserE: sub,
       idTicket: props.idTicket,
     };
     dispatch(putTicketTransfer(dataTransfer));
@@ -164,9 +169,6 @@ const TicketCard = (props) => {
           </div>
 
           <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
-            <button onClick={venderTicket} className="text-sm px-2">
-              Vender
-            </button>
             <button onClick={handleOpenPopup} className="text-sm px-2">
               Transferir
             </button>

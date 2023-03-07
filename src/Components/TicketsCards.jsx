@@ -5,10 +5,11 @@ import TicketCard from "./TicketCard";
 
 const TicketsCards = () => {
   const ticketsUser = useSelector((state) => state?.getTicketUserData);
+  console.log(ticketsUser);
 
   return (
     <div className=" flex items-center bg-azulOscuro text-[white] py-2 w-screen px-4 ">
-      {ticketsUser.map((t) => (
+      {ticketsUser?.map((t) => (
         <TicketCard
           idTicket={t.id}
           seatUser={t.seat}

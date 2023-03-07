@@ -323,6 +323,11 @@ export const limpiarReduxData = () => {
       type: "GET_AIRPORTS_INPUT",
       payload: [],
     });
+
+    dispatch({
+      type: "GET_TICKET_USER",
+      payload: [],
+    });
   };
 };
 

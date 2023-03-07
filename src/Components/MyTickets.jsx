@@ -10,9 +10,9 @@ export default function MyTickets() {
   const id = user?.sub;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getTicketUser(id));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getTicketUser(id));
+  // }, []);
 
   return (
     <div className="absolute ml-[21%] w-[100%] z-20 bg-[pink]  flex flex-col items-center">
