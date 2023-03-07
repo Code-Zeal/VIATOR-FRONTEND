@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFlights } from "../Redux/Actions";
+import { getFlights, getFlightsAdm } from "../Redux/Actions";
 import moment from "moment";
 import Paginated from "./Paginated";
 import { Link } from "react-router-dom";
 
 export default function FlightsAdmin() {
   const dispatch = useDispatch();
-  const flights = useSelector((state) => state.flights);
+  const flightsAdm = useSelector((state) => state.flightsAdm);
 
-  console.log(flights);
+  console.log(flightsAdm);
   useEffect(() => {
-    dispatch(getFlights());
+    dispatch(getFlightsAdm());
   }, [dispatch]);
   const toggleHandler = (event) => {
     console.log(event.target.value);
@@ -20,7 +20,10 @@ export default function FlightsAdmin() {
   const [recipesPerPage] = useState(6);
   const indexOfLastRecipes = currentPage * recipesPerPage;
   const indexOfFirstRecipes = indexOfLastRecipes - recipesPerPage;
-  const currentRecipes = flights.slice(indexOfFirstRecipes, indexOfLastRecipes);
+  const currentRecipes = flightsAdm.slice(
+    indexOfFirstRecipes,
+    indexOfLastRecipes
+  );
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -76,7 +79,7 @@ export default function FlightsAdmin() {
       <div>
         <Paginated
           recipesPerPage={recipesPerPage}
-          allRecipes={flights.length}
+          allRecipes={flightsAdm.length}
           pagination={pagination}
           currentRecipes={currentRecipes}
           currentPage={currentPage}

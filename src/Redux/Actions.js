@@ -113,6 +113,15 @@ export function getFlights() {
     });
   };
 }
+export function getFlightsAdm() {
+  return async function (dispatch) {
+    const res = await axios.get("http://localhost:4000/api/flightsAdmin");
+    return dispatch({
+      type: "GET_FLIGHTS_ADM",
+      payload: res.data,
+    });
+  };
+}
 
 export function searchFlights({
   origin,
