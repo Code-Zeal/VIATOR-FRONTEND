@@ -460,15 +460,16 @@ export const getAirportsAirline = (id) => {
 };
 export function putFlightDetails(idState) {
   return async function (dispatch) {
-    
-      const res = await axios.put(
-        "http://localhost:4000/api/setStateFlights",
-        idState
-      );
-      return dispatch({
-        type: "PUT_FLIGHT_DETAILS",
-      })
-    }}
+    const res = await axios.put(
+      "http://localhost:4000/api/setStateFlights",
+      idState
+    );
+    return dispatch({
+      type: "PUT_FLIGHT_DETAILS",
+      payload: res.data,
+    });
+  };
+}
 
 export function getFlightsByAirline(airline) {
   return async function (dispatch) {

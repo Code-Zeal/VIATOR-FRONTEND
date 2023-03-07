@@ -11,7 +11,6 @@ import {
   getCountries,
 } from "../Redux/Actions";
 import { useHistory } from "react-router-dom";
-import { Cloudinary } from "@cloudinary/url-gen";
 export default function ConectAir() {
   let history = useHistory();
 
