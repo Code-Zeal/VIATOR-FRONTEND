@@ -1,8 +1,16 @@
 import RecommendationsCard from "./RecomentationsCard.jsx";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAirlines } from "../Redux/Actions.js";
 
 export default function Recommendations() {
+  const dispatch = useDispatch();
   const airlines = useSelector((state) => state.getAirliness);
+
+  useEffect(() => {
+    dispatch(getAirlines());
+  }, []);
 
   return (
     <div className="flex flex-col items-center px-4 py-6 justify-center  ">
