@@ -42,6 +42,7 @@ const initialState = {
   userData: [],
   userEmailExiste: "",
   flights: [],
+  airlineFlights: [],
   searchedFlights: [],
   searchedFlightsAUX: [],
 
@@ -55,8 +56,8 @@ const initialState = {
   getFiltroFlightsScale: [],
   filteredAirports: [],
   recommended: [],
+  onApproveRes: "",
   getAirliness: [],
-  //
   getCountries: [],
   getAirline: [],
   getAirlinesAirports: [],
@@ -150,7 +151,19 @@ export const userReducer = (state = initialState, action) => {
         recommended: action.payload,
       };
     }
+    case "CREATE_ORDER": {
+      window.location.href = action.payload.href;
+      return {
+        ...state,
+      };
+    }
+
     case CREATE_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case "ON_APPROVE": {
       return {
         ...state,
       };
@@ -198,7 +211,7 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         searchedFlights: [
           ...state.searchedFlightsAUX.filter(
-            (air) => air.AirlineId == action.payload
+            (air) => air.AirlineId === action.payload
           ),
         ],
       };
@@ -235,6 +248,18 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         flightsAdm: action.payload,
+      };
+
+    case "GET_AIRLINE_FLIGHTS":
+      return {
+        ...state,
+        airlineFlights: action.payload,
+      };
+
+    case "CLEAR_STATE":
+      return {
+        ...state,
+        airlineFlights: [],
       };
 
     // defecto

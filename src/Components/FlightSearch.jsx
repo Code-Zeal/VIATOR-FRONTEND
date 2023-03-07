@@ -3,7 +3,7 @@ import Select from "react-select";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { searchFlights } from "../Redux/Actions";
+import { searchFlights, clearState } from "../Redux/Actions";
 
 export default function FlightSearch() {
   const flights = useSelector((state) => state.searchedFlights);
@@ -148,6 +148,7 @@ export default function FlightSearch() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    dispatch(clearState());
     dispatch(searchFlights(formData));
     console.log(flights[0]);
     history.push("/shop");
