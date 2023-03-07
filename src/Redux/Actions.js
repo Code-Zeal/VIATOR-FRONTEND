@@ -97,6 +97,8 @@ export const verificaccionEmail = (subAuth0) => async (dispatch) => {
     `http://localhost:4000/isRegistered?id=${subAuth0}`
   );
 
+  console.log(subAuth0, response);
+
   dispatch({
     type: VERIFICACCION_EMAIL,
     // DATA SERIA POR EL EXIOS
