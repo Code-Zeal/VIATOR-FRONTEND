@@ -60,6 +60,8 @@ const initialState = {
   getCountries: [],
   getAirline: [],
   getAirlinesAirports: [],
+  cloudinaryAirline: "",
+  cloudinaryUsers: "",
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -213,6 +215,20 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         getAirlinesAirports: action.payload,
+      };
+    case "PUT_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+      };
+    case "CLOUDINARY_FLIGHTS":
+      return {
+        ...state,
+        cloudinaryAirline: action.payload,
+      };
+    case "CLOUDINARY_USERS":
+      return {
+        ...state,
+        cloudinaryUsers: action.payload,
       };
 
     // defecto

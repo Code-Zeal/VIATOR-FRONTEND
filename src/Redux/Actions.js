@@ -430,3 +430,31 @@ export const getAirportsAirline = (id) => {
     console.log(response.data);
   };
 };
+export function putFlightDetails(idState) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.put(
+        "http://localhost:4000/api/setStateFlights",
+        idState
+      );
+      return dispatch({
+        type: "PUT_FLIGHT_DETAILS",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function cloudinaryFlights(payload) {
+  return {
+    type: "CLOUDINARY_FLIGHTS",
+    payload,
+  };
+}
+export function cloudinaryUsers(payload) {
+  return {
+    type: "CLOUDINARY_USERS",
+    payload,
+  };
+}

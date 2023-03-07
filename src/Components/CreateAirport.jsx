@@ -87,21 +87,26 @@ export default function CreateAirport() {
       {/* <button className="mx-6" onClick={countries}>
         countries
       </button> */}
-      <form action="">
-        <div className="flex flex-col py-2">
-          <label htmlFor="">Nombre del aeropuerto</label>
+      <form className="bg-azulClaro p-9 my-20 rounded-xl">
+        <div className="flex flex-col pt-2 rounded-lg  ">
+          <label className="font-bold text-[white]" htmlFor="">
+            Nombre del aeropuerto
+          </label>
           <input
             name="name"
             onChange={handlerChangeAirport}
             type="text"
-            className="bg-[gray]  rounded-lg"
+            className="bg-azulOscuro border-2  rounded-lg text-[white]"
+            placeholder="Introduce el Nombre del aeropuerto"
           />
         </div>
         <div className=" flex flex-col py-2">
-          <label htmlFor="Pais">Pais</label>
+          <label className="font-bold text-[white]" htmlFor="Pais">
+            Pais
+          </label>
           <select
             onChange={handlerChangeAirport}
-            className=" countries bg-[gray]  rounded-lg"
+            className=" countries  bg-azulOscuro border-2  rounded-lg text-[white]"
             name="country"
             id=""
           >
@@ -114,11 +119,13 @@ export default function CreateAirport() {
           </select>
         </div>
         <div className="flex flex-col py-2">
-          <label htmlFor="Ciudad">Ciudad</label>
+          <label className="font-bold text-[white]" htmlFor="Ciudad">
+            Ciudad
+          </label>
           <select
             disabled={city}
             onChange={handlerChangeAirport}
-            className="bg-[gray]  rounded-lg"
+            className="bg-azulOscuro border-2  rounded-lg text-[white]"
             name="city"
             id=""
           >
@@ -131,21 +138,13 @@ export default function CreateAirport() {
             ) : (
               <></>
             )}
-            {/* {countrie ? (
-              CountrieCities`${countrie}`
-            ) : <></>} */}
-            {/* <option value="Buenos Aires">Buenos Aires</option>
-            <option value="Santiago">Santiago</option>
-            <option value="Bogotá">Bogotá</option>
-            <option value="Lima">Lima</option>
-            <option value="Maracaibo">Maracaibo</option> */}
           </select>
         </div>
 
-        <label htmlFor="airlines">Aerolineas</label>
+        <label className="font-bold text-[white]" htmlFor="airlines">
+          Aerolineas
+        </label>
         <div>
-          {/* <input onChange={handlerChangeAirport} type="checkbox" />
-          <label htmlFor="">Nombre de la aerolinea</label> */}
           {airlines.map((el) => {
             return (
               <div>
@@ -153,13 +152,23 @@ export default function CreateAirport() {
                   onChange={handlerRelation}
                   name={el.id}
                   type="checkbox"
+                  className=" border-2 w-4 h-4 appearance-none bg-[white] m-0 checked:bg-[#ef1bef]  checked:border-[white] checked:border-2 rounded-full "
                 />
-                <label htmlFor="">{el.name}</label>
+                <label className=" text-[white]" htmlFor="">
+                  {el.name}
+                </label>
               </div>
             );
           })}
         </div>
-        <button onClick={submitHandler}>Crear</button>
+        <div className="w-full flex justify-center items-center pt-8">
+          <button
+            onClick={submitHandler}
+            className="border-2 border-[black] hover:bg-[#191483] bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg font-bold"
+          >
+            Crear
+          </button>
+        </div>
       </form>
     </div>
   );

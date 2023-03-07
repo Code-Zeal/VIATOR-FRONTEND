@@ -236,181 +236,191 @@ export default function CreateFlight() {
   }
 
   return (
-    <div className="absolute ml-[21%] w-[75%] z-20 bg-[#F8FBFB]  flex flex-col items-center">
+    <div className="absolute ml-[21%] w-[75%] z-20 bg-[#F8FBFB]  flex flex-col items-center  ">
       {/* <button className="mx-6" onClick={countries}>
         countries
       </button> */}
-      <div className="flex flex-col">
-        <label htmlFor="">Tipo de vuelo</label>
-        <select
-          onChange={handlerRoundTrip}
-          className="bg-azulClaro my-4 text-[white]"
-          name="roundTrip"
-        >
-          <option disabled="true" selected type="text">
-            Seleccionar tipo de vuelo
-          </option>
-          <option value="ida" type="text">
-            Solo Ida
-          </option>
-          <option value="ida y vuelta" type="text">
-            Ida y Vuelta
-          </option>
-        </select>
-        <div className="flex flex-col">
-          <label className="bg-azulOscuro text-[white]" htmlFor="">
-            Vuelo de ida: Fecha y hora de salida
+      <div className="bg-azulClaro w-4/6 px-6 py-2 my-4 rounded-lg">
+        <div className="flex flex-col items-stretch">
+          <div className="flex flex-col my-2">
+            <label className="text-[white] font-bold" htmlFor="">
+              Tipo de vuelo
+            </label>
+            <select
+              onChange={handlerRoundTrip}
+              className=" bg-azulOscuro border-2  rounded-lg text-[white] w-1/2"
+              name="roundTrip"
+            >
+              <option disabled="true" selected type="text">
+                Seleccionar tipo de vuelo
+              </option>
+              <option value="ida" type="text">
+                Solo Ida
+              </option>
+              <option value="ida y vuelta" type="text">
+                Ida y Vuelta
+              </option>
+            </select>
+          </div>
+          <div className="flex flex-col mt-2">
+            <label className="font-bold text-[white]" htmlFor="">
+              Vuelo de ida: Fecha y hora de salida
+            </label>
+            <div>
+              <input
+                name="dateTimeDeparture"
+                onChange={handleFormFlight}
+                className="date1 disabled:bg-[#02122c78] disabled:text-[gray]  bg-azulOscuro border-2  rounded-lg text-[white]"
+                type="date"
+              />
+              <input
+                disabled={time1}
+                name="dateTimeDeparture"
+                onChange={handleFormFlight}
+                className="time1 disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white]"
+                type="time"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col mt-2">
+            <label className="font-bold text-[white]" htmlFor="">
+              Vuelo de ida: Fecha y hora de llegada
+            </label>
+            <div>
+              <input
+                name="dateTimeArrival1"
+                onChange={handleFormFlight}
+                className="date2 disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white]"
+                type="date"
+              />
+              <input
+                disabled={time2}
+                name="dateTimeArrival1"
+                onChange={handleFormFlight}
+                className="time2 disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white]"
+                type="time"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col mt-2">
+          <label className="text-[white] font-bold" htmlFor="">
+            Vuelo de vuelta: Fecha y hora de salida
           </label>
           <div>
             <input
-              name="dateTimeDeparture"
+              name="dateTimeReturn"
               onChange={handleFormFlight}
-              className="date1 bg-azulClaro rounded-lg border-2 border-[gray]"
+              disabled={hasRoundTrip}
+              className="disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white]"
               type="date"
             />
             <input
-              disabled={time1}
-              name="dateTimeDeparture"
+              disabled={time3}
+              name="dateTimeReturn"
               onChange={handleFormFlight}
-              className="time1 bg-azulClaro rounded-lg border-2 border-[gray]"
+              className="time3 disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white]"
               type="time"
             />
           </div>
         </div>
-        <div className="flex flex-col">
-          <label className="bg-azulOscuro text-[white]" htmlFor="">
-            Vuelo de ida: Fecha y hora de llegada
+        <div className="flex flex-col mt-2">
+          <label className="text-[white] font-bold" htmlFor="">
+            Vuelo de vuelta: Fecha y hora de llegada
           </label>
           <div>
             <input
-              name="dateTimeArrival1"
+              name="dateTimeArrival2"
               onChange={handleFormFlight}
-              className="date2 bg-azulClaro rounded-lg border-2 border-[gray]"
+              disabled={hasRoundTrip}
+              className="bg-azulOscuro border-2  rounded-lg text-[white] disabled:bg-[#02122c78] disabled:text-[gray] date4"
               type="date"
             />
             <input
-              disabled={time2}
-              name="dateTimeArrival1"
+              disabled={time4}
+              name="dateTimeArrival2"
               onChange={handleFormFlight}
-              className="time2 bg-azulClaro rounded-lg border-2 border-[gray]"
+              className="time4 disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white]"
               type="time"
             />
           </div>
         </div>
-      </div>
-      <div className="flex flex-col">
-        <label className="text-[white] bg-azulOscuro" htmlFor="">
-          Vuelo de vuelta: Fecha y hora de salida
-        </label>
-        <div>
-          <input
-            name="dateTimeReturn"
-            onChange={handleFormFlight}
-            disabled={hasRoundTrip}
-            className="bg-azulClaro rounded-lg border-2 border-[gray] date3"
-            type="date"
-          />
-          <input
-            disabled={time3}
-            name="dateTimeReturn"
-            onChange={handleFormFlight}
-            className="time3 bg-azulClaro rounded-lg border-2 border-[gray]"
-            type="time"
-          />
+        <div className="flex flex-col mt-2">
+          <div className="flex flex-col w-full">
+            <label className="text-[white] font-bold" htmlFor="">
+              Asientos Disponibles
+            </label>
+            <input
+              onChange={handleFormFlight}
+              name="seatsAvailable"
+              className="bg-azulOscuro border-2  rounded-lg text-[white] w-1/2"
+              type="number"
+            />
+          </div>
+          <div className="flex flex-col mt-2">
+            <label className="text-[white] font-bold" htmlFor="">
+              Precio
+            </label>
+            <input
+              onChange={handleFormFlight}
+              name="ticketPrice"
+              className="bg-azulOscuro border-2  rounded-lg text-[white] w-1/2"
+              type="number"
+            />
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col">
-        <label className="text-[white] bg-azulOscuro" htmlFor="">
-          Vuelo de vuelta: Fecha y hora de llegada
-        </label>
-        <div>
-          <input
-            name="dateTimeArrival2"
+        <div className="flex flex-col mt-2">
+          <label className="text-[white] font-bold" htmlFor="">
+            Escalas
+          </label>
+          <select
             onChange={handleFormFlight}
-            disabled={hasRoundTrip}
-            className="bg-azulClaro rounded-lg border-2 border-[gray] date4"
-            type="date"
-          />
-          <input
-            disabled={time4}
-            name="dateTimeArrival2"
-            onChange={handleFormFlight}
-            className="time4 bg-azulClaro rounded-lg border-2 border-[gray]"
-            type="time"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <label className="text-[white] bg-azulOscuro" htmlFor="">
-          Asientos Disponibles
-        </label>
-        <input
-          onChange={handleFormFlight}
-          name="seatsAvailable"
-          className="bg-azulClaro rounded-lg border-2 border-[gray]"
-          type="number"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label className="text-[white] bg-azulOscuro" htmlFor="">
-          Precio
-        </label>
-        <input
-          onChange={handleFormFlight}
-          name="ticketPrice"
-          className="bg-azulClaro rounded-lg border-2 border-[gray]"
-          type="text"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label className="text-[white] bg-azulOscuro" htmlFor="">
-          Escalas
-        </label>
-        <select
-          onChange={handleFormFlight}
-          className="bg-azulClaro rounded-lg border-2 border-[gray]"
-          name="scale"
-          id=""
-        >
-          <option value={0}>0 Escalas</option>
-          <option value={1}>1 Escala</option>
-          <option value={2}>2 Escalas</option>
-        </select>
-        {/* <input
+            className="bg-azulOscuro border-2  rounded-lg text-[white] w-1/2"
+            name="scale"
+            id=""
+          >
+            <option value={0}>0 Escalas</option>
+            <option value={1}>1 Escala</option>
+            <option value={2}>2 Escalas</option>
+          </select>
+          {/* <input
           className="bg-azulClaro rounded-lg border-2 border-[gray]"
           type="text"
         /> */}
-      </div>
-      <div className="flex justify-around w-[75%] ">
-        <div className="flex flex-col py-6">
-          <label htmlFor="airlines">Aerolinea</label>
+        </div>
+        <div className="flex flex-col py-2">
+          <label className="font-bold text-[white]" htmlFor="airlines">
+            Aerolinea
+          </label>
           {/* <input onChange={handlerChangeAirport} type="checkbox" />
           <label htmlFor="">Nombre de la aerolinea</label> */}
           <select
             onChange={handleFormFlight}
             name="AirlineId"
             id=""
-            className="airline"
+            className="airline bg-azulOscuro border-2  rounded-lg text-[white]"
           >
             <option value="default" disabled="true" selected>
-              Aerolinea
+              Selecciona la Aerolinea
             </option>
             {airlines.map((el) => {
               return <option value={el.id}>{el.name}</option>;
             })}
           </select>
         </div>
-        <div className="flex flex-col py-6">
-          <label htmlFor="airlines">Aeropuerto Origen</label>
+        <div className="flex flex-col py-2">
+          <label className="text-[white] font-bold" htmlFor="airlines">
+            Aeropuerto Origen
+          </label>
           <select
             disabled={hasAirline}
             name="airportOriginId"
             onChange={handleFormFlight}
             id=""
-            className=""
+            className="bg-azulOscuro border-2   rounded-lg text-[white]"
           >
             <option value="default" disabled="true" selected>
-              Aeropuerto
+              Seleccionar Aeropuerto de Origen
             </option>
             {hasAirline === false ? (
               getAirlinesAirports.Airports.map((el) => {
@@ -422,15 +432,18 @@ export default function CreateFlight() {
               <></>
             )}
           </select>
-          <label htmlFor="airlines">Aeropuerto Destino</label>
+          <label className="font-bold text-[white] pt-2" htmlFor="airlines">
+            Aeropuerto Destino
+          </label>
           <select
+            className="bg-azulOscuro border-2  rounded-lg text-[white]"
             disabled={hasAirline}
             onChange={handleFormFlight}
             name="airportDestinyId"
             id=""
           >
             <option value="default" disabled="true" selected>
-              Aeropuerto
+              Seleccionar Aeropuerto de Destino
             </option>
             {hasAirline === false ? (
               getAirlinesAirports.Airports.map((el) => {
@@ -443,16 +456,15 @@ export default function CreateFlight() {
             )}
           </select>
         </div>
+        <div className="flex w-full justify-center">
+          <button
+            className="border-2 border-[black] hover:bg-[#191483] bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg font-bold my-4"
+            onClick={submitCreate}
+          >
+            Crear Vuelo
+          </button>
+        </div>
       </div>
-      {/* <div className="w-[75%] flex justify-evenly "> */}
-      <button className="text-[white] bg-azulOscuro" onClick={submitCreate}>
-        Crear Vuelo
-      </button>
-      {/*
-        <button className="text-[white] bg-[red]" onClick={submitHandlerDelete}>
-          Eliminar Conexión
-        </button>
-      </div> */}
     </div>
   );
 }

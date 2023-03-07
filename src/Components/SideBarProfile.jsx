@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function SideBarProfile() {
+  const data = useSelector((state) => state?.userData);
+
   return (
     <div className="h-screen w-1/5 bg-[#F8FBFB]">
       <div class="flex h-screen flex-col justify-between border-r bg-white">
@@ -49,34 +52,6 @@ export default function SideBarProfile() {
               </svg>
 
               <span class="text-sm font-medium"> Mis Boletos </span>
-            </Link>
-            <Link
-              to="/favorites"
-              className="flex items-center gap-2 rounded-lg  py-2 hover:bg-azulClaro"
-            >
-              <details class="group [&_summary::-webkit-details-marker]:hidden">
-                <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                  <div class="flex items-center gap-2">
-                    <svg
-                      width="27"
-                      height="27"
-                      viewBox="0 0 27 27"
-                      fill="#FFFFFF"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M14.2076 21.8821C13.7622 21.6526 13.2378 21.6526 12.7924 21.8821L7.08254 24.8237C5.87328 25.4467 4.51169 24.3214 4.83961 22.9699L6.17467 17.4675C6.30232 16.9414 6.16776 16.3843 5.81568 15.9812L1.40855 10.9357C0.530067 9.93003 1.15409 8.32304 2.46343 8.21927L8.61147 7.73198C9.18657 7.68639 9.69206 7.32202 9.93074 6.78097L12.0593 1.95581C12.6215 0.681396 14.3785 0.681396 14.9407 1.95581L17.0693 6.78097C17.3079 7.32202 17.8135 7.68639 18.3885 7.73198L24.5365 8.21927C25.8458 8.32304 26.47 9.93003 25.5914 10.9357L21.1843 15.9812C20.8322 16.3843 20.6976 16.9414 20.8253 17.4675L22.1604 22.9699C22.4883 24.3214 21.1267 25.4467 19.9175 24.8237L14.2076 21.8821Z"
-                        stroke="black"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-
-                    <span class="text-sm font-medium"> Favoritos </span>
-                  </div>
-                </summary>
-              </details>
             </Link>
 
             <Link
@@ -327,20 +302,20 @@ export default function SideBarProfile() {
 
         <div class="sticky inset-x-0 bottom-0 border-t border-gray-100">
           <Link
-            to="/profile"
+            to="/data"
             className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
           >
             <img
               alt="Man"
-              src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+              src={data.picture}
               class="h-10 w-10 rounded-full object-cover"
             />
 
             <div>
               <p class="text-xs">
-                <strong class="block font-medium">Eric Frusciante</strong>
+                <strong class="block font-medium">{data.nickName}</strong>
 
-                <span> eric@frusciante.com </span>
+                <span>{data.email}</span>
               </p>
             </div>
           </Link>
