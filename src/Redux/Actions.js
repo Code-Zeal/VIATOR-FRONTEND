@@ -10,7 +10,13 @@ export const GET_DATA = "GET_DATA";
 export const PUT_DATA = "PUT_DATA";
 export const VERIFICACCION_EMAIL = "VERIFICACCION_EMAIL";
 export const SLIDER_RECOMENDADO = "SLIDER_RECOMENDADO";
-
+export const CREATE_AIRPORT = "CREATE_AIRPORT";
+export const CREATE_AIRLINE = "CREATE_AIRLINE";
+export const GET_AIRLINES = "GET_AIRLINES";
+export const ADD_AIRLINE_TO_AIRPORT = "ADD_AIRLINE_TO_AIRPORT";
+export const ADD_AIRPORT_TO_AIRLINE = "ADD_AIRLINE_TO_AIRPORT";
+export const DELETE_AIRPORT_TO_AIRLINE = "DELETE_AIRPORT_TO_AIRLINE";
+export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_AIRLINE = "GET_AIRLINE";
 export const FILTRO_AIRLINE_NAME = "FILTRO_AIRLINE_NAME";
 export const FILTRO_RESET_SHOP = "FILTRO_RESET_SHOP";
@@ -112,6 +118,15 @@ export function getFlights() {
     });
   };
 }
+export function getFlightsAdm() {
+  return async function (dispatch) {
+    const res = await axios.get("http://localhost:4000/api/flightsAdmin");
+    return dispatch({
+      type: "GET_FLIGHTS_ADM",
+      payload: res.data,
+    });
+  };
+}
 
 export function searchFlights({
   origin,
@@ -198,6 +213,25 @@ export function getAirportsByInput(payload) {
     });
   };
 }
+export function createOrder(oder) {
+  console.log(oder);
+  return async function (dispatch) {
+    const res = await axios.post(`http://localhost:4000/createOrder`, oder);
+    return dispatch({
+      type: "CREATE_ORDER",
+      payload: res.data,
+    });
+  };
+}
+export function onApprove(body) {
+  return async function (dispatch) {
+    const res = await axios.get(`http://localhost:4000/capture-order`, body);
+    return dispatch({
+      type: "ON_APPROVE",
+      payload: res,
+    });
+  };
+}
 
 export const sliderRecomendado = () => {
   return async (dispatch) => {
@@ -205,6 +239,86 @@ export const sliderRecomendado = () => {
     dispatch({
       type: SLIDER_RECOMENDADO,
       payload: info.data,
+    });
+  };
+};
+export const CreateAirports = (formAirport) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/createAirport",
+      formAirport
+    );
+    dispatch({
+      type: CREATE_AIRPORT,
+      payload: response.data,
+    });
+  };
+};
+export const CreateAirlines = (formAiline) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/airlines",
+      formAiline
+    );
+    dispatch({
+      type: CREATE_AIRLINE,
+      payload: response.data,
+    });
+  };
+};
+export const getAirlines = () => {
+  return async (dispatch) => {
+    const response = await axios.get("http://localhost:4000/api/airlines");
+    dispatch({
+      type: GET_AIRLINES,
+      payload: response.data,
+    });
+  };
+};
+export const getCountries = () => {
+  return async (dispatch) => {
+    const response = await axios.get(
+      "https://countriesnow.space/api/v0.1/countries"
+    );
+    dispatch({
+      type: GET_COUNTRIES,
+      payload: response.data.data,
+    });
+  };
+};
+export const addAirlineToAirport = (data) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/addAirlineToAirport",
+      data
+    );
+    dispatch({
+      type: ADD_AIRLINE_TO_AIRPORT,
+      payload: response.data,
+    });
+  };
+};
+export const addAirportToAirline = (data) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/addAirportToAirline",
+      data
+    );
+    dispatch({
+      type: ADD_AIRPORT_TO_AIRLINE,
+      payload: response.data,
+    });
+  };
+};
+export const deleteAirportToAirline = (data) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/deleteAirportToAirline",
+      data
+    );
+    dispatch({
+      type: DELETE_AIRPORT_TO_AIRLINE,
+      payload: response.data,
     });
   };
 };
@@ -355,6 +469,40 @@ export function putTicketTransfer(data) {
     return dispatch({
       type: PUT_TICKET_TRANSFER,
       payload: response.data,
+
+export const CreateFlights = (formFlight) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/flights",
+      formFlight
+    );
+    dispatch({
+      type: "CREATE_FLIGHT",
+      payload: response.data,
+    });
+  };
+};
+export const getAirportsAirline = (id) => {
+  return async (dispatch) => {
+    const response = await axios.get(
+      `http://localhost:4000/api/airlines/${id}`
+    );
+    dispatch({
+      type: "GET_AIRPORTS_AIRLINE",
+      payload: response.data,
+    });
+    console.log(response.data);
+  };
+};
+export function putFlightDetails(idState) {
+  return async function (dispatch) {
+    const res = await axios.put(
+      "http://localhost:4000/api/setStateFlights",
+      idState
+    );
+    return dispatch({
+      type: "PUT_FLIGHT_DETAILS",
+      payload: res.data,
     });
   };
 }
@@ -372,3 +520,35 @@ export function putTicketCompleteForm(data) {
     });
   };
 }
+export function getFlightsByAirline(airline) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(
+        "http://localhost:4000/api/getFlightByAirline?airlineName=" + airline
+      );
+      return dispatch({
+        type: "GET_AIRLINE_FLIGHTS",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function cloudinaryFlights(payload) {
+  return {
+    type: "CLOUDINARY_FLIGHTS",
+    payload,
+  };
+}
+export function cloudinaryUsers(payload) {
+  return {
+    type: "CLOUDINARY_USERS",
+    payload,
+  };
+}
+
+export const clearState = () => ({
+  type: "CLEAR_STATE",
+  payload: [],
+});

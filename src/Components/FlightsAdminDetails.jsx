@@ -1,38 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFlightDetails } from "../Redux/Actions";
+import { getFlightDetails, putFlightDetails } from "../Redux/Actions";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import moment from "moment";
-import Paypal from "./Paypal";
-import { useAuth0 } from "@auth0/auth0-react";
 
-export default function FlightDetails({ flightId, roundTrip }) {
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const { user } = useAuth0();
-  const sub = user?.sub;
-
-  const [quantity, setQuantity] = useState({
-    quantity: Number,
-  });
-  const handlerQantity = (event) => {
-    let value = Number(event.target.value);
-    setQuantity({
-      quantity: value,
-    });
-  };
+export default function FlightAdminDetails({ flightId }) {
   const dispatch = useDispatch();
+
   const detailedFlight = useSelector((state) => state.flightDetails);
+  const [toggle, setToggle] = useState(detailedFlight.state);
+
+  console.log(detailedFlight);
 
   useEffect(() => {
     dispatch(getFlightDetails(flightId));
-  }, [flightId, dispatch]);
+  }, [flightId]);
   let idaVuelta = detailedFlight.roundTrip;
+  const handletoggle = async (event) => {
+    await dispatch(
+      putFlightDetails({
+        id: flightId,
+        state: !detailedFlight.state,
+      })
+    );
+    dispatch(getFlightDetails(flightId));
+  };
   return (
     <div>
       <NavBar />
       <div className="rounded-tr-xl rounded-tl-xl shadow-lg lg:w-9/12 shadow-[#0f0f0f] w-11/12 mx-auto bg-blanco my-6">
-        <div className="rounded-tr-xl rounded-tl-xl w-full py-6 px-4 bg-azulClaro flex justify-between items-center text-[white] font-bold  ">
+        <div className="rounded-tr-xl rounded-tl-xl w-full py-6 px-4 bg-[#990F02] flex justify-between items-center text-[white] font-bold  ">
           <div className="flex flex-col items-center">
             <h3 className="py-2">
               <p> {detailedFlight.origin} </p>
@@ -76,23 +74,6 @@ export default function FlightDetails({ flightId, roundTrip }) {
                 src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png"
                 alt=""
               />
-              <div className=" flex font-bold items-center lg:text-2xl">
-                {detailedFlight.Airline ? detailedFlight.Airline.rating : "4.5"}
-                <svg
-                  className="mx-1 "
-                  width="20"
-                  height="20"
-                  viewBox="0 0 15 13"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.20801 1.08066C6.44272 0.552054 7.25329 0.552054 7.48799 1.08066L8.68061 3.76636C8.78001 3.99012 9.00766 4.14288 9.26872 4.16101L12.4028 4.37868C13.0196 4.42153 13.2701 5.13349 12.7983 5.50301L10.4014 7.38057C10.2017 7.53697 10.1147 7.78415 10.1768 8.01914L10.9211 10.8394C11.0676 11.3944 10.4118 11.8344 9.88553 11.5342L7.21151 10.0089C6.9887 9.88181 6.7073 9.88181 6.4845 10.0089L3.81048 11.5342C3.28418 11.8344 2.62845 11.3944 2.77495 10.8394L3.51929 8.01914C3.5813 7.78415 3.49435 7.53697 3.29464 7.38057L0.897663 5.50301C0.425888 5.13349 0.67635 4.42153 1.2932 4.37868L4.42726 4.16101C4.68838 4.14288 4.91603 3.99012 5.01539 3.76636L6.20801 1.08066Z"
-                    fill="#DBFF00"
-                    stroke="black"
-                  />
-                </svg>
-              </div>
             </div>
             <h3 className="font-bold  pt-4 text-lg lg:text-2xl">Aerolínea: </h3>
             <h3 className="font-bold pb-2 text-lg lg:text-2xl">
@@ -134,7 +115,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                   </clipPath>
                 </defs>
               </svg>
-              <div className="bg-azulClaro text-[white] font-bold px-2 py-1 rounded-lg">
+              <div className="bg-[#990F02] text-[white] font-bold px-2 py-1 rounded-lg">
                 <p className="text-base lg:text-2xl">
                   {detailedFlight.seatsAvailable
                     ? detailedFlight.seatsAvailable
@@ -178,7 +159,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                   {" "}
                   {
                     <p className="lg:text-md mr-1">
-                      {detailedFlight?.ticketPrice}.00{" "}
+                      {detailedFlight.ticketPrice}.00{" "}
                     </p>
                   }
                   USD{" "}
@@ -210,28 +191,15 @@ export default function FlightDetails({ flightId, roundTrip }) {
                 </svg>
 
                 <p className="font-bold lg:text-lg">
-                  {detailedFlight?.ticketPrice} USDT
+                  {detailedFlight.ticketPrice} USDT
                 </p>
               </div>
-              <select onChange={handlerQantity} name="quantity" id="">
-                <option selected disabled="true">
-                  Cantidad de boletos
-                </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-              </select>
             </div>
           </>
         )}
         {idaVuelta ? (
           <>
-            <div className="rounded-tr-xl rounded-tl-xl w-full py-6 px-4 bg-azulClaro flex justify-between items-center text-[white] font-bold">
+            <div className="rounded-tr-xl rounded-tl-xl w-full py-6 px-4 bg-[#990F02] flex justify-between items-center text-[white] font-bold">
               <div className="flex flex-col items-center">
                 <h3 className="py-2">
                   <p> {detailedFlight.destiny}</p>
@@ -275,25 +243,6 @@ export default function FlightDetails({ flightId, roundTrip }) {
                     src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png"
                     alt=""
                   />
-                  <div className=" flex font-bold items-center">
-                    {detailedFlight.Airline
-                      ? detailedFlight.Airline.rating
-                      : "4.5"}
-                    <svg
-                      className="mx-1"
-                      width="15"
-                      height="13"
-                      viewBox="0 0 15 13"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M6.20801 1.08066C6.44272 0.552054 7.25329 0.552054 7.48799 1.08066L8.68061 3.76636C8.78001 3.99012 9.00766 4.14288 9.26872 4.16101L12.4028 4.37868C13.0196 4.42153 13.2701 5.13349 12.7983 5.50301L10.4014 7.38057C10.2017 7.53697 10.1147 7.78415 10.1768 8.01914L10.9211 10.8394C11.0676 11.3944 10.4118 11.8344 9.88553 11.5342L7.21151 10.0089C6.9887 9.88181 6.7073 9.88181 6.4845 10.0089L3.81048 11.5342C3.28418 11.8344 2.62845 11.3944 2.77495 10.8394L3.51929 8.01914C3.5813 7.78415 3.49435 7.53697 3.29464 7.38057L0.897663 5.50301C0.425888 5.13349 0.67635 4.42153 1.2932 4.37868L4.42726 4.16101C4.68838 4.14288 4.91603 3.99012 5.01539 3.76636L6.20801 1.08066Z"
-                        fill="#DBFF00"
-                        stroke="black"
-                      />
-                    </svg>
-                  </div>
                 </div>
                 <h3 className="font-bold pt-4 text-lg">Aerolínea: </h3>
                 <h3 className="font-bold pb-2 text-xl mx-auto">
@@ -335,7 +284,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                       </clipPath>
                     </defs>
                   </svg>
-                  <div className="bg-azulClaro text-[white] font-bold px-2 py-1 rounded-lg">
+                  <div className="bg-[#990F02] text-[white] font-bold px-2 py-1 rounded-lg">
                     <p>{detailedFlight.seatsAvailable + 17} </p>
                   </div>
                 </div>
@@ -375,24 +324,11 @@ export default function FlightDetails({ flightId, roundTrip }) {
                       {" "}
                       {
                         <p className="lg:text-md mr-1">
-                          {detailedFlight?.ticketPrice}.00{" "}
+                          {detailedFlight.ticketPrice}.00{" "}
                         </p>
                       }
                       USD{" "}
                     </p>
-                    <select onChange={handlerQantity} name="quantity" id="">
-                      <option selected disabled="true">
-                        Cantidad de boletos
-                      </option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                    </select>
                   </div>
                   <div className="flex">
                     <svg
@@ -420,7 +356,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
                     </svg>
 
                     <p className="font-bold lg:text-lg">
-                      {detailedFlight?.ticketPrice} USDT
+                      {detailedFlight.ticketPrice} USDT
                     </p>
                   </div>
                 </>
@@ -432,18 +368,25 @@ export default function FlightDetails({ flightId, roundTrip }) {
         ) : (
           <></>
         )}
+        <div className="flex flex-col items-center p-2">
+          <p>Estado actual</p>
+          <label
+            for="AcceptConditions"
+            class="relative h-8 w-14 cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              id="AcceptConditions"
+              class="peer sr-only"
+              onClick={handletoggle}
+              checked={toggle}
+            />
 
-        <button className="w-full mt-4 bg-[#080808] text-[white] py-4 rounded-tl-xl rounded-tr-xl text-4xl tracking-wide font-bold lg:mt-20">
-          {console.log(detailedFlight.ticketPrice)}
-          <Paypal
-            userId={sub}
-            flightId={detailedFlight.id}
-            valuePerTicket={detailedFlight.ticketPrice}
-            quantity={quantity.quantity}
-            name={`Compra de Boleto de Viator `}
-            description={`Compra de Boleto de Viator `}
-          ></Paypal>
-        </button>
+            <span class="absolute inset-0 rounded-full bg-[gray] transition peer-checked:bg-[green]"></span>
+
+            <span class="absolute inset-0 m-1 h-6 w-6 rounded-full bg-[white] transition peer-checked:translate-x-6"></span>
+          </label>
+        </div>
       </div>
       <Footer></Footer>
     </div>

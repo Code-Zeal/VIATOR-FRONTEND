@@ -13,6 +13,13 @@ import {
   VERIFICACCION_EMAIL,
   searchFlights,
   SLIDER_RECOMENDADO,
+  CREATE_AIRPORT,
+  GET_AIRLINES,
+  ADD_AIRLINE_TO_AIRPORT,
+  GET_COUNTRIES,
+  CREATE_AIRLINE,
+  ADD_AIRPORT_TO_AIRLINE,
+  DELETE_AIRPORT_TO_AIRLINE,
   GET_AIRLINE,
   FILTRO_AIRLINE_NAME,
   FILTRO_RESET_SHOP,
@@ -38,6 +45,7 @@ const initialState = {
   userData: [],
   userEmailExiste: "",
   flights: [],
+  airlineFlights: [],
   searchedFlights: [],
   searchedFlightsAUX: [],
 
@@ -51,33 +59,17 @@ const initialState = {
   getFiltroFlightsScale: [],
   filteredAirports: [],
   recommended: [],
+  onApproveRes: "",
+  getAirliness: [],
+  getCountries: [],
   getAirline: [],
 
-  getTicketUserData: [
-    {
-      id: 1,
-      namePassanger: "Carlitos Hernandez",
-      seat: 12,
-      UserId: "auth0id131",
-      FlightId: 1,
-      Flight: {
-        id: 1,
-        origin: "Aereopuerto Internacional el Dorado, Bogota D.C, Colombia",
-        destiny: "Aeropuerto Internacional Jorge Chávez, Callao, Peru",
-        dateTimeDeparture: "2023-03-22T13:40:00.000Z",
-        dateTimeArrival1: "2023-03-22T21:30:00.000Z",
-        dateTimeReturn: "2023-03-22T13:40:00.000Z",
-        dateTimeArrival2: "2023-03-22T21:30:00.000Z",
-        roundTrip: true,
-        seatsAvailable: 134,
-        ticketPrice: 288,
-        scale: "1",
-        state: true,
-        AirlineId: 1,
-      },
-    },
-  ],
+  getTicketUserData: [],
   // Ticket
+  getAirlinesAirports: [],
+  cloudinaryAirline: "",
+  cloudinaryUsers: "",
+  flightsAdm: "",
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -165,6 +157,55 @@ export const userReducer = (state = initialState, action) => {
         recommended: action.payload,
       };
     }
+    case "CREATE_ORDER": {
+      window.location.href = action.payload.href;
+      return {
+        ...state,
+      };
+    }
+
+    case CREATE_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case "ON_APPROVE": {
+      return {
+        ...state,
+      };
+    }
+    case GET_AIRLINES: {
+      return {
+        ...state,
+        getAirliness: action.payload,
+      };
+    }
+    case ADD_AIRLINE_TO_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case ADD_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case GET_COUNTRIES: {
+      return {
+        ...state,
+        getCountries: action.payload,
+      };
+    }
+    case CREATE_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
 
     case GET_AIRLINE:
       return {
@@ -176,7 +217,7 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         searchedFlights: [
           ...state.searchedFlightsAUX.filter(
-            (air) => air.AirlineId == action.payload
+            (air) => air.AirlineId === action.payload
           ),
         ],
       };
@@ -185,6 +226,46 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: [...state.searchedFlightsAUX],
+      };
+    case "CREATE_FLIGHT":
+      return {
+        ...state,
+      };
+    case "GET_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+        getAirlinesAirports: action.payload,
+      };
+    case "PUT_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+      };
+    case "CLOUDINARY_FLIGHTS":
+      return {
+        ...state,
+        cloudinaryAirline: action.payload,
+      };
+    case "CLOUDINARY_USERS":
+      return {
+        ...state,
+        cloudinaryUsers: action.payload,
+      };
+    case "GET_FLIGHTS_ADM":
+      return {
+        ...state,
+        flightsAdm: action.payload,
+      };
+
+    case "GET_AIRLINE_FLIGHTS":
+      return {
+        ...state,
+        airlineFlights: action.payload,
+      };
+
+    case "CLEAR_STATE":
+      return {
+        ...state,
+        airlineFlights: [],
       };
 
     case GET_TICKET_USER:

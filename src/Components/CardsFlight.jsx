@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 const CardsFlight = () => {
   const flights = useSelector((state) => state.searchedFlights);
+  const airlineFlights = useSelector((state) => state.airlineFlights);
 
   // const dispatch = useDispatch();
 
@@ -23,22 +24,43 @@ const CardsFlight = () => {
 
   return (
     <div className="">
-      {flights.map((f) => (
-        <CardFlight
-          flightId={f.id}
-          AirlineId={f.AirlineId}
-          origin={f.origin}
-          destiny={f.destiny}
-          dateTimeDeparture={f.dateTimeDeparture}
-          dateTimeArrival1={f.dateTimeArrival1}
-          dateTimeArrival2={f.dateTimeArrival2}
-          dateTimeReturn={f.dateTimeReturn}
-          scale={f.scale}
-          roundTrip={f.roundTrip}
-          seatsAvailable={f.seatsAvailable}
-          ticketPrice={f.ticketPrice}
-        />
-      ))}
+      {airlineFlights.length > 0
+        ? airlineFlights.map((f) => (
+            <CardFlight
+              key={f.id}
+              flightId={f.id}
+              AirlineId={f.AirlineId}
+              origin={f.origin}
+              destiny={f.destiny}
+              dateTimeDeparture={f.dateTimeDeparture}
+              dateTimeArrival1={f.dateTimeArrival1}
+              dateTimeArrival2={f.dateTimeArrival2}
+              dateTimeReturn={f.dateTimeReturn}
+              scale={f.scale}
+              roundTrip={f.roundTrip}
+              seatsAvailable={f.seatsAvailable}
+              ticketPrice={f.ticketPrice}
+            />
+          ))
+        : flights.length > 0
+        ? flights.map((f) => (
+            <CardFlight
+              key={f.id}
+              flightId={f.id}
+              AirlineId={f.AirlineId}
+              origin={f.origin}
+              destiny={f.destiny}
+              dateTimeDeparture={f.dateTimeDeparture}
+              dateTimeArrival1={f.dateTimeArrival1}
+              dateTimeArrival2={f.dateTimeArrival2}
+              dateTimeReturn={f.dateTimeReturn}
+              scale={f.scale}
+              roundTrip={f.roundTrip}
+              seatsAvailable={f.seatsAvailable}
+              ticketPrice={f.ticketPrice}
+            />
+          ))
+        : null}
     </div>
   );
 };
