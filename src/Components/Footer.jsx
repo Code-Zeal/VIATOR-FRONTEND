@@ -2,10 +2,10 @@ export default function Footer() {
   return (
     <footer
       aria-label="Site Footer"
-      class="bg-blanco w-full flex flex-row-reverse items-center"
+      class="bg-azulOscuro w-full flex flex-row-reverse items-center"
     >
       <a
-        class=" rounded-full bg-azulOscuro p-2 text-white shadow transition hover:bg-azulClaro sm:p-3 lg:p-4 transform -translate-x-20 hidden md:inline-block "
+        class=" rounded-full bg-blanco p-2 text-white shadow transition hover:bg-azulClaro sm:p-3 lg:p-4 transform -translate-x-20 hidden md:inline-block "
         href="#up"
       >
         <span class="sr-only">Back to top</span>
@@ -14,7 +14,7 @@ export default function Footer() {
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5 animate-bounce"
           viewBox="0 0 20 20"
-          fill="white"
+          fill="#02122C"
         >
           <path
             fill-rule="evenodd"
@@ -26,13 +26,13 @@ export default function Footer() {
       <div class="mx-auto max-w-5xl p-4 sm:px-6 lg:px-8">
         <div class="flex justify-center text-teal-600">
           <img
-            className="w-32 h-32"
-            src="https://cdn.discordapp.com/attachments/1073592184344948758/1075861657273782332/Viator-logo-PNG.png"
+            className="w-30 h-22"
+            src="https://i.imgur.com/clNpPpW.png"
             alt=""
           />
         </div>
 
-        <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
+        <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-[white]">
           Con nuestras opciones de búsqueda avanzada y nuestos filtros, podrá
           encontrar exactamente lo que necesita
         </p>
@@ -40,13 +40,13 @@ export default function Footer() {
         <nav aria-label="Footer Nav" class="mt-12">
           <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             <li className=" animate-bounce">
-              <a className="text-[black]  hover:text-[gray]" href="/about">
+              <a className="text-[white]  hover:text-[gray]" href="/about">
                 Acerca de viator
               </a>
             </li>
 
             <li className="animate-bounce">
-              <a class="text-gray-700 transition hover:text-[gray]" href="/">
+              <a class="text-[white] transition hover:text-[gray]" href="/">
                 Los vuelos más baratos
               </a>
             </li>
@@ -64,7 +64,7 @@ export default function Footer() {
               <span class="sr-only">Facebook</span>
               <svg
                 class="h-6 w-6"
-                fill="currentColor"
+                fill="#ffffff"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
@@ -87,7 +87,7 @@ export default function Footer() {
               <span class="sr-only">Instagram</span>
               <svg
                 class="h-6 w-6"
-                fill="currentColor"
+                fill="#ffffff"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
@@ -110,7 +110,7 @@ export default function Footer() {
               <span class="sr-only">Twitter</span>
               <svg
                 class="h-6 w-6"
-                fill="currentColor"
+                fill="#ffffff"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
