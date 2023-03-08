@@ -28,7 +28,9 @@ import FlightsAdmin from "./Components/FlightsAdmin";
 import ConectAir from "./Components/ConectAir";
 import FlightAdminDetails from "./Components/FlightsAdminDetails";
 import FormRegisterAUX from "./Components/FormRegisterAUX";
-
+import axios from "axios";
+axios.defaults.baseURL = "https://viator-backend-production.up.railway.app/";
+// http://localhost:4000
 function App() {
   return (
     <Router>

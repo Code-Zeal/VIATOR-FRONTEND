@@ -49,7 +49,7 @@ export default function FlightSearch() {
 
   const handleOriginInputChange = (inputValue) => {
     axios
-      .get(`http://localhost:4000/getAirportsByInput/${inputValue}`)
+      .get(`/getAirportsByInput/${inputValue}`)
       .then((response) => {
         const options = response.data.map((airport) => ({
           value: `${airport.name}, ${airport.city}, ${airport.country}`,
@@ -64,7 +64,7 @@ export default function FlightSearch() {
 
   const handleDestinyInputChange = (inputValue) => {
     axios
-      .get(`http://localhost:4000/getAirportsByInput/${inputValue}`)
+      .get(`/getAirportsByInput/${inputValue}`)
       .then((response) => {
         const options = response.data.map((airport) => ({
           value: `${airport.name}, ${airport.city}, ${airport.country}`,

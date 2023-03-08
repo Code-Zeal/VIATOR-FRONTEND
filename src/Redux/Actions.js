@@ -26,15 +26,11 @@ export const PUT_TICKET_TRANSFER = "PUT_TICKET_TRANSFER";
 export const PUT_TICKET_FORM = "PUT_TICKET_FORM";
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
-  const response = await axios.put(
-    "http://localhost:4000/setInfo",
-    fromRegister,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await axios.put("/setInfo", fromRegister, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   dispatch({
     type: PUT_USER,
@@ -47,15 +43,11 @@ export const postDataAuth0Inicial =
   (dataRegister, token) => async (dispatch) => {
     console.log(token);
 
-    const response = await axios.post(
-      "http://localhost:4000/register",
-      dataRegister,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.post("/register", dataRegister, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     dispatch({
       type: POST_AUTH0_DATA,
@@ -65,7 +57,7 @@ export const postDataAuth0Inicial =
   };
 
 export const verificaccionUser = (subAuth0) => async (dispatch) => {
-  const response = await axios.post("http://localhost:4000/login", subAuth0);
+  const response = await axios.post("/login", subAuth0);
 
   dispatch({
     type: VERIFICACCION_USER,
@@ -75,7 +67,7 @@ export const verificaccionUser = (subAuth0) => async (dispatch) => {
 };
 export const getDataUser = (id) => async (dispatch) => {
   console.log(id);
-  const response = await axios.get(`http://localhost:4000/User/getUser/${id}`);
+  const response = await axios.get(`/User/getUser/${id}`);
 
   dispatch({
     type: GET_DATA,
@@ -86,10 +78,7 @@ export const getDataUser = (id) => async (dispatch) => {
 
 export const putDataUser = (id, formPut) => async (dispatch) => {
   console.log("formPut");
-  const response = await axios.put(
-    `http://localhost:4000/User/updateUser/${id}`,
-    formPut
-  );
+  const response = await axios.put(`/User/updateUser/${id}`, formPut);
 
   dispatch({
     type: PUT_DATA,
@@ -98,9 +87,7 @@ export const putDataUser = (id, formPut) => async (dispatch) => {
 };
 
 export const verificaccionEmail = (subAuth0) => async (dispatch) => {
-  const response = await axios.get(
-    `http://localhost:4000/isRegistered?id=${subAuth0}`
-  );
+  const response = await axios.get(`/isRegistered?id=${subAuth0}`);
 
   console.log(subAuth0, response);
 
@@ -113,7 +100,7 @@ export const verificaccionEmail = (subAuth0) => async (dispatch) => {
 
 export function getFlights() {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:4000/api/flights/");
+    const res = await axios.get("/api/flights/");
     return dispatch({
       type: "GET_FLIGHTS",
       payload: res.data,
@@ -123,7 +110,7 @@ export function getFlights() {
 export function getFlightsAdms() {
   console.log("getFlightsAdms");
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:4000/api/flightsAdmin");
+    const res = await axios.get("/api/flightsAdmin");
     return dispatch({
       type: "GET_FLIGHTS_ADM",
       payload: res.data,
@@ -133,9 +120,7 @@ export function getFlightsAdms() {
 export function getFlightDetailAdm(id) {
   console.log("getFlightsAdms");
   return async function (dispatch) {
-    const res = await axios.get(
-      `http://localhost:4000/api/getFlightByIdWithFalse/${id}`
-    );
+    const res = await axios.get(`/api/getFlightByIdWithFalse/${id}`);
     return dispatch({
       type: "GET_FLIGHT_ADM",
       payload: res.data,
@@ -153,7 +138,7 @@ export function searchFlights({
 }) {
   return async function (dispatch) {
     const res = await axios.get(
-      `http://localhost:4000/getFlightsByQuery?origin=${origin}&destiny=${destiny}&dateTimeDeparture=${dateTimeDeparture}&dateTimeReturn=${dateTimeReturn}&roundTrip=${roundTrip}&passengers=${passengers}`
+      `/getFlightsByQuery?origin=${origin}&destiny=${destiny}&dateTimeDeparture=${dateTimeDeparture}&dateTimeReturn=${dateTimeReturn}&roundTrip=${roundTrip}&passengers=${passengers}`
     );
     return dispatch({
       type: "SEARCH_FLIGHTS",
@@ -165,7 +150,7 @@ export function searchFlights({
 export function getFlightDetails(id) {
   return async function (dispatch) {
     try {
-      const res = await axios.get("http://localhost:4000/api/flights/" + id);
+      const res = await axios.get("/api/flights/" + id);
       return dispatch({
         type: "GET_FLIGHT_DETAILS",
         payload: res.data,
@@ -186,7 +171,7 @@ export function filteredFlights(payload) {
 // Airports
 export function getAirports() {
   return async function (dispatch) {
-    const response = await axios.get(`http://localhost:4000/getAirports`);
+    const response = await axios.get(`/getAirports`);
     return dispatch({
       type: GET_AIRPORTS,
       payload: response.data,
@@ -199,7 +184,7 @@ export function getAirports() {
 export function getAirportByCountry2(airlineName, country) {
   return async function (dispatch) {
     const response = await axios.get(
-      `http://localhost:4000/getAirportsByCountry?airlineName=${airlineName}&country=${country}`
+      `/getAirportsByCountry?airlineName=${airlineName}&country=${country}`
     );
     return dispatch({
       type: FILTRO_AIRPORT_BY_COUNTRY,
@@ -219,9 +204,7 @@ export function getFlightsScale(scale) {
 
 export function getAirportsByInput(payload) {
   return async function (dispatch) {
-    const res = await axios.get(
-      `http://localhost:4000/getAirportsByInput/${payload}`
-    );
+    const res = await axios.get(`/getAirportsByInput/${payload}`);
     return dispatch({
       type: "GET_AIRPORTS_INPUT",
       payload: res.data,
@@ -231,7 +214,7 @@ export function getAirportsByInput(payload) {
 export function createOrder(oder) {
   console.log(oder);
   return async function (dispatch) {
-    const res = await axios.post(`http://localhost:4000/createOrder`, oder);
+    const res = await axios.post(`/createOrder`, oder);
     return dispatch({
       type: "CREATE_ORDER",
       payload: res.data,
@@ -240,7 +223,7 @@ export function createOrder(oder) {
 }
 export function onApprove(body) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:4000/capture-order`, body);
+    const res = await axios.get(`/capture-order`, body);
     return dispatch({
       type: "ON_APPROVE",
       payload: res,
@@ -250,7 +233,7 @@ export function onApprove(body) {
 
 export const sliderRecomendado = () => {
   return async (dispatch) => {
-    const info = await axios.get(`http://localhost:4000/api/recommended`);
+    const info = await axios.get(`/api/recommended`);
     dispatch({
       type: SLIDER_RECOMENDADO,
       payload: info.data,
@@ -259,10 +242,7 @@ export const sliderRecomendado = () => {
 };
 export const CreateAirports = (formAirport) => {
   return async (dispatch) => {
-    const response = await axios.post(
-      "http://localhost:4000/createAirport",
-      formAirport
-    );
+    const response = await axios.post("/createAirport", formAirport);
     dispatch({
       type: CREATE_AIRPORT,
       payload: response.data,
@@ -271,10 +251,7 @@ export const CreateAirports = (formAirport) => {
 };
 export const CreateAirlines = (formAiline) => {
   return async (dispatch) => {
-    const response = await axios.post(
-      "http://localhost:4000/api/airlines",
-      formAiline
-    );
+    const response = await axios.post("/api/airlines", formAiline);
     dispatch({
       type: CREATE_AIRLINE,
       payload: response.data,
@@ -283,7 +260,7 @@ export const CreateAirlines = (formAiline) => {
 };
 export const getAirlines = () => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:4000/api/airlines");
+    const response = await axios.get("/api/airlines");
     dispatch({
       type: GET_AIRLINES,
       payload: response.data,
@@ -303,10 +280,7 @@ export const getCountries = () => {
 };
 export const addAirlineToAirport = (data) => {
   return async (dispatch) => {
-    const response = await axios.post(
-      "http://localhost:4000/addAirlineToAirport",
-      data
-    );
+    const response = await axios.post("/addAirlineToAirport", data);
     dispatch({
       type: ADD_AIRLINE_TO_AIRPORT,
       payload: response.data,
@@ -315,10 +289,7 @@ export const addAirlineToAirport = (data) => {
 };
 export const addAirportToAirline = (data) => {
   return async (dispatch) => {
-    const response = await axios.post(
-      "http://localhost:4000/api/addAirportToAirline",
-      data
-    );
+    const response = await axios.post("/api/addAirportToAirline", data);
     dispatch({
       type: ADD_AIRPORT_TO_AIRLINE,
       payload: response.data,
@@ -327,10 +298,7 @@ export const addAirportToAirline = (data) => {
 };
 export const deleteAirportToAirline = (data) => {
   return async (dispatch) => {
-    const response = await axios.post(
-      "http://localhost:4000/api/deleteAirportToAirline",
-      data
-    );
+    const response = await axios.post("/api/deleteAirportToAirline", data);
     dispatch({
       type: DELETE_AIRPORT_TO_AIRLINE,
       payload: response.data,
@@ -340,7 +308,7 @@ export const deleteAirportToAirline = (data) => {
 
 export function get_airline() {
   return async function (dispatch) {
-    const response = await axios.get(`http://localhost:4000/api/airlines`);
+    const response = await axios.get(`/api/airlines`);
     console.log(response);
     return dispatch({
       type: GET_AIRLINE,
@@ -463,9 +431,7 @@ export const limpiarReduxData = () => {
 export function getTicketUser(id) {
   return async function (dispatch) {
     console.log(id);
-    const response = await axios.get(
-      `http://localhost:4000/User/getUserTickets?id=${id}`
-    );
+    const response = await axios.get(`/User/getUserTickets?id=${id}`);
     console.log(response);
     return dispatch({
       type: GET_TICKET_USER,
@@ -477,10 +443,7 @@ export function getTicketUser(id) {
 export function putTicketTransfer(data) {
   return async function (dispatch) {
     console.log(data);
-    const response = await axios.put(
-      `http://localhost:4000/transferTickets`,
-      data
-    );
+    const response = await axios.put(`/transferTickets`, data);
     return dispatch({
       type: PUT_TICKET_TRANSFER,
       payload: response.data,
@@ -490,10 +453,7 @@ export function putTicketTransfer(data) {
 
 export const CreateFlights = (formFlight) => {
   return async (dispatch) => {
-    const response = await axios.post(
-      "http://localhost:4000/api/flights",
-      formFlight
-    );
+    const response = await axios.post("/api/flights", formFlight);
     dispatch({
       type: "CREATE_FLIGHT",
       payload: response.data,
@@ -502,9 +462,7 @@ export const CreateFlights = (formFlight) => {
 };
 export const getAirportsAirline = (id) => {
   return async (dispatch) => {
-    const response = await axios.get(
-      `http://localhost:4000/api/airlines/${id}`
-    );
+    const response = await axios.get(`/api/airlines/${id}`);
     dispatch({
       type: "GET_AIRPORTS_AIRLINE",
       payload: response.data,
@@ -514,10 +472,7 @@ export const getAirportsAirline = (id) => {
 };
 export function putFlightDetails(idState) {
   return async function (dispatch) {
-    const res = await axios.put(
-      "http://localhost:4000/api/setStateFlights",
-      idState
-    );
+    const res = await axios.put("/api/setStateFlights", idState);
     return dispatch({
       type: "PUT_FLIGHT_DETAILS",
       payload: res.data,
@@ -528,10 +483,7 @@ export function putFlightDetails(idState) {
 export function putTicketCompleteForm(data) {
   return async function (dispatch) {
     console.log(data);
-    const response = await axios.put(
-      `http://localhost:4000/api/tickets/:id`,
-      data
-    );
+    const response = await axios.put(`/api/tickets/:id`, data);
     return dispatch({
       type: PUT_TICKET_FORM,
       payload: response.data,
@@ -542,7 +494,7 @@ export function getFlightsByAirline(airline) {
   return async function (dispatch) {
     try {
       const res = await axios.get(
-        "http://localhost:4000/api/getFlightByAirline?airlineName=" + airline
+        "/api/getFlightByAirline?airlineName=" + airline
       );
       return dispatch({
         type: "GET_AIRLINE_FLIGHTS",
@@ -557,9 +509,7 @@ export function getAdmin(id) {
   console.log("getAdmin");
   return async function (dispatch) {
     try {
-      const res = await axios.get(
-        "http://localhost:4000/tokenauth?userId=" + id
-      );
+      const res = await axios.get("/tokenauth?userId=" + id);
       return dispatch({
         type: "GET_ADMIN",
         payload: res.data,
