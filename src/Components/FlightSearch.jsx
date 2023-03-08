@@ -19,7 +19,7 @@ export default function FlightSearch() {
     roundTrip: "",
     dateTimeDeparture: "",
     dateTimeReturn: "",
-    passengers: 1,
+    passengers: "1",
   });
   const [formValid, setFormValid] = useState(false);
 
@@ -128,7 +128,7 @@ export default function FlightSearch() {
       formData.destiny !== "" &&
       formData.dateTimeDeparture !== "" &&
       formData.passengers !== "" &&
-      (checked2 ? formData.dateTimeReturn !== "" : true)
+      (formData.roundTrip ? formData.dateTimeReturn !== "" : true)
     ) {
       setFormValid(true);
     } else {
@@ -143,6 +143,8 @@ export default function FlightSearch() {
     console.log(flights[0]);
     history.push("/shop");
   }
+
+  const num = 1;
 
   return (
     <div class="bg-azulOscuro py-10">
@@ -229,7 +231,7 @@ export default function FlightSearch() {
               type="number"
               min="1"
               max="8"
-              defaultValue="1"
+              defaultValue={num.toString()}
               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400 transition-colors duration-300"
               onChange={handlePassengersChange}
             />
