@@ -15,8 +15,8 @@ export default function MyTickets() {
   }, [id]);
 
   return (
-    <div className="absolute ml-[21%] w-[100%] z-20 bg-[pink]  flex flex-col items-center">
-      <h1>Tickets Del usuario</h1>
+    <div className="absolute ml-[20%] w-[80%] z-20 bg-azulOscuro flex flex-col items-center">
+      <h1 className="text-blanco">Boletos comprados</h1>
 
       <TicketsCards />
     </div>

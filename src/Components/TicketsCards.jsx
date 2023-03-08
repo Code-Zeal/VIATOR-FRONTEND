@@ -20,7 +20,7 @@ const TicketsCards = () => {
   };
 
   return (
-    <div className=" flex flex-col items-center bg-azulOscuro text-[white] py-2 w-screen px-4 ">
+    <div className=" flex flex-col items-center bg-azulOscuro text-[white] py-2 w-full px-4 ">
       {currentRecipes ? (
         currentRecipes.map((t) => (
           <TicketCard
