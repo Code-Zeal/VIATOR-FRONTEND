@@ -72,6 +72,7 @@ const initialState = {
   flightsAdm: [],
   flightDetailAdm: [],
   isAdm: "",
+  idUser: "",
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -287,12 +288,19 @@ export const userReducer = (state = initialState, action) => {
       };
 
     case PUT_TICKET_TRANSFER:
+      window.location.reload();
       return {
         ...state,
       };
     case PUT_TICKET_FORM:
+      window.location.reload();
       return {
         ...state,
+      };
+    case "MY_ID":
+      return {
+        ...state,
+        idUser: action.payload,
       };
 
     // defecto

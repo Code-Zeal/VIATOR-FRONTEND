@@ -583,6 +583,12 @@ export function cloudinaryUsers(payload) {
     payload,
   };
 }
+export function myId(payload) {
+  return {
+    type: "MY_ID",
+    payload: payload,
+  };
+}
 
 export const clearState = () => ({
   type: "CLEAR_STATE",

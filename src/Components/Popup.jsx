@@ -1,11 +1,24 @@
 import React, { useState } from "react";
+import { putTicketTransfer } from "../Redux/Actions";
+import { useDispatch } from "react-redux";
 
-function Popup({ isOpen, onClose, onSubmit }) {
-  const [email, setEmail] = useState("");
+function Popup({ isOpen, onClose, onSubmit, id }) {
+  const [email, setEmail] = useState({
+    emailR: "",
+    idTicketSelect: id,
+  });
+  const dispatch = useDispatch();
 
+  const handleChange = (event) => {
+    let value = event.target.value;
+    setEmail({
+      ...email,
+      [event.target.name]: value,
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(email);
+    dispatch(putTicketTransfer(email));
     onClose();
   };
 
@@ -24,10 +37,9 @@ function Popup({ isOpen, onClose, onSubmit }) {
               <input
                 type="email"
                 id="email"
-                name="email"
+                name="emailR"
                 placeholder="Ingresa el correo electrónico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
               />
               <div className="button-container">
                 <button type="submit" className="transfer-button">

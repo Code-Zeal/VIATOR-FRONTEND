@@ -66,6 +66,7 @@ const TicketCard = (props) => {
       email: email,
       namePassanger: namePassanger,
     };
+
     dispatch(putTicketCompleteForm(id, dataPassanger));
     dispatch(getTicketUser(sub));
     redirectHome();
@@ -78,7 +79,7 @@ const TicketCard = (props) => {
   ////////////////////////////////////////Transferir
 
   return (
-    <div className="m-auto my-6 flex flex-col lg:w-1/2  w-11/12 mx-auto  ">
+    <div className="m-auto my-6 flex flex-col lg:w-2/4 w-8/12 mx-auto  ">
       <div className="flex   justify-between">
         <div className="border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90  flex lg:flex-row flex-col lg:justify-between justify-center w-1/2 lg:w-1/3 items-center font-bold">
           <h4> Standar Ticket</h4>
@@ -188,6 +189,7 @@ const TicketCard = (props) => {
                   isOpen={showPopup}
                   onClose={handleClosePopup}
                   onSubmit={handleTransfer}
+                  id={props.idTicket}
                 />
               </>
             )}
@@ -203,6 +205,7 @@ const TicketCard = (props) => {
                   isOpen={showPopupForm}
                   onClose={handleClosePopupForm}
                   onSubmit={handleFormPassanger}
+                  id={props.idTicket}
                 />
               </>
             )}

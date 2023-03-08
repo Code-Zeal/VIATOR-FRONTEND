@@ -7,7 +7,8 @@ import TicketsCards from "./TicketsCards";
 
 export default function MyTickets() {
   const { user } = useAuth0();
-  const id = user?.sub;
+  const id = useSelector((state) => state.idUser);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
