@@ -43,10 +43,11 @@ export default function Data() {
   const CountrieCities = useSelector((state) => state.getCountries);
 
   useEffect(() => {
+    valor.id = data.id;
     setLocalData(data);
     setIsLoaded(true);
     // setEditDispatch({ ...editDispatch, idSubAuth0: valor.id });
-  }, [data, isLoaded]);
+  }, [data, isLoaded, valor]);
   console.log(localData);
   const [city, setCity] = useState(true);
   const [countrie, setCountrie] = useState(false);
@@ -60,7 +61,7 @@ export default function Data() {
     city: String,
     picture: data.picture,
   });
-  console.log(editDispatch);
+  console.log(data);
 
   // "asfasgfasfasfas"
   const submitHandler = async (event) => {
@@ -82,8 +83,8 @@ export default function Data() {
     // reviso en mi base de datos si tengo el id de la persona que acaba de iniciar sesion
     //  si tengo el id muetro el home em caso contrario muestro el formulario
 
-    dispatch(getDataUser(valor.id));
-  }, [user?.sub, editDispatch]);
+    dispatch(getDataUser(user?.sub));
+  }, [user?.sub, editDispatch, dispatch]);
 
   console.log(valor.id);
   const handlerEdit = () => {
@@ -134,6 +135,7 @@ export default function Data() {
 
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
+  console.log(valor.id);
   useEffect(() => {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
@@ -142,7 +144,6 @@ export default function Data() {
         uploadPreset: "lc03gemm",
       },
       function (error, result) {
-        console.log(result.event === "success");
         if (result.event === "success") {
           dispatch(
             putDataUser(valor.id, {
@@ -154,7 +155,7 @@ export default function Data() {
         }
       }
     );
-  }, []);
+  }, [data, dispatch, redirectHome, valor]);
   const handleSelect = (event) => {};
   return (
     <div className="absolute ml-[21%] w-[70%] z-20  flex flex-col items-center">

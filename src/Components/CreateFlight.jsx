@@ -312,7 +312,7 @@ export default function CreateFlight() {
               name="dateTimeReturn"
               onChange={handleFormFlight}
               disabled={hasRoundTrip}
-              className="disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white]"
+              className="disabled:bg-[#02122c78] disabled:text-[gray] bg-azulOscuro border-2  rounded-lg text-[white] date3"
               type="date"
             />
             <input

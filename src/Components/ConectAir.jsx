@@ -42,7 +42,7 @@ export default function ConectAir() {
   }, [dispatch]);
 
   const redirectHome = async () => {
-    history.push("/createAirline");
+    history.push("/myTickets");
     window.location.reload();
   };
   const submitHandlerCreate = async () => {
