@@ -21,6 +21,10 @@ export default function Data() {
   const phoneNumber = new RegExp(
     /(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})/g
   );
+  const redirectHome = async () => {
+    history.push("/data");
+    window.location.reload();
+  };
 
   const verificar = () => {
     // phoneNumber: Number,
@@ -43,11 +47,10 @@ export default function Data() {
   const CountrieCities = useSelector((state) => state.getCountries);
 
   useEffect(() => {
-    valor.id = data.id;
     setLocalData(data);
     setIsLoaded(true);
     // setEditDispatch({ ...editDispatch, idSubAuth0: valor.id });
-  }, [data, isLoaded, valor]);
+  }, [data, isLoaded]);
   console.log(localData);
   const [city, setCity] = useState(true);
   const [countrie, setCountrie] = useState(false);
@@ -83,8 +86,8 @@ export default function Data() {
     // reviso en mi base de datos si tengo el id de la persona que acaba de iniciar sesion
     //  si tengo el id muetro el home em caso contrario muestro el formulario
 
-    dispatch(getDataUser(user?.sub));
-  }, [user?.sub, editDispatch, dispatch]);
+    dispatch(getDataUser(valor.id));
+  }, [valor.id, editDispatch, dispatch]);
 
   console.log(valor.id);
   const handlerEdit = () => {
@@ -128,10 +131,6 @@ export default function Data() {
       });
     }
   };
-  const redirectHome = async () => {
-    history.push("/data");
-    window.location.reload();
-  };
 
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
@@ -145,13 +144,22 @@ export default function Data() {
       },
       function (error, result) {
         if (result.event === "success") {
-          dispatch(
-            putDataUser(valor.id, {
-              ...data,
-              picture: result.info.secure_url,
-            })
-          );
-          redirectHome();
+          if (
+            window.confirm(
+              "Estás seguro/a de que quieres cambiar tus datos?"
+            ) === true
+          ) {
+            dispatch(
+              putDataUser(valor.id, {
+                ...data,
+                picture: result.info.secure_url,
+              })
+            );
+            alert("Complete data");
+            redirectHome();
+          } else {
+            redirectHome();
+          }
         }
       }
     );

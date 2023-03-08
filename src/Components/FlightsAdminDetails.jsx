@@ -8,25 +8,29 @@ import {
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function FlightAdminDetails({ flightId }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const detailedFlight = useSelector((state) => state.flightDetailAdm);
-  const [toggle, setToggle] = useState(null);
+  const [toggle, setToggle] = useState({
+    toggle: "",
+  });
 
   console.log(flightId);
-  console.log(toggle);
+  console.log(toggle.toggle);
   console.log(detailedFlight);
 
   useEffect(() => {
-    setToggle(detailedFlight.state);
     dispatch(getFlightDetailAdm(flightId));
-  }, []);
+    // setToggle({
+    //   toggle: detailedFlight.state,
+    // });
+  }, [dispatch]);
   let idaVuelta = detailedFlight.roundTrip;
-  const redirectHome = async () => {
+  const redirectHome = () => {
     history.push(`/flightAdm/${flightId}`);
     window.location.reload();
   };
@@ -390,26 +394,33 @@ export default function FlightAdminDetails({ flightId }) {
         ) : (
           <></>
         )}
-        <div className="flex flex-col items-center p-10">
-          <p className="bg-azulClaro my-4 py-2 px-6 text-[white] rounded-tr-lg rounded-bl-lg">
-            Estado actual
-          </p>
-          <label
-            for="AcceptConditions"
-            class="relative h-8 w-14 cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              id="AcceptConditions"
-              class="peer sr-only"
-              onClick={handletoggle}
-              checked={toggle}
-            />
+        <div className="flex flex-row-reverse w-full justify-evenly items-center">
+          <div className="flex flex-col items-center p-10">
+            <p className="bg-azulClaro my-4 py-2 px-6 text-[white] rounded-tr-lg rounded-bl-lg">
+              Estado actual
+            </p>
+            <label
+              for="AcceptConditions"
+              class="relative h-8 w-14 cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="AcceptConditions"
+                class="peer sr-only"
+                onClick={handletoggle}
+                checked={detailedFlight.state}
+              />
 
-            <span class="absolute inset-0 rounded-full bg-[gray] transition peer-checked:bg-[green]"></span>
+              <span class="absolute inset-0 rounded-full bg-[gray] transition peer-checked:bg-[green]"></span>
 
-            <span class="absolute inset-0 m-1 h-6 w-6 rounded-full bg-[white] transition peer-checked:translate-x-6"></span>
-          </label>
+              <span class="absolute inset-0 m-1 h-6 w-6 rounded-full bg-[white] transition peer-checked:translate-x-6"></span>
+            </label>
+          </div>
+          <Link to="/flights">
+            <button className="border-2 border-[black] hover:bg-[#191483] bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg font-bold">
+              Volver
+            </button>
+          </Link>
         </div>
       </div>
       <Footer></Footer>

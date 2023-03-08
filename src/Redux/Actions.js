@@ -588,13 +588,3 @@ export const clearState = () => ({
   type: "CLEAR_STATE",
   payload: [],
 });
-
-export const sliderRecomendado = () => {
-  return async (dispatch) => {
-    const info = await axios.get(`http://localhost:4000/api/recommended`);
-    dispatch({
-      type: SLIDER_RECOMENDADO,
-      payload: info.data,
-    });
-  };
-};
