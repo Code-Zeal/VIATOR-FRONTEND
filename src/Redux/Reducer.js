@@ -1,3 +1,6 @@
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import {
   POST_AUTH0_DATA,
   PUT_USER,
@@ -9,8 +12,27 @@ import {
   PUT_DATA,
   VERIFICACCION_EMAIL,
   searchFlights,
-  SLIDER_RECOMENDADO
+  SLIDER_RECOMENDADO,
+  CREATE_AIRPORT,
+  GET_AIRLINES,
+  ADD_AIRLINE_TO_AIRPORT,
+  GET_COUNTRIES,
+  CREATE_AIRLINE,
+  ADD_AIRPORT_TO_AIRLINE,
+  DELETE_AIRPORT_TO_AIRLINE,
+  GET_AIRLINE,
+  FILTRO_AIRLINE_NAME,
+  FILTRO_RESET_SHOP,
+  CLEAR_DATA,
+  GET_TICKET_USER,
+  PUT_TICKET_TRANSFER,
+  PUT_TICKET_FORM,
 } from "./Actions";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
 const initialState = {
   ////////auth0
@@ -23,7 +45,10 @@ const initialState = {
   userData: [],
   userEmailExiste: "",
   flights: [],
+  airlineFlights: [],
   searchedFlights: [],
+  searchedFlightsAUX: [],
+
   flightDetails: [],
   filteredFlights: [],
 
@@ -33,10 +58,23 @@ const initialState = {
   ///// FILTRO SCALE
   getFiltroFlightsScale: [],
   filteredAirports: [],
-  recommended : []
+  recommended: [],
+  onApproveRes: "",
+  getAirliness: [],
+  getCountries: [],
+  getAirline: [],
+
+  getTicketUserData: [],
+  // Ticket
+  getAirlinesAirports: [],
+  cloudinaryAirline: "",
+  cloudinaryUsers: "",
+  flightsAdm: [],
+  flightDetailAdm: [],
+  isAdm: "",
 };
 
-const rootReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case PUT_USER:
       return {
@@ -86,8 +124,11 @@ const rootReducer = (state = initialState, action) => {
     case FILTRO_SCALE:
       return {
         ...state,
-        getFiltroFlightsScale: action.payload,
-        searchedFlights: action.payload,
+        searchedFlights: [
+          ...state.searchedFlightsAUX.filter(
+            (scal) => scal.scale === action.payload
+          ),
+        ],
       };
 
     case FILTRO_AIRPORT_BY_COUNTRY:
@@ -100,6 +141,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedFlights: action.payload,
+        searchedFlightsAUX: action.payload,
       };
     case "GET_FLIGHT_DETAILS":
       return {
@@ -114,9 +156,145 @@ const rootReducer = (state = initialState, action) => {
     case SLIDER_RECOMENDADO: {
       return {
         ...state,
-        recommended : action.payload
-      }
+        recommended: action.payload,
+      };
     }
+    case "CREATE_ORDER": {
+      window.location.href = action.payload.href;
+      return {
+        ...state,
+      };
+    }
+
+    case CREATE_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case "ON_APPROVE": {
+      return {
+        ...state,
+      };
+    }
+    case GET_AIRLINES: {
+      return {
+        ...state,
+        getAirliness: action.payload,
+      };
+    }
+    case ADD_AIRLINE_TO_AIRPORT: {
+      return {
+        ...state,
+      };
+    }
+    case ADD_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case GET_COUNTRIES: {
+      return {
+        ...state,
+        getCountries: action.payload,
+      };
+    }
+    case CREATE_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_AIRPORT_TO_AIRLINE: {
+      return {
+        ...state,
+      };
+    }
+
+    case GET_AIRLINE:
+      return {
+        ...state,
+        getAirline: action.payload,
+      };
+    case FILTRO_AIRLINE_NAME:
+      return {
+        ...state,
+        searchedFlights: [
+          ...state.searchedFlightsAUX.filter(
+            (air) => air.AirlineId === action.payload
+          ),
+        ],
+      };
+
+    case FILTRO_RESET_SHOP:
+      return {
+        ...state,
+        searchedFlights: [...state.searchedFlightsAUX],
+      };
+    case "CREATE_FLIGHT":
+      return {
+        ...state,
+      };
+    case "GET_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+        getAirlinesAirports: action.payload,
+      };
+    case "PUT_AIRPORTS_AIRLINE":
+      return {
+        ...state,
+      };
+    case "CLOUDINARY_FLIGHTS":
+      return {
+        ...state,
+        cloudinaryAirline: action.payload,
+      };
+    case "CLOUDINARY_USERS":
+      return {
+        ...state,
+        cloudinaryUsers: action.payload,
+      };
+    case "GET_FLIGHTS_ADM":
+      return {
+        ...state,
+        flightsAdm: action.payload,
+      };
+    case "GET_FLIGHT_ADM":
+      return {
+        ...state,
+        flightDetailAdm: action.payload,
+      };
+
+    case "GET_AIRLINE_FLIGHTS":
+      return {
+        ...state,
+        airlineFlights: action.payload,
+      };
+
+    case "CLEAR_STATE":
+      return {
+        ...state,
+        airlineFlights: [],
+      };
+    case "GET_ADMIN":
+      return {
+        ...state,
+        isAdm: action.payload,
+      };
+
+    case GET_TICKET_USER:
+      return {
+        ...state,
+        getTicketUserData: action.payload,
+      };
+
+    case PUT_TICKET_TRANSFER:
+      return {
+        ...state,
+      };
+    case PUT_TICKET_FORM:
+      return {
+        ...state,
+      };
+
     // defecto
     default:
       return {
@@ -125,4 +303,7 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+const rootReducer = combineReducers({
+  user: userReducer,
+});
+export default persistReducer(persistConfig, rootReducer);

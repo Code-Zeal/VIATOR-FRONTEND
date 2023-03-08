@@ -4,6 +4,9 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { Provider } from "react-redux";
 import store from "./Redux/Store";
 
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./Redux/Store";
+
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -16,11 +19,13 @@ root.render(
     authorizationParams={{
       redirect_uri: window.location.origin,
       audience: "this is a unique identifier viator final 2",
-      scope: "openid profile email",
+      scope: "openid profile email admin   ",
     }}
   >
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </Auth0Provider>
 );

@@ -77,10 +77,6 @@ const FormRegister = () => {
     ? countries.find((country) => country.country === selectedCountry).cities
     : [];
 
-  useEffect(() => {
-    dispatch(getCountries());
-  }, [getCountries]);
-
   const handleKeyPress = (event) => {
     const charCode = event.which || event.keyCode;
     // Códigos de teclas permitidas: letras mayúsculas y minúsculas, números y algunos caracteres de puntuación
@@ -105,6 +101,12 @@ const FormRegister = () => {
   const { user, getAccessTokenSilently } = useAuth0();
   const sub = user?.sub;
   console.log(sub);
+
+  const setEmail = user.email;
+
+  useEffect(() => {
+    dispatch(getCountries());
+  }, [getCountries]);
 
   const dispatch = useDispatch();
   //   const [formRegisterPhoneSelec, setformRegisterPhoneSelec] = useState({
@@ -140,7 +142,7 @@ const FormRegister = () => {
     phoneNumber: Number,
     country: "",
     city: "",
-
+    email: "",
     idSubAuth0: "",
   });
   const [errors, setErrors] = useState({
@@ -153,8 +155,12 @@ const FormRegister = () => {
     city: "",
   });
   useEffect(() => {
-    setFormRegister({ ...formRegister, idSubAuth0: sub });
+    setFormRegister({ ...formRegister, idSubAuth0: sub, email: setEmail });
   }, [user?.sub]);
+
+  // useEffect(() => {
+  //   setFormRegister({ ...formRegister, email: setEmail });
+  // }, [user?.email]);
 
   const put = async () => {
     const token = await getAccessTokenSilently({});
@@ -196,7 +202,6 @@ const FormRegister = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    await registro();
 
     if (Object.keys(errors).length === 0) {
       alert("Complete data");
@@ -224,6 +229,7 @@ const FormRegister = () => {
       alert("You Must Correct Errors");
     }
   };
+
   console.log(formRegister);
 
   return (

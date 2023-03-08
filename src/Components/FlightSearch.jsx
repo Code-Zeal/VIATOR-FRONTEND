@@ -3,7 +3,7 @@ import Select from "react-select";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { searchFlights } from "../Redux/Actions";
+import { searchFlights, clearState } from "../Redux/Actions";
 
 export default function FlightSearch() {
   const flights = useSelector((state) => state.searchedFlights);
@@ -20,7 +20,6 @@ export default function FlightSearch() {
     dateTimeDeparture: "",
     dateTimeReturn: "",
     passengers: 1,
-    class: "",
   });
   const [formValid, setFormValid] = useState(false);
 
@@ -123,15 +122,6 @@ export default function FlightSearch() {
     console.log(formData);
   }
 
-  function handleClassChange(event) {
-    setFormData({
-      ...formData,
-      class: event.target.value,
-    });
-    validateForm();
-    console.log(formData);
-  }
-
   const validateForm = () => {
     if (
       formData.origin !== "" &&
@@ -148,6 +138,7 @@ export default function FlightSearch() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    dispatch(clearState());
     dispatch(searchFlights(formData));
     console.log(flights[0]);
     history.push("/shop");
@@ -242,19 +233,6 @@ export default function FlightSearch() {
               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400 transition-colors duration-300"
               onChange={handlePassengersChange}
             />
-          </div>
-
-          <div class="w-full lg:w-auto">
-            <label class="block font-medium mb-2 text-blanco">Clase</label>
-            <select
-              id="clase"
-              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400 transition-colors duration-300"
-              onChange={handleClassChange}
-            >
-              <option value="turist">Turista</option>
-              <option value="business">Ejecutiva</option>
-              <option value="first">Primera</option>
-            </select>
           </div>
         </div>
         <div class="mt-6 text-center">
