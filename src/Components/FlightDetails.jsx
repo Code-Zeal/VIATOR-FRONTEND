@@ -15,7 +15,7 @@ export default function FlightDetails({ flightId, roundTrip }) {
   const sub = user?.sub;
 
   const [quantity, setQuantity] = useState({
-    quantity: Number,
+    quantity: 0,
   });
   const handlerQantity = (event) => {
     let value = Number(event.target.value);
@@ -424,14 +424,21 @@ export default function FlightDetails({ flightId, roundTrip }) {
 
         <button className="w-full mt-4 bg-[#080808] text-[white] py-4 rounded-tl-xl rounded-tr-xl text-4xl tracking-wide font-bold lg:mt-20">
           {console.log(detailedFlight.ticketPrice)}
-          <Paypal
-            userId={sub}
-            flightId={detailedFlight.id}
-            valuePerTicket={detailedFlight.ticketPrice}
-            quantity={quantity.quantity}
-            name={`Compra de Boleto de Viator `}
-            description={`Compra de Boleto de Viator `}
-          ></Paypal>
+          {console.log(quantity.quantity)}
+          {quantity.quantity === 0 ? (
+            <>
+              <span>Selecciona cuantos pasajes vas a Comprar</span>{" "}
+            </>
+          ) : (
+            <Paypal
+              userId={sub}
+              flightId={detailedFlight.id}
+              valuePerTicket={detailedFlight.ticketPrice}
+              quantity={quantity.quantity}
+              name={`Compra de Boleto de Viator `}
+              description={`Compra de Boleto de Viator `}
+            ></Paypal>
+          )}
         </button>
       </div>
       <Footer></Footer>
