@@ -59,6 +59,7 @@ const TicketCard = (props) => {
     // Cerrar el popup después de transferir el ticket
     setShowPopup(false);
   };
+  console.log(props.picture);
 
   const handleFormPassanger = ({ email, namePassanger }) => {
     const id = props.idTicket;
@@ -66,6 +67,7 @@ const TicketCard = (props) => {
       email: email,
       namePassanger: namePassanger,
     };
+
     dispatch(putTicketCompleteForm(id, dataPassanger));
     dispatch(getTicketUser(sub));
     redirectHome();
@@ -78,7 +80,7 @@ const TicketCard = (props) => {
   ////////////////////////////////////////Transferir
 
   return (
-    <div className="m-auto my-6 flex flex-col lg:w-1/2  w-11/12 mx-auto  ">
+    <div className="m-auto my-6 flex flex-col lg:w-2/4 w-8/12 mx-auto  ">
       <div className="flex   justify-between">
         <div className="border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90  flex lg:flex-row flex-col lg:justify-between justify-center w-1/2 lg:w-1/3 items-center font-bold">
           <h4> Standar Ticket</h4>
@@ -107,7 +109,15 @@ const TicketCard = (props) => {
           </h4>
         </div>
       </div>
-      <div className=" bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain  ">
+      <div
+        className="  bg-center bg-no-repeat bg-contain "
+        style={{
+          backgroundImage: "url(" + props.picture + ")",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="bg-[#E2D8FE] bg-opacity-80 border-2 flex flex-col lg:flex-row lg:items-stretch   items-center justify-center w-full  h-full  ">
           <div className="w-4/5 text-[#00000] rounded-tl-xl rounded-bl-xl   py-4 flex   justify-center lg:justify-between lg:px-2">
             <div className="flex lg:flex-row flex-col lg:w-auto w-11/12  items-center justify-center ">
@@ -188,6 +198,7 @@ const TicketCard = (props) => {
                   isOpen={showPopup}
                   onClose={handleClosePopup}
                   onSubmit={handleTransfer}
+                  id={props.idTicket}
                 />
               </>
             )}
@@ -203,6 +214,7 @@ const TicketCard = (props) => {
                   isOpen={showPopupForm}
                   onClose={handleClosePopupForm}
                   onSubmit={handleFormPassanger}
+                  id={props.idTicket}
                 />
               </>
             )}
@@ -211,7 +223,15 @@ const TicketCard = (props) => {
       </div>
       {props.roundTrip ? (
         <div>
-          <div className="bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain">
+          <div
+            className=" bg-center bg-no-repeat bg-contain"
+            style={{
+              backgroundImage: "url(" + props.picture + ")",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
             <div className="bg-[#E2D8FE] bg-opacity-80   border-2 flex w-full   items-center justify-start">
               <svg
                 className="cursor-pointer my-4 lg:mx-4 lg:my-0 invisible"

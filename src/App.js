@@ -14,7 +14,7 @@ import CardsFlight from "./Components/CardsFlight";
 import Shop from "./Components/Shop";
 import Profile from "./Components/Profile";
 import MyTickets from "./Components/MyTickets";
-
+import NavBar from "./Components/NavBar";
 import FilterShop from "./Components/FilterShop";
 import Favorites from "./Components/Favorites";
 import Data from "./Components/Data";
@@ -62,6 +62,7 @@ function App() {
           path="/myTickets"
           render={() => (
             <div>
+              <NavBar />
               <MyTickets />
               <Profile></Profile>
               <Footer></Footer>
@@ -84,6 +85,7 @@ function App() {
           path="/data"
           render={() => (
             <div>
+              <NavBar />
               <Data />
               <Profile />
               <Footer></Footer>
@@ -95,6 +97,7 @@ function App() {
           path="/createAirport"
           render={() => (
             <div>
+              <NavBar />
               <CreateAirport />
               <Profile />
               <Footer></Footer>
@@ -106,6 +109,7 @@ function App() {
           path="/createAirline"
           render={() => (
             <div>
+              <NavBar />
               <CreateAirline></CreateAirline>
               <Profile />
               <Footer></Footer>
@@ -117,6 +121,7 @@ function App() {
           path="/createFlight"
           render={() => (
             <div>
+              <NavBar />
               <CreateFlight></CreateFlight>
               <Profile />
               <Footer></Footer>
@@ -128,6 +133,7 @@ function App() {
           path="/flights"
           render={() => (
             <div>
+              <NavBar />
               <FlightsAdmin></FlightsAdmin>
               <Profile />
               <Footer></Footer>
@@ -139,6 +145,7 @@ function App() {
           path="/conectAir"
           render={() => (
             <div>
+              <NavBar />
               <ConectAir></ConectAir>
               <Profile />
               <Footer></Footer>

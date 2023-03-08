@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import Recommendations from "./Recommendations.jsx";
 import { useDispatch } from "react-redux";
-import { getAdmin } from "../Redux/Actions";
+import { getAdmin, myId } from "../Redux/Actions";
 
 export default function Home(props) {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ export default function Home(props) {
   const { user, isAuthenticated } = useAuth0();
   useEffect(() => {
     dispatch(getAdmin(user.sub));
+    dispatch(myId(user.sub));
   }, []);
 
   console.log(user);
