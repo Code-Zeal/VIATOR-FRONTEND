@@ -8,12 +8,19 @@ import Footer from "./Footer";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Recommendations from "./Recommendations.jsx";
+import { useDispatch } from "react-redux";
+import { getAdmin } from "../Redux/Actions";
 
 export default function Home(props) {
+  const dispatch = useDispatch();
   let history = useHistory();
 
   const { user, isAuthenticated } = useAuth0();
+  useEffect(() => {
+    dispatch(getAdmin(user.sub));
+  }, []);
 
+  console.log(user);
   return (
     <>
       {isAuthenticated ? (

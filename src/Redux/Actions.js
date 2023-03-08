@@ -80,7 +80,7 @@ export const getDataUser = (id) => async (dispatch) => {
 };
 
 export const putDataUser = (id, formPut) => async (dispatch) => {
-  console.log(formPut);
+  console.log("formPut");
   const response = await axios.put(
     `http://localhost:4000/User/updateUser/${id}`,
     formPut
@@ -113,11 +113,24 @@ export function getFlights() {
     });
   };
 }
-export function getFlightsAdm() {
+export function getFlightsAdms() {
+  console.log("getFlightsAdms");
   return async function (dispatch) {
     const res = await axios.get("http://localhost:4000/api/flightsAdmin");
     return dispatch({
       type: "GET_FLIGHTS_ADM",
+      payload: res.data,
+    });
+  };
+}
+export function getFlightDetailAdm(id) {
+  console.log("getFlightsAdms");
+  return async function (dispatch) {
+    const res = await axios.get(
+      `http://localhost:4000/api/getFlightByIdWithFalse/${id}`
+    );
+    return dispatch({
+      type: "GET_FLIGHT_ADM",
       payload: res.data,
     });
   };
@@ -460,15 +473,15 @@ export const getAirportsAirline = (id) => {
 };
 export function putFlightDetails(idState) {
   return async function (dispatch) {
-    
-      const res = await axios.put(
-        "http://localhost:4000/api/setStateFlights",
-        idState
-      );
-      return dispatch({
-        type: "PUT_FLIGHT_DETAILS",
-      })
-    }}
+    const res = await axios.put(
+      "http://localhost:4000/api/setStateFlights",
+      idState
+    );
+    return dispatch({
+      type: "PUT_FLIGHT_DETAILS",
+    });
+  };
+}
 
 export function getFlightsByAirline(airline) {
   return async function (dispatch) {
@@ -478,6 +491,22 @@ export function getFlightsByAirline(airline) {
       );
       return dispatch({
         type: "GET_AIRLINE_FLIGHTS",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getAdmin(id) {
+  console.log("getAdmin");
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(
+        "http://localhost:4000/tokenauth?userId=" + id
+      );
+      return dispatch({
+        type: "GET_ADMIN",
         payload: res.data,
       });
     } catch (error) {

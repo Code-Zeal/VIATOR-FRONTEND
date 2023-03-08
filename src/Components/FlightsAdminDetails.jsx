@@ -1,30 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFlightDetails, putFlightDetails } from "../Redux/Actions";
+import {
+  getFlightDetailAdm,
+  getFlightDetails,
+  putFlightDetails,
+} from "../Redux/Actions";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 export default function FlightAdminDetails({ flightId }) {
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  const detailedFlight = useSelector((state) => state.flightDetails);
-  const [toggle, setToggle] = useState(detailedFlight.state);
+  const detailedFlight = useSelector((state) => state.flightDetailAdm);
+  const [toggle, setToggle] = useState(null);
 
+  console.log(flightId);
+  console.log(toggle);
   console.log(detailedFlight);
 
   useEffect(() => {
-    dispatch(getFlightDetails(flightId));
-  }, [flightId]);
+    setToggle(detailedFlight.state);
+    dispatch(getFlightDetailAdm(flightId));
+  }, []);
   let idaVuelta = detailedFlight.roundTrip;
+  const redirectHome = async () => {
+    history.push(`/flightAdm/${flightId}`);
+    window.location.reload();
+  };
   const handletoggle = async (event) => {
-    await dispatch(
-      putFlightDetails({
-        id: flightId,
-        state: !detailedFlight.state,
-      })
-    );
-    dispatch(getFlightDetails(flightId));
+    if (
+      window.confirm("Estás seguro/a de que quieres cambiar el estado?") ===
+      true
+    ) {
+      await dispatch(
+        putFlightDetails({
+          id: flightId,
+          state: !detailedFlight.state,
+        })
+      );
+      dispatch(getFlightDetailAdm(flightId));
+      alert("Complete data");
+      redirectHome();
+    } else {
+      redirectHome();
+    }
   };
   return (
     <div>
@@ -68,13 +90,6 @@ export default function FlightAdminDetails({ flightId }) {
         </div>
         <div className="flex justify-around items-center  py-4 lg:py-20 w-full">
           <div className="flex flex-col items-center justify-center w-5/12 mx-auto ">
-            <div className="flex justify-center items-center">
-              <img
-                className="w-20 h-7   lg:w-60 lg:h-20 lg:mr-1"
-                src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png"
-                alt=""
-              />
-            </div>
             <h3 className="font-bold  pt-4 text-lg lg:text-2xl">Aerolínea: </h3>
             <h3 className="font-bold pb-2 text-lg lg:text-2xl">
               {detailedFlight.Airline
@@ -82,7 +97,14 @@ export default function FlightAdminDetails({ flightId }) {
                 : "Qatar Airways"}
             </h3>
           </div>
-
+          <div className="bg-[#990F02] text-[white] py-1 px-3 flex items-center justify-center rounded-lg">
+            <h3 className="font-bold inline-flex  text-lg lg:text-2xl mr-2">
+              Escalas:
+            </h3>
+            <h3 className="font-bold  inline-flex text-lg lg:text-2xl">
+              {detailedFlight.scale}
+            </h3>
+          </div>
           <div className="flex flex-col items-center w-5/12 mx-auto">
             <div className="flex items-start">
               <svg
@@ -237,13 +259,6 @@ export default function FlightAdminDetails({ flightId }) {
             </div>
             <div className="flex justify-around items-center  py-4 w-full">
               <div className="flex flex-col items-center">
-                <div className="flex ">
-                  <img
-                    className="w-32 h-10 px-2"
-                    src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png"
-                    alt=""
-                  />
-                </div>
                 <h3 className="font-bold pt-4 text-lg">Aerolínea: </h3>
                 <h3 className="font-bold pb-2 text-xl mx-auto">
                   {detailedFlight.Airline
@@ -251,7 +266,14 @@ export default function FlightAdminDetails({ flightId }) {
                     : "Qatar Airways"}
                 </h3>
               </div>
-
+              <div className="bg-[#990F02] text-[white] py-1 px-3 flex items-center justify-center rounded-lg">
+                <h3 className="font-bold inline-flex  text-lg lg:text-2xl mr-2">
+                  Escalas:
+                </h3>
+                <h3 className="font-bold  inline-flex text-lg lg:text-2xl">
+                  {detailedFlight.scale}
+                </h3>
+              </div>
               <div className="flex flex-col items-center">
                 <div className="flex items-start">
                   <svg
@@ -324,7 +346,7 @@ export default function FlightAdminDetails({ flightId }) {
                       {" "}
                       {
                         <p className="lg:text-md mr-1">
-                          {detailedFlight.ticketPrice}.00{" "}
+                          ${detailedFlight.ticketPrice}.00{" "}
                         </p>
                       }
                       USD{" "}
@@ -368,8 +390,10 @@ export default function FlightAdminDetails({ flightId }) {
         ) : (
           <></>
         )}
-        <div className="flex flex-col items-center p-2">
-          <p>Estado actual</p>
+        <div className="flex flex-col items-center p-10">
+          <p className="bg-azulClaro my-4 py-2 px-6 text-[white] rounded-tr-lg rounded-bl-lg">
+            Estado actual
+          </p>
           <label
             for="AcceptConditions"
             class="relative h-8 w-14 cursor-pointer"
