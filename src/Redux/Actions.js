@@ -484,6 +484,9 @@ export function putTicketTransfer(data) {
     return dispatch({
       type: PUT_TICKET_TRANSFER,
       payload: response.data,
+    });
+  };
+}
 
 export const CreateFlights = (formFlight) => {
   return async (dispatch) => {
