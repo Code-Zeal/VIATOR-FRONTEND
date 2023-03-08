@@ -27,6 +27,7 @@ import CreateFlight from "./Components/CreateFlight";
 import FlightsAdmin from "./Components/FlightsAdmin";
 import ConectAir from "./Components/ConectAir";
 import FlightAdminDetails from "./Components/FlightsAdminDetails";
+import FormRegisterAUX from "./Components/FormRegisterAUX";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route exact path="/cards" component={CardsFlight} />
 
         <Route exact path="/form" component={FormRegister} />
+        <Route exact path="/formaux" component={FormRegisterAUX} />
         <Route exact path="/welcome" component={Welcome} />
 
         <Route exact path="/shop" component={Shop} />
