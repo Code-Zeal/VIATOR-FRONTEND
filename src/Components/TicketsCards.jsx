@@ -1,16 +1,28 @@
 import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import PaginatedMyTickets from "./PaginatedMyTickets";
 import TicketCard from "./TicketCard";
 
 const TicketsCards = () => {
   const ticketsUser = useSelector((state) => state?.getTicketUserData);
   console.log(ticketsUser);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recipesPerPage] = useState(4);
+  const indexOfLastRecipes = currentPage * recipesPerPage;
+  const indexOfFirstRecipes = indexOfLastRecipes - recipesPerPage;
+  const currentRecipes = ticketsUser.slice(
+    indexOfFirstRecipes,
+    indexOfLastRecipes
+  );
+  const pagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className=" flex flex-col items-center bg-azulOscuro text-[white] py-2 w-screen px-4 ">
-      {ticketsUser ? (
-        ticketsUser.map((t) => (
+      {currentRecipes ? (
+        currentRecipes.map((t) => (
           <TicketCard
             activatedTicket={t.activatedTicket}
             idTicket={t.id}
@@ -32,6 +44,15 @@ const TicketsCards = () => {
       ) : (
         <></>
       )}
+      <div>
+        <PaginatedMyTickets
+          recipesPerPage={recipesPerPage}
+          allRecipes={ticketsUser.length}
+          pagination={pagination}
+          currentRecipes={currentRecipes}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 };
