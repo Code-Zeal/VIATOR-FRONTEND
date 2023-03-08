@@ -8,25 +8,30 @@ const TicketsCards = () => {
   console.log(ticketsUser);
 
   return (
-    <div className=" flex items-center bg-azulOscuro text-[white] py-2 w-screen px-4 ">
-      {ticketsUser?.map((t) => (
-        <TicketCard
-          idTicket={t.id}
-          seatUser={t.seat}
-          flightId={t.id}
-          AirlineId={t.AirlineId}
-          origin={t.Flight.origin}
-          destiny={t.Flight.destiny}
-          dateTimeDeparture={t.Flight.dateTimeDeparture}
-          dateTimeArrival1={t.Flight.dateTimeArrival1}
-          dateTimeArrival2={t.Flight.dateTimeArrival2}
-          dateTimeReturn={t.Flight.dateTimeReturn}
-          scale={t.Flight.scale}
-          roundTrip={t.Flight.roundTrip}
-          //   ticketPrice={t.Flight.ticketPrice}
-          // nameAerolinea={t.}
-        />
-      ))}
+    <div className=" flex flex-col items-center bg-azulOscuro text-[white] py-2 w-screen px-4 ">
+      {ticketsUser ? (
+        ticketsUser.map((t) => (
+          <TicketCard
+            activatedTicket={t.activatedTicket}
+            idTicket={t.id}
+            seatUser={t.seat}
+            flightId={t.id}
+            AirlineId={t.AirlineId}
+            origin={t.Flight.origin}
+            destiny={t.Flight.destiny}
+            dateTimeDeparture={t.Flight.dateTimeDeparture}
+            dateTimeArrival1={t.Flight.dateTimeArrival1}
+            dateTimeArrival2={t.Flight.dateTimeArrival2}
+            dateTimeReturn={t.Flight.dateTimeReturn}
+            scale={t.Flight.scale}
+            roundTrip={t.Flight.roundTrip}
+            //   ticketPrice={t.Flight.ticketPrice}
+            // nameAerolinea={t.}
+          />
+        ))
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
