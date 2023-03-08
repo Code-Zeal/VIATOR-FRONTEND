@@ -40,7 +40,7 @@ export default function CreateAirline() {
         }
       }
     );
-  }, []);
+  }, [formAiline]);
   let history = useHistory();
 
   const airlines = useSelector((state) => state.getAirliness);
@@ -107,9 +107,26 @@ export default function CreateAirline() {
     window.location.reload();
   };
   const submitHandler = async () => {
-    await dispatch(CreateAirlines(formAiline));
-    await dispatch(addAirportToAirline(relation));
-    await redirectHome();
+    if (
+      window.confirm("Estás seguro/a de que quieres crear este aeropuerto?") ===
+      true
+    ) {
+      if (
+        formAiline.name === "" ||
+        formAiline.infoContact === "" ||
+        formAiline.picture === ""
+      ) {
+        alert("Hay campos obligatorios incompletos");
+        redirectHome();
+      } else {
+        alert("Aerolinea creada correctamente");
+
+        await dispatch(CreateAirlines(formAiline));
+        await dispatch(addAirportToAirline(relation));
+      }
+    } else {
+      redirectHome();
+    }
   };
 
   return (
@@ -156,7 +173,7 @@ export default function CreateAirline() {
         </div>
 
         <label className="font-bold text-[white] " htmlFor="airlines">
-          Aeropuertos
+          Aeropuertos (opcional)
         </label>
         <div>
           <div className="bg-azulOscuro w-full rounded-lg p-4 my-2 ">

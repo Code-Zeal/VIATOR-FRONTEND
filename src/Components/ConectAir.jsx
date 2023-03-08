@@ -42,19 +42,43 @@ export default function ConectAir() {
   }, [dispatch]);
 
   const redirectHome = async () => {
-    history.push("/myTickets");
+    history.push("/conectAir");
     window.location.reload();
   };
   const submitHandlerCreate = async () => {
-    await dispatch(addAirportToAirline(relation));
-    alert("Conexión creada correctamente");
-    await redirectHome();
+    if (
+      window.confirm("Estás seguro/a de que quieres crear esta conexión?") ===
+      true
+    ) {
+      if (relation.airlineId === Number || relation.airportsId === Number) {
+        alert("Hay campos obligatorios incompletos");
+        redirectHome();
+      } else {
+        await dispatch(addAirportToAirline(relation));
+        alert("Conexión creada correctamente");
+        await redirectHome();
+      }
+    } else {
+      redirectHome();
+    }
   };
   const submitHandlerDelete = async () => {
-    await dispatch(deleteAirportToAirline(relation));
-    alert("Conexión eliminada correctamente");
-
-    await redirectHome();
+    if (
+      window.confirm(
+        "Estás seguro/a de que quieres eliminar esta conexión?"
+      ) === true
+    ) {
+      if (relation.airlineId === Number || relation.airportsId === Number) {
+        alert("Hay campos obligatorios incompletos");
+        redirectHome();
+      } else {
+        await dispatch(deleteAirportToAirline(relation));
+        alert("Conexión eliminada correctamente");
+        await redirectHome();
+      }
+    } else {
+      redirectHome();
+    }
   };
 
   return (

@@ -74,7 +74,7 @@ export default function Data() {
       true
     ) {
       await dispatch(putDataUser(valor.id, editDispatch));
-      alert("Complete data");
+      alert("Datos Actualizados");
     } else {
       redirectHome();
     }
@@ -146,7 +146,7 @@ export default function Data() {
         if (result.event === "success") {
           if (
             window.confirm(
-              "Estás seguro/a de que quieres cambiar tus datos?"
+              "Estás seguro/a de que quieres cambiar tu Imagen?"
             ) === true
           ) {
             dispatch(
@@ -155,7 +155,7 @@ export default function Data() {
                 picture: result.info.secure_url,
               })
             );
-            alert("Complete data");
+            alert("Imagen Actualizada");
             redirectHome();
           } else {
             redirectHome();

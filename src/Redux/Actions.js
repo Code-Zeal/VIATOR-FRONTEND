@@ -279,6 +279,7 @@ export const CreateAirlines = (formAiline) => {
       type: CREATE_AIRLINE,
       payload: response.data,
     });
+    return window.location.reload();
   };
 };
 export const getAirlines = () => {
@@ -323,6 +324,7 @@ export const addAirportToAirline = (data) => {
       type: ADD_AIRPORT_TO_AIRLINE,
       payload: response.data,
     });
+    return window.location.reload();
   };
 };
 export const deleteAirportToAirline = (data) => {
@@ -335,6 +337,7 @@ export const deleteAirportToAirline = (data) => {
       type: DELETE_AIRPORT_TO_AIRLINE,
       payload: response.data,
     });
+    return window.location.reload();
   };
 };
 

@@ -76,10 +76,28 @@ export default function CreateAirport() {
     history.push("/createAirport");
     window.location.reload();
   };
-  const submitHandler = async () => {
-    await dispatch(CreateAirports(formAirport));
-    await dispatch(addAirlineToAirport(relation));
-    await redirectHome();
+
+  const submitHandler = () => {
+    if (
+      window.confirm("Estás seguro/a de que quieres crear este aeropuerto?") ===
+      true
+    ) {
+      if (
+        formAirport.name === "" ||
+        formAirport.city === "" ||
+        formAirport.country === ""
+      ) {
+        alert("Hay campos obligatorios incompletos");
+        redirectHome();
+      } else {
+        alert("Aeropuerto creado correctamente");
+        dispatch(CreateAirports(formAirport));
+        dispatch(addAirlineToAirport(relation));
+        redirectHome();
+      }
+    } else {
+      redirectHome();
+    }
   };
 
   return (
@@ -142,7 +160,7 @@ export default function CreateAirport() {
         </div>
 
         <label className="font-bold text-[white]" htmlFor="airlines">
-          Aerolineas
+          Aerolineas (opcional)
         </label>
         <div>
           {airlines.map((el) => {
