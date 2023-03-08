@@ -24,6 +24,9 @@ import {
   FILTRO_AIRLINE_NAME,
   FILTRO_RESET_SHOP,
   CLEAR_DATA,
+  GET_TICKET_USER,
+  PUT_TICKET_TRANSFER,
+  PUT_TICKET_FORM,
 } from "./Actions";
 
 const persistConfig = {
@@ -60,6 +63,9 @@ const initialState = {
   getAirliness: [],
   getCountries: [],
   getAirline: [],
+
+  getTicketUserData: [],
+  // Ticket
   getAirlinesAirports: [],
   cloudinaryAirline: "",
   cloudinaryUsers: "",
@@ -272,6 +278,21 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isAdm: action.payload,
+      };
+
+    case GET_TICKET_USER:
+      return {
+        ...state,
+        getTicketUserData: action.payload,
+      };
+
+    case PUT_TICKET_TRANSFER:
+      return {
+        ...state,
+      };
+    case PUT_TICKET_FORM:
+      return {
+        ...state,
       };
 
     // defecto

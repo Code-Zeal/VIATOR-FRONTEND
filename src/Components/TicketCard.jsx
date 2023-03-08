@@ -1,30 +1,73 @@
-import React, { useEffect, useState } from "react";
-import moment from "moment";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAirportsAirline } from "../Redux/Actions";
+import Popup from "./Popup";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const CardFlight = (props) => {
-  console.log(props.AirlineId);
-  const [isFav, setIsFav] = useState(false);
-  const airline = useSelector((state) => state.getAirlinesAirports);
+import { putTicketTransfer, putTicketCompleteForm } from "../Redux/Actions";
+
+import moment from "moment";
+import PopupFormPasajero from "./PopupFormPasajero";
+
+const TicketCard = (props) => {
+  const { user } = useAuth0();
+  const sub = user?.sub;
   const dispatch = useDispatch();
-  console.log(airline);
-  useEffect(() => {
-    dispatch(getAirportsAirline(props.AirlineId));
-  }, [dispatch]);
-  // const [hover, setHover] = React.useState(false);
-  // const handleMouseEnter = () => setHover(true);
-  // const handleMouseLeave = () => setHover(false);
 
-  /* //   getFlights
-//   id: 1,
-//   origin: "chiloe",
-//   destiny: "arica",
-//   dateTimeDeparture: "2023-02-22T19:35:20.000Z",
-//   dateTimeArrival: "2023-02-22T19:35:20.000Z",
-//   seatsAvailable: 20,
-//   ticketPrice: "400.000", */
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupForm, setShowPopupForm] = useState(false);
+
+  //////////////////////tranferir
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
+  const handleOpenPopupForm = () => {
+    setShowPopupForm(true);
+  };
+
+  const handleClosePopupForm = () => {
+    setShowPopupForm(false);
+  };
+
+  const handleTransfer = (email) => {
+    const dataTransfer = {
+      email: email,
+      idUserE: sub,
+      idTicket: props.idTicket,
+    };
+    dispatch(putTicketTransfer(dataTransfer));
+
+    // Aquí puedes agregar la lógica para transferir el ticket
+    console.log("Ticket transferido a: " + email);
+    // Cerrar el popup después de transferir el ticket
+    setShowPopup(false);
+  };
+
+  const handleFormPassanger = ({ email, namePassanger }) => {
+    const dataPassanger = {
+      email: email,
+      namePassanger: namePassanger,
+    };
+    dispatch(putTicketCompleteForm(dataPassanger));
+
+    // Aquí puedes agregar la lógica para transferir el ticket
+    console.log("Ticket transferido a: " + email);
+    // Cerrar el popup después de transferir el ticket
+    setShowPopup(false);
+  };
+  ////////////////////////////////////////Transferir
+
+  const venderTicket = () => {
+    // dispatch(funcion())
+  };
+
+  const rellenarPasajeTicket = () => {
+    // dispatch(funcion())
+  };
 
   return (
     <div className="m-auto my-6 flex flex-col lg:w-1/2  w-11/12 mx-auto  ">
@@ -52,59 +95,14 @@ const CardFlight = (props) => {
           <h3 className="text-sm">DEPARTURE </h3>
 
           <h4 className="text-sm">
-            {moment(props.dateTimeDeparture).format("DD - M - YYYY")}
+            {moment(props.dateTimeDeparture).format("DD - MM - YYYY")}
           </h4>
         </div>
       </div>
-      <div
-        className=" bg-center bg-no-repeat bg-contain  "
-        style={{
-          backgroundImage: "url(" + airline.picture + ")",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
+      <div className=" bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain  ">
         <div className="bg-[#E2D8FE] bg-opacity-80 border-2 flex flex-col lg:flex-row lg:items-stretch   items-center justify-center w-full  h-full  ">
           <div className="w-4/5 text-[#00000] rounded-tl-xl rounded-bl-xl   py-4 flex   justify-center lg:justify-between lg:px-2">
             <div className="flex lg:flex-row flex-col lg:w-auto w-11/12  items-center justify-center ">
-              {isFav ? (
-                <>
-                  <svg
-                    className="cursor-pointer my-4 lg:mx-4 lg:my-0"
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={() => setIsFav(false)}
-                    width="50px"
-                    height="50px"
-                    viewBox="0 0 24 24"
-                    fill="#E9134C"
-                  >
-                    <path
-                      d="M4.42602 12.9469L10.1622 19.1217C11.1546 20.1899 12.8454 20.1899 13.8378 19.1217L19.574 12.9469C21.4753 10.9002 21.4753 7.58179 19.574 5.53505C17.6726 3.48832 14.5899 3.48832 12.6885 5.53505V5.53505C12.3168 5.93527 11.6832 5.93527 11.3115 5.53505V5.53505C9.4101 3.48832 6.32738 3.48832 4.42602 5.53505C2.52466 7.58178 2.52466 10.9002 4.42602 12.9469Z"
-                      stroke="#000000"
-                      stroke-width="2"
-                    />
-                  </svg>
-                </>
-              ) : (
-                <>
-                  <svg
-                    className="cursor-pointer my-4 lg:mx-4 lg:my-0"
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={() => setIsFav(true)}
-                    width="50px"
-                    height="50px"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      d="M4.42602 12.9469L10.1622 19.1217C11.1546 20.1899 12.8454 20.1899 13.8378 19.1217L19.574 12.9469C21.4753 10.9002 21.4753 7.58179 19.574 5.53505C17.6726 3.48832 14.5899 3.48832 12.6885 5.53505V5.53505C12.3168 5.93527 11.6832 5.93527 11.3115 5.53505V5.53505C9.4101 3.48832 6.32738 3.48832 4.42602 5.53505C2.52466 7.58178 2.52466 10.9002 4.42602 12.9469Z"
-                      stroke="#000000"
-                      stroke-width="2"
-                    />
-                  </svg>
-                </>
-              )}
               <div className="flex items-center">
                 <div className="flex flex-col items-center justify-center">
                   <p className="font-bold px-2 text-xl">{`${props.origin}`}</p>
@@ -164,40 +162,36 @@ const CardFlight = (props) => {
                 </div>
               </div>
               <div className="ml-5 flex flex-col  items-center justify-center">
-                <span className="font-bold text-xl">Precio final</span>
-                {props.roundTrip ? (
-                  <p className="font-bold text-md">
-                    USD {props.ticketPrice}
-                    {"."}
-                    00
-                  </p>
-                ) : (
-                  <p className="font-bold text-md">
-                    USD
-                    {props.ticketPrice}
-                  </p>
-                )}
+                <span className="font-bold text-xl">Asientos</span>
+                <p>{props.seatUser}</p>
               </div>
             </div>
-            {/* <p>LUN</p> */}
           </div>
 
-          <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-1/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
-            <Link to={`/flight/${props.flightId}`}>Detalles</Link>
+          <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
+            <button onClick={handleOpenPopup} className="text-sm px-2">
+              Transferir
+            </button>
+            <Popup
+              isOpen={showPopup}
+              onClose={handleClosePopup}
+              onSubmit={handleTransfer}
+            />
+
+            <button onClick={handleOpenPopupForm} className="text-sm px-2">
+              Rellenar pasaje
+            </button>
+            <PopupFormPasajero
+              isOpen={showPopupForm}
+              onClose={handleClosePopupForm}
+              onSubmit={handleFormPassanger}
+            />
           </div>
         </div>
       </div>
       {props.roundTrip ? (
         <div>
-          <div
-            className=" bg-center bg-no-repeat bg-contain"
-            style={{
-              backgroundImage: "url(" + airline.picture + ")",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
+          <div className="bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain">
             <div className="bg-[#E2D8FE] bg-opacity-80   border-2 flex w-full   items-center justify-start">
               <svg
                 className="cursor-pointer my-4 lg:mx-4 lg:my-0 invisible"
@@ -279,6 +273,11 @@ const CardFlight = (props) => {
                   {moment(props.dateTimeArrival2).format("HH:mm")}
                 </p>
               </div>
+
+              <div className="ml-5 flex flex-col  items-center justify-center">
+                <span className="font-bold text-xl">Asientos</span>
+                <p>{props.seatUser + 7}</p>
+              </div>
             </div>
           </div>
 
@@ -316,59 +315,4 @@ const CardFlight = (props) => {
     </div>
   );
 };
-
-/* <div>
-            <div className="border mt-4 mb-1">
-              <h4 className="mb-2">Vuelta</h4>
-
-              <p>{moment(props.dateTimeDeparture).format("HH:mm:ss")}</p>
-              <p>Puerto Montt</p>
-            </div>
-
-            <div className=" border mb-4">
-              <p>{moment(props.dateTimeArrival).format("HH:mm:ss")}</p>
-              <p>Santiago</p>
-            </div>
-          </div> */
-
-// sequelize.define('Flight',{
-//     id:{
-//         type:DataTypes.INTEGER,
-//         autoIncrement:true,
-//         allowNull:false,
-//         primaryKey:true,
-//     },
-//     origin:{
-//         type:DataTypes.STRING,
-//         allowNull:false,
-//     },
-//     destiny:{
-//       type:DataTypes.STRING,
-//       allowNull:false,
-//   },
-//     dateTimeDeparture:{
-//         type:DataTypes.DATE,
-//         allowNull: false,
-//         },
-
-//     dateTimeArrival:{
-//         type:DataTypes.DATE,
-//         allowNull: false,
-//       },
-
-//     seatsAvailable:{
-//         type:DataTypes.INTEGER,
-//         defaultValue: 0,
-
-//       },
-//     ticketPrice:{
-//         type:DataTypes.STRING,
-//         defaultValue: "",
-//       },
-
-//     }, {
-//     timestamps: false,
-
-export default CardFlight;
-
-/* <div class=" max-w-xl m-auto flex flex-wrap flex-col md:flex-row items-center justify-start"> */
+export default TicketCard;

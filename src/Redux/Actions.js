@@ -21,6 +21,9 @@ export const GET_AIRLINE = "GET_AIRLINE";
 export const FILTRO_AIRLINE_NAME = "FILTRO_AIRLINE_NAME";
 export const FILTRO_RESET_SHOP = "FILTRO_RESET_SHOP";
 export const CLEAR_DATA = "CLEAR_DATA";
+export const GET_TICKET_USER = "GET_TICKET_USER";
+export const PUT_TICKET_TRANSFER = "PUT_TICKET_TRANSFER";
+export const PUT_TICKET_FORM = "PUT_TICKET_FORM";
 
 export const putRegister = (fromRegister, token) => async (dispatch) => {
   const response = await axios.put(
@@ -42,6 +45,8 @@ export const putRegister = (fromRegister, token) => async (dispatch) => {
 
 export const postDataAuth0Inicial =
   (dataRegister, token) => async (dispatch) => {
+    console.log(token);
+
     const response = await axios.post(
       "http://localhost:4000/register",
       dataRegister,
@@ -445,8 +450,39 @@ export const limpiarReduxData = () => {
       type: "GET_AIRPORTS_INPUT",
       payload: [],
     });
+
+    dispatch({
+      type: "GET_TICKET_USER",
+      payload: [],
+    });
   };
 };
+
+export function getTicketUser(id) {
+  return async function (dispatch) {
+    console.log(id);
+    const response = await axios.get(
+      `http://localhost:4000/User/getUserTickets?id=${id}`
+    );
+    console.log(response);
+    return dispatch({
+      type: GET_TICKET_USER,
+      payload: response.data,
+    });
+  };
+}
+
+export function putTicketTransfer(data) {
+  return async function (dispatch) {
+    console.log(data);
+    const response = await axios.put(
+      `http://localhost:4000/transferTickets`,
+      data
+    );
+    return dispatch({
+      type: PUT_TICKET_TRANSFER,
+      payload: response.data,
+
 export const CreateFlights = (formFlight) => {
   return async (dispatch) => {
     const response = await axios.post(
@@ -479,10 +515,24 @@ export function putFlightDetails(idState) {
     );
     return dispatch({
       type: "PUT_FLIGHT_DETAILS",
+      payload: res.data,
     });
   };
 }
 
+export function putTicketCompleteForm(data) {
+  return async function (dispatch) {
+    console.log(data);
+    const response = await axios.put(
+      `http://localhost:4000/api/tickets/:id`,
+      data
+    );
+    return dispatch({
+      type: PUT_TICKET_FORM,
+      payload: response.data,
+    });
+  };
+}
 export function getFlightsByAirline(airline) {
   return async function (dispatch) {
     try {

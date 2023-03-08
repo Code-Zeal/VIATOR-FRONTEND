@@ -19,7 +19,7 @@ root.render(
     authorizationParams={{
       redirect_uri: window.location.origin,
       audience: "this is a unique identifier viator final 2",
-      scope: "openid profile email",
+      scope: "openid profile email admin   ",
     }}
   >
     <Provider store={store}>
