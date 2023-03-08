@@ -19,12 +19,13 @@ const TicketsCards = () => {
     setCurrentPage(pageNumber);
   };
 
-  console.log(currentRecipes);
+  console.log(ticketsUser);
   return (
     <div className=" flex flex-col items-center bg-azulOscuro text-[white] py-2 w-full px-4 ">
       {currentRecipes ? (
         currentRecipes.map((t) => (
           <TicketCard
+            picture={t.Flight.Airline.picture}
             activatedTicket={t.activatedTicket}
             idTicket={t.id}
             seatUser={t.seat}
