@@ -261,28 +261,9 @@ export default function FlightDetails({ flightId, roundTrip }) {
                 <div className="flex ">
                   <img
                     className="w-32 h-10 px-2"
-                    src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png"
+                    src={airline.picture}
                     alt=""
                   />
-                  <div className=" flex font-bold items-center">
-                    {detailedFlight.Airline
-                      ? detailedFlight.Airline.rating
-                      : "4.5"}
-                    <svg
-                      className="mx-1"
-                      width="15"
-                      height="13"
-                      viewBox="0 0 15 13"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M6.20801 1.08066C6.44272 0.552054 7.25329 0.552054 7.48799 1.08066L8.68061 3.76636C8.78001 3.99012 9.00766 4.14288 9.26872 4.16101L12.4028 4.37868C13.0196 4.42153 13.2701 5.13349 12.7983 5.50301L10.4014 7.38057C10.2017 7.53697 10.1147 7.78415 10.1768 8.01914L10.9211 10.8394C11.0676 11.3944 10.4118 11.8344 9.88553 11.5342L7.21151 10.0089C6.9887 9.88181 6.7073 9.88181 6.4845 10.0089L3.81048 11.5342C3.28418 11.8344 2.62845 11.3944 2.77495 10.8394L3.51929 8.01914C3.5813 7.78415 3.49435 7.53697 3.29464 7.38057L0.897663 5.50301C0.425888 5.13349 0.67635 4.42153 1.2932 4.37868L4.42726 4.16101C4.68838 4.14288 4.91603 3.99012 5.01539 3.76636L6.20801 1.08066Z"
-                        fill="#DBFF00"
-                        stroke="black"
-                      />
-                    </svg>
-                  </div>
                 </div>
                 <h3 className="font-bold pt-4 text-lg">Aerolínea: </h3>
                 <h3 className="font-bold pb-2 text-xl mx-auto">
