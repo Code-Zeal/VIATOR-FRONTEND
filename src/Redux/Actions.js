@@ -525,11 +525,13 @@ export function putFlightDetails(idState) {
   };
 }
 
-export function putTicketCompleteForm(data) {
+export function putTicketCompleteForm(id, data) {
   return async function (dispatch) {
     console.log(data);
+    console.log(id);
+
     const response = await axios.put(
-      `http://localhost:4000/api/tickets/:id`,
+      `http://localhost:4000/api/tickets/${id}`,
       data
     );
     return dispatch({

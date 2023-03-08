@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import Popup from "./Popup";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { putTicketTransfer, putTicketCompleteForm } from "../Redux/Actions";
+import {
+  putTicketTransfer,
+  putTicketCompleteForm,
+  getTicketUser,
+} from "../Redux/Actions";
 
 import moment from "moment";
 import PopupFormPasajero from "./PopupFormPasajero";
 
 const TicketCard = (props) => {
+  const history = useHistory();
+  const redirectHome = async () => {
+    history.push("/myTickets");
+    window.location.reload();
+  };
   const { user } = useAuth0();
   const sub = user?.sub;
   const dispatch = useDispatch();
@@ -35,11 +46,13 @@ const TicketCard = (props) => {
 
   const handleTransfer = (email) => {
     const dataTransfer = {
-      email: email,
-      idUserE: sub,
-      idTicket: props.idTicket,
+      emailR: email,
+      idTicketSelect: props.idTicket,
     };
+    console.log(dataTransfer);
     dispatch(putTicketTransfer(dataTransfer));
+    dispatch(getTicketUser(sub));
+    redirectHome();
 
     // Aquí puedes agregar la lógica para transferir el ticket
     console.log("Ticket transferido a: " + email);
@@ -48,11 +61,14 @@ const TicketCard = (props) => {
   };
 
   const handleFormPassanger = ({ email, namePassanger }) => {
+    const id = props.idTicket;
     const dataPassanger = {
       email: email,
       namePassanger: namePassanger,
     };
-    dispatch(putTicketCompleteForm(dataPassanger));
+    dispatch(putTicketCompleteForm(id, dataPassanger));
+    dispatch(getTicketUser(sub));
+    redirectHome();
 
     // Aquí puedes agregar la lógica para transferir el ticket
     console.log("Ticket transferido a: " + email);
@@ -60,14 +76,6 @@ const TicketCard = (props) => {
     setShowPopup(false);
   };
   ////////////////////////////////////////Transferir
-
-  const venderTicket = () => {
-    // dispatch(funcion())
-  };
-
-  const rellenarPasajeTicket = () => {
-    // dispatch(funcion())
-  };
 
   return (
     <div className="m-auto my-6 flex flex-col lg:w-1/2  w-11/12 mx-auto  ">
@@ -169,23 +177,35 @@ const TicketCard = (props) => {
           </div>
 
           <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
-            <button onClick={handleOpenPopup} className="text-sm px-2">
-              Transferir
-            </button>
-            <Popup
-              isOpen={showPopup}
-              onClose={handleClosePopup}
-              onSubmit={handleTransfer}
-            />
-
-            <button onClick={handleOpenPopupForm} className="text-sm px-2">
-              Rellenar pasaje
-            </button>
-            <PopupFormPasajero
-              isOpen={showPopupForm}
-              onClose={handleClosePopupForm}
-              onSubmit={handleFormPassanger}
-            />
+            {props.activatedTicket ? (
+              <></>
+            ) : (
+              <>
+                <button onClick={handleOpenPopup} className="text-sm px-2">
+                  Transferir
+                </button>{" "}
+                <Popup
+                  isOpen={showPopup}
+                  onClose={handleClosePopup}
+                  onSubmit={handleTransfer}
+                />
+              </>
+            )}
+            {props.activatedTicket ? (
+              <></>
+            ) : (
+              <>
+                {" "}
+                <button onClick={handleOpenPopupForm} className="text-sm px-2">
+                  Rellenar pasaje
+                </button>
+                <PopupFormPasajero
+                  isOpen={showPopupForm}
+                  onClose={handleClosePopupForm}
+                  onSubmit={handleFormPassanger}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
