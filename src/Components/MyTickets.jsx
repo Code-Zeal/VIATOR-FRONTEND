@@ -6,26 +6,20 @@ import { getTicketUser } from "../Redux/Actions";
 import TicketsCards from "./TicketsCards";
 
 export default function MyTickets() {
-  const { user, isAuthenticated } = useAuth0();
-  const id = user?.sub;
+  const { user } = useAuth0();
+  const id = useSelector((state) => state.idUser);
+
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getTicketUser(id));
-  // }, []);
+  useEffect(() => {
+    dispatch(getTicketUser(id));
+  }, [id]);
 
   return (
-    <div className="absolute ml-[21%] w-[100%] z-20 bg-[pink]  flex flex-col items-center">
-      <h1>Tickets Del usuario</h1>
+    <div className="absolute ml-[20%] w-[80%] z-20 bg-azulOscuro flex flex-col items-center">
+      <h1 className="text-blanco">Boletos comprados</h1>
 
       <TicketsCards />
-      {/* <h1 className="text-[white] my-2">MyTickets</h1>
-      <h1 className="text-[white] my-2">MyTickets</h1>
-      <h1 className="text-[white] my-2">MyTickets</h1>
-      <h1 className="text-[white] my-2">MyTickets</h1>
-      <h1 className="text-[white] my-2">MyTickets</h1>
-      <h1 className="text-[white] my-2">MyTickets</h1>
-      <h1 className="text-[white] my-2">MyTickets</h1> */}
     </div>
   );
 }

@@ -1,17 +1,36 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { putTicketCompleteForm } from "../Redux/Actions";
+import { useHistory } from "react-router-dom";
 
-function PopupFormPasajero({ isOpen, onClose, onSubmit }) {
+function PopupFormPasajero({ isOpen, onClose, onSubmit, id }) {
+  let history = useHistory();
+
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [namePassanger, setNamePassanger] = useState("");
-
+  const [dataForm, setDataForm] = useState({
+    email: "",
+    namePassanger: "",
+  });
+  // const id = useSelector((state) => state.idUser);
+  console.log(dataForm);
+  const redirectHome = async () => {
+    history.push("/myTickets");
+    window.location.reload();
+  };
+  const handleChange = (event) => {
+    let value = event.target.value;
+    setDataForm({
+      ...dataForm,
+      [event.target.name]: value,
+    });
+  };
+  // const encodedUserId = encodeURIComponent(id);
   const handleSubmit = (e) => {
-    const dataForm = {
-      email,
-      namePassanger,
-    };
-    console.log(dataForm);
-    e.preventDefault();
-    onSubmit(dataForm);
+    dispatch(putTicketCompleteForm(id, dataForm));
+    alert("Ticket rellenado correctamente");
     onClose();
   };
 
@@ -30,9 +49,8 @@ function PopupFormPasajero({ isOpen, onClose, onSubmit }) {
               <input
                 type="text"
                 name="namePassanger"
-                placeholder="Ingresa el correo electrónico"
-                value={namePassanger}
-                onChange={(e) => setNamePassanger(e.target.value)}
+                placeholder="Ingresa el nombre del pasajero"
+                onChange={handleChange}
               />
               <label htmlFor="email">Correo electrónico:</label>
               <input
@@ -40,12 +58,11 @@ function PopupFormPasajero({ isOpen, onClose, onSubmit }) {
                 id="email"
                 name="email"
                 placeholder="Ingresa el correo electrónico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
               />
               <div className="button-container">
                 <button type="submit" className="transfer-button">
-                  Transferir
+                  Rellenar
                 </button>
                 <button
                   type="button"

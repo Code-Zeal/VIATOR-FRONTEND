@@ -128,11 +128,65 @@ export default function CreateFlight() {
     history.push("/createFlight");
     window.location.reload();
   };
+  // roundTrip: "",
+  //   airportOriginId: Number,
+  //   airportDestinyId: Number,
+  //   dateTimeDeparture: "",
+  //   dateTimeArrival1: "",
+  //   dateTimeReturn: "",
+  //   dateTimeArrival2: "",
+  //   seatsAvailable: Number,
+  //   ticketPrice: "",
+  //   scale: "",
+  //   AirlineId: Number,
   const submitCreate = async () => {
-    await dispatch(CreateFlights(formFlight));
-    alert("Conexión creada correctamente");
-    await redirectHome();
+    if (
+      window.confirm("Estás seguro/a de que quieres crear este vuelo?") === true
+    ) {
+      if (
+        formFlight.roundTrip === "" ||
+        formFlight.airportOriginId === Number ||
+        formFlight.airportDestinyId === Number ||
+        formFlight.dateTimeDeparture === "" ||
+        formFlight.dateTimeReturn === "" ||
+        formFlight.dateTimeArrival1 === "" ||
+        formFlight.dateTimeArrival2 === "" ||
+        formFlight.seatsAvailable === Number ||
+        formFlight.ticketPrice === "" ||
+        formFlight.scale === "" ||
+        formFlight.AirlineId === Number
+      ) {
+        alert("Hay campos obligatorios incompletos");
+        redirectHome();
+      } else {
+        await dispatch(CreateFlights(formFlight));
+        alert("Vuelo creado correctamente");
+        await redirectHome();
+        return;
+      }
+    } else {
+      redirectHome();
+    }
   };
+  //  if (
+  //       formFlight.roundTrip === "" ||
+  //       formFlight.airportOriginId === Number ||
+  //       formFlight.airportDestinyId === Number ||
+  //       formFlight.dateTimeDeparture === "" ||
+  //       formFlight.dateTimeArrival1 === "" ||
+  //       formFlight.seatsAvailable === Number ||
+  //       formFlight.ticketPrice === "" ||
+  //       formFlight.scale === "" ||
+  //       formFlight.AirlineId === Number
+  //     ) {
+  //       alert("Hay campos obligatorios incompletos");
+  //       redirectHome();
+  //     } else if (formFlight.roundTrip === false) {
+  //       await dispatch(CreateFlights(formFlight));
+  //       alert("Vuelo solo ida creado correctamente");
+  //       await redirectHome();
+  //       return;
+  //     }
   const handleFormFlight = (event) => {
     //DATES
     if (event.target.className.includes("date1")) {

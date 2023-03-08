@@ -30,7 +30,7 @@ export default function NavBar() {
             <p className="mx-2 hidden sm:inline">Inicio</p>
           </a>
 
-          <a href="/profile" className="flex items-center justify-center px-2">
+          <a href="/data" className="flex items-center justify-center px-2">
             <svg
               className=" min-w-min w-6 h-6 m-4 sm:mx-0 sm:my-0 sm:w-auto sm:h-auto"
               xmlns="http://www.w3.org/2000/svg"

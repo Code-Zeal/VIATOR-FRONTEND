@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import Popup from "./Popup";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { putTicketTransfer, putTicketCompleteForm } from "../Redux/Actions";
+import {
+  putTicketTransfer,
+  putTicketCompleteForm,
+  getTicketUser,
+} from "../Redux/Actions";
 
 import moment from "moment";
 import PopupFormPasajero from "./PopupFormPasajero";
 
 const TicketCard = (props) => {
+  const history = useHistory();
+  const redirectHome = async () => {
+    history.push("/myTickets");
+    window.location.reload();
+  };
   const { user } = useAuth0();
   const sub = user?.sub;
   const dispatch = useDispatch();
@@ -35,24 +46,31 @@ const TicketCard = (props) => {
 
   const handleTransfer = (email) => {
     const dataTransfer = {
-      email: email,
-      idUserE: sub,
-      idTicket: props.idTicket,
+      emailR: email,
+      idTicketSelect: props.idTicket,
     };
+    console.log(dataTransfer);
     dispatch(putTicketTransfer(dataTransfer));
+    dispatch(getTicketUser(sub));
+    redirectHome();
 
     // Aquí puedes agregar la lógica para transferir el ticket
     console.log("Ticket transferido a: " + email);
     // Cerrar el popup después de transferir el ticket
     setShowPopup(false);
   };
+  console.log(props.picture);
 
   const handleFormPassanger = ({ email, namePassanger }) => {
+    const id = props.idTicket;
     const dataPassanger = {
       email: email,
       namePassanger: namePassanger,
     };
-    dispatch(putTicketCompleteForm(dataPassanger));
+
+    dispatch(putTicketCompleteForm(id, dataPassanger));
+    dispatch(getTicketUser(sub));
+    redirectHome();
 
     // Aquí puedes agregar la lógica para transferir el ticket
     console.log("Ticket transferido a: " + email);
@@ -61,16 +79,8 @@ const TicketCard = (props) => {
   };
   ////////////////////////////////////////Transferir
 
-  const venderTicket = () => {
-    // dispatch(funcion())
-  };
-
-  const rellenarPasajeTicket = () => {
-    // dispatch(funcion())
-  };
-
   return (
-    <div className="m-auto my-6 flex flex-col lg:w-1/2  w-11/12 mx-auto  ">
+    <div className="m-auto my-6 flex flex-col lg:w-2/4 w-8/12 mx-auto  ">
       <div className="flex   justify-between">
         <div className="border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90  flex lg:flex-row flex-col lg:justify-between justify-center w-1/2 lg:w-1/3 items-center font-bold">
           <h4> Standar Ticket</h4>
@@ -99,7 +109,15 @@ const TicketCard = (props) => {
           </h4>
         </div>
       </div>
-      <div className=" bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain  ">
+      <div
+        className="  bg-center bg-no-repeat bg-contain "
+        style={{
+          backgroundImage: "url(" + props.picture + ")",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="bg-[#E2D8FE] bg-opacity-80 border-2 flex flex-col lg:flex-row lg:items-stretch   items-center justify-center w-full  h-full  ">
           <div className="w-4/5 text-[#00000] rounded-tl-xl rounded-bl-xl   py-4 flex   justify-center lg:justify-between lg:px-2">
             <div className="flex lg:flex-row flex-col lg:w-auto w-11/12  items-center justify-center ">
@@ -169,29 +187,51 @@ const TicketCard = (props) => {
           </div>
 
           <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
-            <button onClick={handleOpenPopup} className="text-sm px-2">
-              Transferir
-            </button>
-            <Popup
-              isOpen={showPopup}
-              onClose={handleClosePopup}
-              onSubmit={handleTransfer}
-            />
-
-            <button onClick={handleOpenPopupForm} className="text-sm px-2">
-              Rellenar pasaje
-            </button>
-            <PopupFormPasajero
-              isOpen={showPopupForm}
-              onClose={handleClosePopupForm}
-              onSubmit={handleFormPassanger}
-            />
+            {props.activatedTicket ? (
+              <></>
+            ) : (
+              <>
+                <button onClick={handleOpenPopup} className="text-sm px-2">
+                  Transferir
+                </button>{" "}
+                <Popup
+                  isOpen={showPopup}
+                  onClose={handleClosePopup}
+                  onSubmit={handleTransfer}
+                  id={props.idTicket}
+                />
+              </>
+            )}
+            {props.activatedTicket ? (
+              <></>
+            ) : (
+              <>
+                {" "}
+                <button onClick={handleOpenPopupForm} className="text-sm px-2">
+                  Rellenar pasaje
+                </button>
+                <PopupFormPasajero
+                  isOpen={showPopupForm}
+                  onClose={handleClosePopupForm}
+                  onSubmit={handleFormPassanger}
+                  id={props.idTicket}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
       {props.roundTrip ? (
         <div>
-          <div className="bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Qatar_Airways_Logo.png')] bg-center bg-no-repeat bg-contain">
+          <div
+            className=" bg-center bg-no-repeat bg-contain"
+            style={{
+              backgroundImage: "url(" + props.picture + ")",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
             <div className="bg-[#E2D8FE] bg-opacity-80   border-2 flex w-full   items-center justify-start">
               <svg
                 className="cursor-pointer my-4 lg:mx-4 lg:my-0 invisible"

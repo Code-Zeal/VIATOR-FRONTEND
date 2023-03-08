@@ -256,6 +256,7 @@ export const CreateAirlines = (formAiline) => {
       type: CREATE_AIRLINE,
       payload: response.data,
     });
+    return window.location.reload();
   };
 };
 export const getAirlines = () => {
@@ -294,6 +295,7 @@ export const addAirportToAirline = (data) => {
       type: ADD_AIRPORT_TO_AIRLINE,
       payload: response.data,
     });
+    return window.location.reload();
   };
 };
 export const deleteAirportToAirline = (data) => {
@@ -303,6 +305,7 @@ export const deleteAirportToAirline = (data) => {
       type: DELETE_AIRPORT_TO_AIRLINE,
       payload: response.data,
     });
+    return window.location.reload();
   };
 };
 
@@ -480,7 +483,7 @@ export function putFlightDetails(idState) {
   };
 }
 
-export function putTicketCompleteForm(data) {
+export function putTicketCompleteForm(id, data) {
   return async function (dispatch) {
     console.log(data);
     const response = await axios.put(`/api/tickets/:id`, data);
@@ -529,6 +532,12 @@ export function cloudinaryUsers(payload) {
   return {
     type: "CLOUDINARY_USERS",
     payload,
+  };
+}
+export function myId(payload) {
+  return {
+    type: "MY_ID",
+    payload: payload,
   };
 }
 

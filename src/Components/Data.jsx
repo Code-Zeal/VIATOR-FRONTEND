@@ -8,6 +8,7 @@ export default function Data() {
   const history = useHistory();
   const { user, getAccessTokenSilently } = useAuth0();
   const data = useSelector((state) => state?.userData);
+  const myId = useSelector((state) => state.idUser);
   const [localData, setLocalData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   const [isEdit, setIsEdit] = useState(true);
@@ -21,6 +22,10 @@ export default function Data() {
   const phoneNumber = new RegExp(
     /(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})/g
   );
+  const redirectHome = async () => {
+    history.push("/data");
+    window.location.reload();
+  };
 
   const verificar = () => {
     // phoneNumber: Number,
@@ -43,11 +48,10 @@ export default function Data() {
   const CountrieCities = useSelector((state) => state.getCountries);
 
   useEffect(() => {
-    valor.id = data.id;
     setLocalData(data);
     setIsLoaded(true);
     // setEditDispatch({ ...editDispatch, idSubAuth0: valor.id });
-  }, [data, isLoaded, valor]);
+  }, [data, isLoaded]);
   console.log(localData);
   const [city, setCity] = useState(true);
   const [countrie, setCountrie] = useState(false);
@@ -71,7 +75,7 @@ export default function Data() {
       true
     ) {
       await dispatch(putDataUser(valor.id, editDispatch));
-      alert("Complete data");
+      alert("Datos Actualizados");
     } else {
       redirectHome();
     }
@@ -83,8 +87,8 @@ export default function Data() {
     // reviso en mi base de datos si tengo el id de la persona que acaba de iniciar sesion
     //  si tengo el id muetro el home em caso contrario muestro el formulario
 
-    dispatch(getDataUser(user?.sub));
-  }, [user?.sub, editDispatch, dispatch]);
+    dispatch(getDataUser(myId));
+  }, [myId, editDispatch, dispatch]);
 
   console.log(valor.id);
   const handlerEdit = () => {
@@ -128,10 +132,6 @@ export default function Data() {
       });
     }
   };
-  const redirectHome = async () => {
-    history.push("/data");
-    window.location.reload();
-  };
 
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
@@ -145,17 +145,26 @@ export default function Data() {
       },
       function (error, result) {
         if (result.event === "success") {
-          dispatch(
-            putDataUser(valor.id, {
-              ...data,
-              picture: result.info.secure_url,
-            })
-          );
-          redirectHome();
+          if (
+            window.confirm(
+              "Estás seguro/a de que quieres cambiar tu Imagen?"
+            ) === true
+          ) {
+            dispatch(
+              putDataUser(myId, {
+                ...data,
+                picture: result.info.secure_url,
+              })
+            );
+            alert("Imagen Actualizada");
+            redirectHome();
+          } else {
+            redirectHome();
+          }
         }
       }
     );
-  }, [data, dispatch, redirectHome, valor]);
+  }, [data, dispatch, redirectHome, myId]);
   const handleSelect = (event) => {};
   return (
     <div className="absolute ml-[21%] w-[70%] z-20  flex flex-col items-center">
