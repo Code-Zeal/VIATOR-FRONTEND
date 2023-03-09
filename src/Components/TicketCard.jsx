@@ -189,7 +189,11 @@ const TicketCard = (props) => {
           </div>
 
           {props.activatedTicket ? (
-            <></>
+            <>
+              <div className="flex items-center justify-center bg-[#E9134C]  text-[white]   w-full py-4  lg:w-2/5  rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl font-bold lg:py-5">
+                Pasaje Rellenado
+              </div>
+            </>
           ) : (
             <>
               <div className="flex items-center justify-center bg-[#E9134C] hover:bg-[#5c081e] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-5">

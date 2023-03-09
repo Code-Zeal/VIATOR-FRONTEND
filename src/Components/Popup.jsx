@@ -29,7 +29,6 @@ function Popup({ isOpen, onClose, onSubmit, id }) {
         alert("Transferencia realizada");
         e.preventDefault();
         dispatch(putTicketTransfer(email));
-        onClose();
       }
     } else {
       alert("Transferencia cancelada");

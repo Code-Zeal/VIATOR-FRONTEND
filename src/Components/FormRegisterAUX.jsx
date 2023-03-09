@@ -59,7 +59,7 @@ const validate = (formRegister) => {
   return errors;
 };
 
-const FormRegister = () => {
+const FormRegisterAUX = () => {
   const countries = useSelector((state) => state.getCountries);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -537,4 +537,4 @@ const FormRegister = () => {
   );
 };
 
-export default FormRegister;
+export default FormRegisterAUX;

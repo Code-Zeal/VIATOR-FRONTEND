@@ -40,7 +40,6 @@ function PopupFormPasajero({ isOpen, onClose, onSubmit, id }) {
       } else {
         dispatch(putTicketCompleteForm(id, dataForm));
         alert("Ticket rellenado correctamente");
-        onClose();
       }
     } else {
       alert("Ticket no ha sido rellenado");
