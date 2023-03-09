@@ -247,6 +247,7 @@ export const CreateAirports = (formAirport) => {
       type: CREATE_AIRPORT,
       payload: response.data,
     });
+    return window.location.reload();
   };
 };
 export const CreateAirlines = (formAiline) => {

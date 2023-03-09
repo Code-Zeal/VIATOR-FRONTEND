@@ -79,9 +79,6 @@ export default function CreateAirport() {
   const dispatch1 = async () => {
     await dispatch(CreateAirports(formAirport));
   };
-  const dispatch2 = async () => {
-    await dispatch(addAirlineToAirport(relation));
-  };
 
   const submitHandler = async () => {
     if (
@@ -98,7 +95,6 @@ export default function CreateAirport() {
       } else {
         await dispatch1();
         alert("Aeropuerto creado correctamente");
-        await dispatch2();
       }
     } else {
       redirectHome();
@@ -164,7 +160,7 @@ export default function CreateAirport() {
           </select>
         </div>
 
-        <label className="font-bold text-[white]" htmlFor="airlines">
+        {/* <label className="font-bold text-[white]" htmlFor="airlines">
           Aerolineas (opcional)
         </label>
         <div>
@@ -183,7 +179,7 @@ export default function CreateAirport() {
               </div>
             );
           })}
-        </div>
+        </div> */}
         <div className="w-full flex justify-center items-center pt-8">
           <button
             onClick={submitHandler}
