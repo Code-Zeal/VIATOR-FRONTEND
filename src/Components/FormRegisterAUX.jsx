@@ -204,8 +204,8 @@ const FormRegisterAUX = () => {
     event.preventDefault();
 
     if (Object.keys(errors).length === 0) {
-      alert("Complete data");
       await put();
+      alert("Complete data");
       setErrors({
         names: "",
         lastNames: "",
