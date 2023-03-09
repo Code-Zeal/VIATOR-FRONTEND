@@ -124,15 +124,15 @@ export default function FlightSearch() {
 
   const validateForm = () => {
     if (
-      formData.origin !== "" &&
-      formData.destiny !== "" &&
-      formData.dateTimeDeparture !== "" &&
-      formData.passengers !== "" &&
+      formData.origin === "" ||
+      formData.destiny === "" ||
+      formData.dateTimeDeparture === "" ||
+      formData.passengers === "" ||
       (formData.roundTrip ? formData.dateTimeReturn !== "" : true)
     ) {
-      setFormValid(true);
-    } else {
       setFormValid(false);
+    } else {
+      setFormValid(true);
     }
   };
 
