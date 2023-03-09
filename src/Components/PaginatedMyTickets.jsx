@@ -20,7 +20,7 @@ export default function PaginatedMyTickets({
               className={
                 currentPage === index + 1
                   ? "bg-[#e54848] text-[white]  p-2 rounded-full mx-2"
-                  : "bg-[white] p-2 rounded-full mx-2"
+                  : "bg-[white] text-[black] p-2 rounded-full mx-2"
               }
               key={`pagina${index}`}
               onClick={() => pagination(number)}

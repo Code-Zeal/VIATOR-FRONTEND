@@ -173,6 +173,24 @@ export default function FlightDetails({ flightId, roundTrip }) {
                   USD{" "}
                 </p>
               </div>
+              <select
+                onChange={handlerQantity}
+                name="quantity"
+                id=""
+                className="bg-[#1b1a1a] border-2  rounded-lg text-[white]"
+              >
+                <option selected disabled="true">
+                  Cantidad de boletos
+                </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
               <div className="flex">
                 <svg
                   width="30"
@@ -202,19 +220,6 @@ export default function FlightDetails({ flightId, roundTrip }) {
                   {detailedFlight?.ticketPrice} USDT
                 </p>
               </div>
-              <select onChange={handlerQantity} name="quantity" id="">
-                <option selected disabled="true">
-                  Cantidad de boletos
-                </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-              </select>
             </div>
           </>
         )}
@@ -350,20 +355,25 @@ export default function FlightDetails({ flightId, roundTrip }) {
                       }
                       USD{" "}
                     </p>
-                    <select onChange={handlerQantity} name="quantity" id="">
-                      <option selected disabled="true">
-                        Cantidad de boletos
-                      </option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                    </select>
                   </div>
+                  <select
+                    className="bg-[#1b1a1a] border-2  rounded-lg text-[white]"
+                    onChange={handlerQantity}
+                    name="quantity"
+                    id=""
+                  >
+                    <option selected disabled="true">
+                      Cantidad de boletos
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                  </select>
                   <div className="flex">
                     <svg
                       width="30"

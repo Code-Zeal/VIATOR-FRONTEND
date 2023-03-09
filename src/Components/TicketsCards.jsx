@@ -8,7 +8,7 @@ const TicketsCards = () => {
   const ticketsUser = useSelector((state) => state?.getTicketUserData);
   console.log(ticketsUser);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recipesPerPage] = useState(3);
+  const [recipesPerPage] = useState(2);
   const indexOfLastRecipes = currentPage * recipesPerPage;
   const indexOfFirstRecipes = indexOfLastRecipes - recipesPerPage;
   const currentRecipes = ticketsUser.slice(
@@ -21,7 +21,7 @@ const TicketsCards = () => {
 
   console.log(ticketsUser);
   return (
-    <div className=" flex flex-col items-center bg-azulOscuro text-[white] py-2 w-full px-4 ">
+    <div className=" flex flex-col items-center bg-[white] text-[white] py-2 w-full px-4 ">
       {currentRecipes ? (
         currentRecipes.map((t) => (
           <TicketCard

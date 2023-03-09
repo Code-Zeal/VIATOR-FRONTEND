@@ -80,9 +80,9 @@ const TicketCard = (props) => {
   ////////////////////////////////////////Transferir
 
   return (
-    <div className="m-auto my-6 flex flex-col lg:w-2/4 w-8/12 mx-auto  ">
+    <div className="m-auto mt-10 flex flex-col lg:w-2/4 w-8/12 mx-auto -mb-8 -pb-8 ">
       <div className="flex   justify-between">
-        <div className="border text-[black] border-[black] bg-[#E2D8FE] rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90  flex lg:flex-row flex-col lg:justify-between justify-center w-1/2 lg:w-1/3 items-center font-bold">
+        <div className="border text-[black] border-[black]   rounded-tl-xl rounded-tr-xl px-2 bg-opacity-90  flex lg:flex-row flex-col lg:justify-between justify-center w-1/2 lg:w-1/3 items-center font-bold">
           <h4> Standar Ticket</h4>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -118,12 +118,12 @@ const TicketCard = (props) => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="bg-[#E2D8FE] bg-opacity-80 border-2 flex flex-col lg:flex-row lg:items-stretch   items-center justify-center w-full  h-full  ">
+        <div className="bg-[#E2D8FE] bg-opacity-80 border-2 flex flex-col lg:flex-row lg:items-stretch   items-center justify-center w-full  h-full -mb-4 ">
           <div className="w-4/5 text-[#00000] rounded-tl-xl rounded-bl-xl   py-4 flex   justify-center lg:justify-between lg:px-2">
             <div className="flex lg:flex-row flex-col lg:w-auto w-11/12  items-center justify-center ">
               <div className="flex items-center">
                 <div className="flex flex-col items-center justify-center">
-                  <p className="font-bold px-2 text-xl">{`${props.origin}`}</p>
+                  <p className="font-bold px-2 text-xl  text-[black]">{`${props.origin}`}</p>
                   <p className=" font-medium text-[#151515] ">
                     {moment(props.dateTimeDeparture).format("HH:mm")}
                   </p>
@@ -173,24 +173,26 @@ const TicketCard = (props) => {
                   Escalas: {<p className="">{props.scale}</p>}
                 </div>
                 <div className="flex-col">
-                  <p className="font-bold text-xl lg:px-2">{`${props.destiny}`}</p>
+                  <p className="font-bold text-xl lg:px-2 text-[black]">{`${props.destiny}`}</p>
                   <p className=" font-medium lg:px-2  text-[#151515]">
                     {moment(props.dateTimeArrival1).format("HH:mm")}
                   </p>
                 </div>
               </div>
               <div className="ml-5 flex flex-col  items-center justify-center">
-                <span className="font-bold text-xl">Asientos</span>
-                <p>{props.seatUser}</p>
+                <span className="font-bold text-xl text-[black]">Asiento:</span>
+                <p className="text-[black] font-bold text-xl">
+                  {props.seatUser}
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center justify-center bg-[#E9134C] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-12">
-            {props.activatedTicket ? (
-              <></>
-            ) : (
-              <>
+          {props.activatedTicket ? (
+            <></>
+          ) : (
+            <>
+              <div className="flex items-center justify-center bg-[#E9134C] hover:bg-[#5c081e] text-[white]   w-full py-4  lg:w-2/5 rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl font-bold lg:py-5">
                 <button onClick={handleOpenPopup} className="text-sm px-2">
                   Transferir
                 </button>{" "}
@@ -200,13 +202,19 @@ const TicketCard = (props) => {
                   onSubmit={handleTransfer}
                   id={props.idTicket}
                 />
-              </>
-            )}
-            {props.activatedTicket ? (
-              <></>
-            ) : (
-              <>
-                {" "}
+              </div>
+            </>
+          )}
+          {props.activatedTicket ? (
+            <>
+              <div className="flex items-center justify-center bg-[#E9134C]  text-[white]   w-full py-4  lg:w-2/5  rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl font-bold lg:py-5">
+                Pasaje Rellenado
+              </div>
+            </>
+          ) : (
+            <>
+              {" "}
+              <div className="flex items-center justify-center bg-[#E9134C] hover:bg-[#5c081e] text-[white]   w-full py-4  lg:w-2/5  rounded-tr-2xl lg:rounded-tr-none cursor-pointer text-2xl font-bold lg:py-12">
                 <button onClick={handleOpenPopupForm} className="text-sm px-2">
                   Rellenar pasaje
                 </button>
@@ -216,9 +224,9 @@ const TicketCard = (props) => {
                   onSubmit={handleFormPassanger}
                   id={props.idTicket}
                 />
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
       {props.roundTrip ? (
@@ -258,7 +266,9 @@ const TicketCard = (props) => {
                 </g>
               </svg>
               <div className="flex flex-col px-2 py-4 items-center justify-center">
-                <p className="font-bold  text-xl">{props.destiny}</p>
+                <p className="font-bold  text-xl text-[black]">
+                  {props.destiny}
+                </p>
                 <p className="font-medium lg:px-2 text-[#151515]">
                   {moment(props.dateTimeReturn).format("HH:mm")}
                 </p>
@@ -305,18 +315,23 @@ const TicketCard = (props) => {
                   <circle cx="37" cy="11" r="2" fill="white" />
                   <circle cx="11" cy="35" r="2" fill="white" />
                 </svg>
+                <p></p>
                 Escalas: {<p className="">{props.scale}</p>}
               </div>
               <div className="flex flex-col py-4 lg:p-6 items-center justify-center">
-                <p className="font-bold lg:px-2  text-xl">{props.origin}</p>
-                <p className="font-medium lg:px-2  text-[#151515]">
+                <p className="font-bold lg:px-2  text-xl text-[black]">
+                  {props.origin}
+                </p>
+                <p className="font-bold lg:px-2  text-[#151515]">
                   {moment(props.dateTimeArrival2).format("HH:mm")}
                 </p>
               </div>
 
-              <div className="ml-5 flex flex-col  items-center justify-center">
-                <span className="font-bold text-xl">Asientos</span>
-                <p>{props.seatUser + 7}</p>
+              <div className="ml-5 flex flex-col  items-center justify-center mr-6">
+                <span className="font-bold text-xl text-[black]">Asiento:</span>
+                <p className="text-[black] font-bold text-xl   ">
+                  {props.seatUser + 7}
+                </p>
               </div>
             </div>
           </div>
