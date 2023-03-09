@@ -28,7 +28,7 @@ export default function CreateAirport() {
     airlinesId: [],
     airportId: Number,
   });
-
+  console.log(relation);
   const handlerRelation = (event) => {
     const propiedad = event.target.name * 1;
     // let value;
