@@ -119,10 +119,8 @@ export default function CreateAirline() {
         alert("Hay campos obligatorios incompletos");
         redirectHome();
       } else {
-        alert("Aerolinea creada correctamente");
-
         await dispatch(CreateAirlines(formAiline));
-        await dispatch(addAirportToAirline(relation));
+        alert("Aerolinea creada correctamente");
       }
     } else {
       redirectHome();
@@ -172,7 +170,7 @@ export default function CreateAirline() {
           />
         </div>
 
-        <label className="font-bold text-[white] " htmlFor="airlines">
+        {/* <label className="font-bold text-[white] " htmlFor="airlines">
           Aeropuertos (opcional)
         </label>
         <div>
@@ -195,7 +193,7 @@ export default function CreateAirline() {
               })}
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="w-full flex items-center justify-center py-4">
           <button
             className="border-2 border-[black] hover:bg-[#191483] bg-[#4F46E5] text-[white] py-2 px-6 text-lg rounded-lg font-bold"
