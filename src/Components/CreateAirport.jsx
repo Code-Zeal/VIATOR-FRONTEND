@@ -91,9 +91,8 @@ export default function CreateAirport() {
         redirectHome();
       } else {
         dispatch(CreateAirports(formAirport));
-        dispatch(addAirlineToAirport(relation));
         alert("Aeropuerto creado correctamente");
-        redirectHome();
+        dispatch(addAirlineToAirport(relation));
       }
     } else {
       redirectHome();

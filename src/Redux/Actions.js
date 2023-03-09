@@ -286,6 +286,7 @@ export const addAirlineToAirport = (data) => {
       type: ADD_AIRLINE_TO_AIRPORT,
       payload: response.data,
     });
+    window.location.reload();
   };
 };
 export const addAirportToAirline = (data) => {
