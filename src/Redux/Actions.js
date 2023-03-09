@@ -486,7 +486,7 @@ export function putFlightDetails(idState) {
 export function putTicketCompleteForm(id, data) {
   return async function (dispatch) {
     console.log(data);
-    const response = await axios.put(`/api/tickets/:id`, data);
+    const response = await axios.put(`/api/tickets/${id}`, data);
     return dispatch({
       type: PUT_TICKET_FORM,
       payload: response.data,
