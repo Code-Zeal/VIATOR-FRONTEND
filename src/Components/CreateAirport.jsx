@@ -90,9 +90,9 @@ export default function CreateAirport() {
         alert("Hay campos obligatorios incompletos");
         redirectHome();
       } else {
-        alert("Aeropuerto creado correctamente");
         dispatch(CreateAirports(formAirport));
         dispatch(addAirlineToAirport(relation));
+        alert("Aeropuerto creado correctamente");
         redirectHome();
       }
     } else {
