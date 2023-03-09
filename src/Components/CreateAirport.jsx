@@ -76,8 +76,14 @@ export default function CreateAirport() {
     history.push("/createAirport");
     window.location.reload();
   };
+  const dispatch1 = async () => {
+    await dispatch(CreateAirports(formAirport));
+  };
+  const dispatch2 = async () => {
+    await dispatch(addAirlineToAirport(relation));
+  };
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     if (
       window.confirm("Estás seguro/a de que quieres crear este aeropuerto?") ===
       true
@@ -90,9 +96,9 @@ export default function CreateAirport() {
         alert("Hay campos obligatorios incompletos");
         redirectHome();
       } else {
-        dispatch(CreateAirports(formAirport));
+        await dispatch1();
         alert("Aeropuerto creado correctamente");
-        dispatch(addAirlineToAirport(relation));
+        await dispatch2();
       }
     } else {
       redirectHome();
